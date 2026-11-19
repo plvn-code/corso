@@ -82,7 +82,7 @@ export function CatalogGrid({ cards, params, chips, collections, colors, sizes, 
 
       {cards.length === 0 ? (
         <div className="empty">
-          <p className="serif-lg">Нічого не знайдено</p>
+          <p className="title-sm">Нічого не знайдено</p>
           <p className="muted">Спробуйте змінити фільтри.</p>
           <Link href="/catalog" className="btn btn--dark">
             Скинути фільтри

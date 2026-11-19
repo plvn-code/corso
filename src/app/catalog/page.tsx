@@ -43,7 +43,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: SP }
     <div className="cat">
       <header className="page-head">
         <p className="eyebrow">{h.kicker}</p>
-        <h1 className="h-serif h-xl">{h.title}</h1>
+        <h1 className="h-title h-xl">{h.title}</h1>
       </header>
       <CatalogGrid
         cards={list.map(toCard)}

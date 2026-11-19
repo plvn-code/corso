@@ -128,7 +128,7 @@ export default async function InfoPage({ params }: { params: Params }) {
     <div className="narrow info">
       <header className="page-head">
         <p className="eyebrow">{p.en}</p>
-        <h1 className="h-serif h-xl">{p.title}</h1>
+        <h1 className="h-title h-xl">{p.title}</h1>
       </header>
       <div className="prose">{p.body}</div>
       <nav className="info__nav">

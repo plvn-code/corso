@@ -63,7 +63,7 @@ export default async function ProductPage({ params, searchParams }: { params: Pa
       <section className="sec related">
         <header className="sec__head">
           <p className="eyebrow">You may also like</p>
-          <h2 className="h-serif">Вам також сподобається</h2>
+          <h2 className="h-title">Вам також сподобається</h2>
         </header>
         <div className="grid grid--home">
           {more.map((c) => (

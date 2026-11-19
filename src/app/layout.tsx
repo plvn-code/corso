@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Playfair_Display } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import { Suspense } from "react";
 import { StoreProvider } from "@/lib/store";
 import { Header, type SearchItem } from "@/components/Header";
@@ -11,7 +11,6 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 const sans = Inter_Tight({ subsets: ["latin", "cyrillic"], weight: ["300", "400", "500", "600"], variable: "--font-sans", display: "swap" });
-const serif = Playfair_Display({ subsets: ["latin", "cyrillic"], weight: ["400", "500"], style: ["normal", "italic"], variable: "--font-serif", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -33,7 +32,7 @@ const searchItems: SearchItem[] = products.map((p) => ({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="uk" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="uk" className={sans.variable}>
       <body>
         <StoreProvider>
           <a href="#main" className="skip">До змісту</a>

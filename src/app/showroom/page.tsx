@@ -14,7 +14,7 @@ export default function Showroom() {
         </div>
         <div className="about__intro">
           <p className="eyebrow">Showroom · Dnipro</p>
-          <h1 className="h-serif h-xl">
+          <h1 className="h-title h-xl">
             Офлайн-<em>примірка</em>
           </h1>
           <p className="lead">Сезонні колекції CORSO представлені офлайн — приходьте відчути тканини та знайти свій ідеальний образ.</p>

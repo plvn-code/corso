@@ -47,7 +47,7 @@ export function Footer() {
   return (
     <footer className="ftr">
       <div className="ftr__news">
-        <p className="serif-lg">The CORSO Letter</p>
+        <p className="title-sm">The CORSO Letter</p>
         <p className="muted">Новинки, закриті передзамовлення та архівні розпродажі — першими.</p>
         {sent ? (
           <p className="ftr__ok">Дякуємо! Ви підписані.</p>

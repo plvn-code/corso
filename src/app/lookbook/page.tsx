@@ -59,7 +59,7 @@ export default function Lookbook() {
           <div className="lb__side">
             <div className="lb__text" data-reveal>
               <span className="lb__no">{s.no}</span>
-              <h2 className="h-serif h-xl">{s.title}</h2>
+              <h2 className="h-title h-xl">{s.title}</h2>
               <p className="eyebrow">{s.sub}</p>
               <p className="lead">{s.text}</p>
               <Link href={s.href} className="ulink">

@@ -11,7 +11,7 @@ export function WishlistGrid({ all }: { all: CardData[] }) {
   if (list.length === 0)
     return (
       <div className="empty">
-        <p className="serif-lg">Тут поки порожньо</p>
+        <p className="title-sm">Тут поки порожньо</p>
         <p className="muted">Натискайте ♡ на картках, щоб зберегти улюблені моделі.</p>
         <Link href="/catalog" className="btn btn--dark">
           До каталогу

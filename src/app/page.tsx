@@ -41,7 +41,7 @@ export default function Home() {
       <section className="sec">
         <header className="sec__head" data-reveal>
           <p className="eyebrow">New In</p>
-          <h2 className="h-serif">Новинки сезону</h2>
+          <h2 className="h-title">Новинки сезону</h2>
           <Link href="/catalog?c=new" className="ulink">
             Дивитись усі
           </Link>
@@ -83,10 +83,10 @@ export default function Home() {
         </div>
         <div className="story__text" data-reveal>
           <p className="eyebrow">The Edit Nº 01</p>
-          <h2 className="h-serif h-xl">
+          <h2 className="h-title h-xl">
             Deep <em>Navy</em>
           </h2>
-          <p className="lead dropcap">
+          <p className="lead">
             Глибокий, аристократичний і стриманий. Він має ту саму універсальність, що й чорний, але виглядає складніше та цікавіше.
           </p>
           <p className="muted">
@@ -110,7 +110,7 @@ export default function Home() {
       <section className="sec sec--grey">
         <header className="sec__head" data-reveal>
           <p className="eyebrow">Bestsellers</p>
-          <h2 className="h-serif">Моделі, до яких повертаються</h2>
+          <h2 className="h-title">Моделі, до яких повертаються</h2>
           <Link href="/catalog?c=bestseller" className="ulink">
             Усі бестселери
           </Link>
@@ -134,7 +134,7 @@ export default function Home() {
           </div>
           <div className="fabric__text" data-reveal>
             <p className="eyebrow">Fabric first</p>
-            <h2 className="h-serif">Тканини, які відчуваєш шкірою</h2>
+            <h2 className="h-title">Тканини, які відчуваєш шкірою</h2>
             <ul className="facts">
               <li>
                 <b>50/45</b>
@@ -156,7 +156,7 @@ export default function Home() {
       <section className="sec">
         <header className="sec__head" data-reveal>
           <p className="eyebrow">Summer 26 · Archive</p>
-          <h2 className="h-serif">Льон, сатин, тенсел</h2>
+          <h2 className="h-title">Льон, сатин, тенсел</h2>
           <Link href="/catalog?col=ss26" className="ulink">
             Літня колекція
           </Link>
@@ -176,7 +176,7 @@ export default function Home() {
         </div>
         <div className="showroom__text" data-reveal>
           <p className="eyebrow">Showroom · Dnipro</p>
-          <h2 className="h-serif h-xl">
+          <h2 className="h-title h-xl">
             Офлайн-<em>примірка</em>
           </h2>
           <p className="lead">Сезонні колекції CORSO представлені в шоурумі — приходьте відчути тканини та знайти свій ідеальний образ.</p>
@@ -212,7 +212,7 @@ export default function Home() {
       <section className="insta">
         <header className="sec__head" data-reveal>
           <p className="eyebrow">{site.instagramHandle} · 30K</p>
-          <h2 className="h-serif">CORSO у вашій стрічці</h2>
+          <h2 className="h-title">CORSO у вашій стрічці</h2>
         </header>
         <div className="insta__grid">
           {INSTA.map((n) => (

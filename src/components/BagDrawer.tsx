@@ -67,7 +67,7 @@ export function BagDrawer() {
         </div>
         {bag.length === 0 ? (
           <div className="drawer__empty">
-            <p className="serif-lg">Кошик порожній</p>
+            <p className="title-sm">Кошик порожній</p>
             <p className="muted">Почніть з новинок сезону осінь — зима 26/27.</p>
             <Link href="/catalog?c=new" className="btn btn--dark" onClick={closeBag}>
               Дивитись новинки

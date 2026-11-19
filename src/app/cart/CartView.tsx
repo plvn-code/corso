@@ -10,11 +10,11 @@ export function CartView() {
     <div className="narrow">
       <header className="page-head">
         <p className="eyebrow">Shopping bag</p>
-        <h1 className="h-serif h-xl">Кошик</h1>
+        <h1 className="h-title h-xl">Кошик</h1>
       </header>
       {!ready ? null : bag.length === 0 ? (
         <div className="empty">
-          <p className="serif-lg">Кошик порожній</p>
+          <p className="title-sm">Кошик порожній</p>
           <Link href="/catalog" className="btn btn--dark">
             До каталогу
           </Link>

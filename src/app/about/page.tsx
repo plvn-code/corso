@@ -14,10 +14,10 @@ export default function About() {
         </div>
         <div className="about__intro">
           <p className="eyebrow">About · Since 2024</p>
-          <h1 className="h-serif h-xl">
+          <h1 className="h-title h-xl">
             Український бренд жіночого одягу <em>premium</em> якості
           </h1>
-          <p className="lead dropcap">
+          <p className="lead">
             CORSO — це мінімалістичний гардероб, у якому кожна річ працює з іншими. Ми створюємо колекції навколо того, що має значення:
             тканини, крою та силуету, який залишається з вами довше за один сезон.
           </p>
@@ -32,7 +32,7 @@ export default function About() {
         ].map(([t, d], i) => (
           <div key={t} className="manifesto__item" data-reveal>
             <span className="lb__no">0{i + 1}</span>
-            <h2 className="h-serif">{t}</h2>
+            <h2 className="h-title">{t}</h2>
             <p className="muted">{d}</p>
           </div>
         ))}
@@ -63,7 +63,7 @@ export default function About() {
         </div>
         <div className="showroom__text" data-reveal>
           <p className="eyebrow">Made in Ukraine</p>
-          <h2 className="h-serif h-xl">
+          <h2 className="h-title h-xl">
             Шиємо в Україні.
             <br />
             <em>Обираємо кращі тканини світу.</em>

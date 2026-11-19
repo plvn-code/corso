@@ -24,7 +24,7 @@ export function AccountView() {
         </div>
         <div className="auth__box">
           <p className="eyebrow">CORSO Edit Club</p>
-          <h1 className="h-serif h-xl">{mode === "in" ? "Вхід" : "Реєстрація"}</h1>
+          <h1 className="h-title h-xl">{mode === "in" ? "Вхід" : "Реєстрація"}</h1>
           <p className="muted">Історія замовлень, обране, швидке оформлення і доступ до закритих передзамовлень.</p>
           <div className="seg">
             <button className={mode === "in" ? "is-on" : ""} onClick={() => setMode("in")}>
@@ -71,7 +71,7 @@ export function AccountView() {
     <div className="acct">
       <header className="page-head">
         <p className="eyebrow">My account</p>
-        <h1 className="h-serif h-xl">
+        <h1 className="h-title h-xl">
           Вітаємо, <em>{user.name}</em>
         </h1>
       </header>
@@ -90,7 +90,7 @@ export function AccountView() {
       {tab === "orders" &&
         (orders.length === 0 ? (
           <div className="empty">
-            <p className="serif-lg">Замовлень поки немає</p>
+            <p className="title-sm">Замовлень поки немає</p>
             <Link href="/catalog" className="btn btn--dark">
               До каталогу
             </Link>
