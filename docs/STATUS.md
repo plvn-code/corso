@@ -10,7 +10,7 @@
 ## Next
 - Prices: client sends the price list → fill `PRICES` in `src/lib/catalog.ts`.
 - Real payment provider (LiqPay / WayForPay / Monobank Acquiring) + real accounts (Supabase/NextAuth) — later stage.
-- GitHub repo + Vercel — ask the user first.
+- GitHub: github.com/plvn-code/corso (main). Vercel — ask the user first.
 
 ## Open questions for the client
 1. Price list (we show only «₴» for now).
