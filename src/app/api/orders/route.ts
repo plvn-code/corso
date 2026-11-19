@@ -1,0 +1,58 @@
+import { NextResponse } from "next/server";
+import { getProduct } from "@/lib/catalog";
+
+/**
+ * Order intake. DEMO stage: validates the order against the catalogue and forwards it to
+ * Telegram when TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID are set; otherwise only logs it.
+ * Online payment is not connected yet (see docs/STATUS.md).
+ */
+const clip = (v: unknown, n = 200) => String(v ?? "").slice(0, n).replace(/[<>]/g, "");
+
+export async function POST(req: Request) {
+  let body: Record<string, unknown>;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ ok: false, error: "bad json" }, { status: 400 });
+  }
+  const c = (body.customer ?? {}) as Record<string, unknown>;
+  const rawLines = Array.isArray(body.lines) ? body.lines.slice(0, 30) : [];
+  const lines = rawLines
+    .map((l: Record<string, unknown>) => {
+      const p = getProduct(clip(l.slug, 80));
+      if (!p) return null;
+      const qty = Math.min(9, Math.max(1, Number(l.qty) || 1));
+      return `• ${p.name} — ${clip(l.color, 40)}, ${clip(l.size, 20)} × ${qty}`;
+    })
+    .filter(Boolean);
+  if (!clip(c.name) || !clip(c.phone) || lines.length === 0) {
+    return NextResponse.json({ ok: false, error: "invalid order" }, { status: 422 });
+  }
+  const text = [
+    `🛍 Нове замовлення ${clip(body.id, 20)}`,
+    `${clip(c.name)} · ${clip(c.phone, 40)}${c.email ? ` · ${clip(c.email)}` : ""}`,
+    `${clip(body.delivery)}${c.city ? ` — ${clip(c.city)}, ${clip(c.branch)}` : ""}`,
+    `Оплата: ${clip(body.payment)}`,
+    ...lines,
+    c.comment ? `💬 ${clip(c.comment, 500)}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chat = process.env.TELEGRAM_CHAT_ID;
+  if (token && chat) {
+    try {
+      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chat, text }),
+      });
+    } catch {
+      return NextResponse.json({ ok: false, error: "notify failed" }, { status: 502 });
+    }
+  } else {
+    console.log("[order:demo]\n" + text);
+  }
+  return NextResponse.json({ ok: true });
+}
