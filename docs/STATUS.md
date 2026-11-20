@@ -1,7 +1,8 @@
 # CORSO — status
 
 ## Done (2026-11-19/20)
-- Next.js store on :3025 — white + graphite/black, Vogue-style serif, mobile first.
+- Next.js store on :3025 — white + graphite/black, Vogue style, mobile first.
+- Brand identity from the client's files (2026-11-20): monogram C/C logo (header, menu, footer, favicon, apple-icon), fonts Open Sans (wordmark/titles) + Montserrat (text/UI), footer lockup «CORSO EDIT CLUB · STYLE HAS AN ADDRESS».
 - 40 products from the Telegram channel (FW 26/27 + Summer 26), 236 product photos cropped 2:3, 27 editorial frames (12 high-res from Instagram).
 - Home (magazine cover hero with giant CORSO masthead), catalogue with filters + 1/2-column view on phones, product page (swipe gallery, colours, sizes, size chart, sticky buy bar, accordions), lookbook, about, showroom, info pages.
 - Bag drawer, checkout with delivery/payment choice, **demo** card payment (Apple Pay / Google Pay / card form), thank-you page, **demo** account (login/registration, order history, profile) — all in localStorage.
@@ -18,7 +19,7 @@
 3. Size chart in cm — current table is generic.
 4. Which models/colours are still in stock (summer collection, archive sale).
 5. Original photos (Telegram web gives only 800 px) — ideally studio files ≥ 1600 px.
-6. Logo file (we typeset CORSO in Playfair Display).
+6. ~~Logo file~~ — received 2026-11-20 (Canva PDF); ask for the original SVG/AI if they have it.
 7. Telegram bot/chat for orders, payment provider choice, domain.
 8. Exchange/return policy wording, public offer and privacy policy texts.
 

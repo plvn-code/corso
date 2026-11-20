@@ -19,7 +19,9 @@ open -a "Google Chrome" http://localhost:3025
 `node_modules` is a symlink to `~/Desktop/nudes/node_modules` (same package.json) — the user's disk is tight. Raw TG/IG photos are not kept (re-download from t.me/s/emotionbrand if needed; `research/tg-posts.json` has every post's text + photo URLs).
 
 ## Stack
-Next.js 15 App Router · React 19 · TypeScript strict · plain CSS (`src/app/globals.css`, tokens in `:root`) · Inter Tight only — uppercase widely tracked titles (client rejected serif/italic fonts 2026-11-20) via next/font · no UI/animation libraries.
+Next.js 15 App Router · React 19 · TypeScript strict · plain CSS (`src/app/globals.css`, tokens in `:root`) · brand fonts from the client's logo file (2026-11-20): **Open Sans** (`--display`: wordmark, hero mast, titles, product names) + **Montserrat** (`--sans`: text, UI) via next/font — uppercase, widely tracked; never serif/italic for text (client rejected them) · no UI/animation libraries.
+
+**Logo:** monogram C/C (two Cormorant Garamond «C» split by a hairline slash) — `src/components/Monogram.tsx` (vector traced from the client's Canva PDF), `src/app/icon.svg`, `src/app/apple-icon.png`, `public/images/monogram.svg`. Lockup «CORSO EDIT CLUB / STYLE HAS AN ADDRESS» in the footer. Header = monogram + CORSO wordmark.
 
 ## Data
 - `src/data/products.json` — 40 products (FW 26/27 + Summer 26) curated from Telegram posts: name, line, category, collection, tags, sizes, description/details/composition (facts from captions only), colours → photo ids (`1303_1` = TG post 1303 photo 1, `gNN` = Instagram grid photo).

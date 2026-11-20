@@ -1,6 +1,6 @@
 /* ===================================================================
    CORSO — white editorial store. Mobile-first.
-   Palette: white + graphite/black (kulakovsky.ua), one tracked sans (Inter Tight), uppercase titles.
+   Palette: white + graphite/black (kulakovsky.ua), brand type from the CORSO logo file — Open Sans (wordmark, display titles) + Montserrat (text, UI), uppercase tracked.
    =================================================================== */
 
 :root {
@@ -18,6 +18,7 @@
   --pad: 16px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --sans: var(--font-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --display: var(--font-display), "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @media (min-width: 960px) {
@@ -47,8 +48,8 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.65;
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -121,11 +122,11 @@ ol {
   gap: 6px;
 }
 .h-title {
-  font-family: var(--sans);
+  font-family: var(--display);
   font-weight: 400;
   font-size: clamp(19px, 5vw, 32px);
   line-height: 1.3;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 .h-title em,
@@ -137,17 +138,28 @@ ol {
 .h-xl {
   font-size: clamp(23px, 6.4vw, 48px);
   line-height: 1.22;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
 }
 .title-sm {
+  font-family: var(--display);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.4;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
+/* display face (Open Sans, as in the CORSO logo file) for names and big statements */
+.menu__label,
+.tile__title,
+.quote blockquote,
+.facts b,
+.pdp__name,
+.lb__title,
+.about__numbers b {
+  font-family: var(--display);
+}
 .lead {
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--ink-2);
 }
@@ -369,12 +381,23 @@ ol {
   display: none;
 }
 .hdr__logo {
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: 0.34em;
-  padding-left: 0.34em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.42em;
   line-height: 1;
   transition: opacity 0.4s, transform 0.5s var(--ease);
+}
+.hdr__mono {
+  height: 30px;
+  width: auto;
+  flex: 0 0 auto;
+}
+.hdr__word {
+  margin-right: -0.42em;
 }
 .hdr--home:not(.hdr--solid) .hdr__logo {
   opacity: 0;
@@ -405,7 +428,11 @@ ol {
     background-size: 100% 1px;
   }
   .hdr__logo {
-    font-size: 26px;
+    font-size: 22px;
+    gap: 14px;
+  }
+  .hdr__mono {
+    height: 38px;
   }
 }
 
@@ -437,10 +464,12 @@ ol {
   border-bottom: 1px solid var(--line);
 }
 .menu__logo {
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: 0.34em;
-  padding-left: 0.34em;
+  display: block;
+}
+.menu__logo svg {
+  display: block;
+  height: 34px;
+  width: auto;
 }
 .menu__body {
   flex: 1;
@@ -638,11 +667,12 @@ ol {
   right: 0;
   bottom: 74px;
   margin: 0;
-  font-weight: 500;
-  font-size: 21vw;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 17vw;
   line-height: 0.8;
-  letter-spacing: 0.06em;
-  padding-left: 0.06em;
+  letter-spacing: 0.16em;
+  padding-left: 0.16em;
   text-align: center;
   color: #fff;
   pointer-events: none;
@@ -652,7 +682,7 @@ ol {
   from {
     opacity: 0;
     transform: translateY(30px);
-    letter-spacing: 0.16em;
+    letter-spacing: 0.32em;
   }
 }
 .cover__issue {
@@ -674,7 +704,7 @@ ol {
   position: absolute;
   left: var(--pad);
   right: var(--pad);
-  bottom: calc(74px + 21vw * 0.74 + 18px);
+  bottom: calc(74px + 17vw * 0.74 + 18px);
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.25);
 }
 .cover__kicker {
@@ -743,11 +773,11 @@ ol {
     display: block;
   }
   .cover__mast {
-    font-size: 20vw;
+    font-size: 15vw;
     bottom: 56px;
   }
   .cover__lines {
-    bottom: calc(56px + 20vw * 0.74 + 22px);
+    bottom: calc(56px + 15vw * 0.74 + 22px);
   }
   .cover__title {
     font-size: 19px;
@@ -766,11 +796,11 @@ ol {
 }
 @media (min-width: 1200px) {
   .cover__mast {
-    font-size: 18vw;
+    font-size: 14vw;
     bottom: 64px;
   }
   .cover__lines {
-    bottom: calc(64px + 18vw * 0.74 + 26px);
+    bottom: calc(64px + 14vw * 0.74 + 26px);
   }
 }
 
@@ -1109,7 +1139,7 @@ ol {
 }
 .tile__title {
   font-size: clamp(17px, 4.6vw, 24px);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.22em;
   line-height: 1.3;
   text-transform: uppercase;
@@ -1478,14 +1508,31 @@ ol {
   text-decoration: none;
 }
 .ftr__mark {
-  font-size: 20vw;
-  font-weight: 500;
-  line-height: 0.8;
-  letter-spacing: 0.06em;
-  padding-left: 0.06em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin: 48px 0 18px;
+  margin: 56px 0 40px;
   user-select: none;
+}
+.ftr__mono {
+  height: 72px;
+  width: auto;
+}
+.ftr__word {
+  margin: 30px 0 0;
+  font-family: var(--display);
+  font-size: clamp(17px, 5.4vw, 40px);
+  line-height: 1;
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
+  white-space: nowrap;
+}
+.ftr__tag {
+  margin: 14px 0 0;
+  font-size: clamp(10px, 2.7vw, 15px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .ftr__base {
   display: flex;
@@ -1521,7 +1568,13 @@ ol {
     padding-top: 0;
   }
   .ftr__mark {
-    font-size: 19vw;
+    margin: 96px 0 64px;
+  }
+  .ftr__mono {
+    height: 104px;
+  }
+  .ftr__word {
+    margin-top: 40px;
   }
 }
 
@@ -1901,7 +1954,7 @@ ol {
 }
 .pdp__name {
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.45;
   letter-spacing: 0.16em;
   margin-top: 8px;

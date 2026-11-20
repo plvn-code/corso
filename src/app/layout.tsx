@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight } from "next/font/google";
+import { Montserrat, Open_Sans } from "next/font/google";
 import { Suspense } from "react";
 import { StoreProvider } from "@/lib/store";
 import { Header, type SearchItem } from "@/components/Header";
@@ -10,7 +10,9 @@ import { products, photo, categoryName } from "@/lib/catalog";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const sans = Inter_Tight({ subsets: ["latin", "cyrillic"], weight: ["300", "400", "500", "600"], variable: "--font-sans", display: "swap" });
+// Brand type (CORSO logo file): Open Sans for the wordmark / display, Montserrat for everything else.
+const sans = Montserrat({ subsets: ["latin", "cyrillic"], weight: ["300", "400", "500", "600"], variable: "--font-sans", display: "swap" });
+const display = Open_Sans({ subsets: ["latin", "cyrillic"], weight: ["300", "400"], variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -32,7 +34,7 @@ const searchItems: SearchItem[] = products.map((p) => ({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="uk" className={sans.variable}>
+    <html lang="uk" className={`${sans.variable} ${display.variable}`}>
       <body>
         <StoreProvider>
           <a href="#main" className="skip">До змісту</a>

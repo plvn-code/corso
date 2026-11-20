@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "@/lib/store";
 import { site } from "@/lib/site";
+import { Monogram } from "./Monogram";
 import { IconBag, IconClose, IconHeart, IconInstagram, IconMenu, IconSearch, IconTelegram, IconUser } from "./Icons";
 
 export interface SearchItem {
@@ -123,7 +124,8 @@ export function Header({ items }: { items: SearchItem[] }) {
             </nav>
           </div>
           <Link href="/" className="hdr__logo" aria-label="CORSO — на головну">
-            CORSO
+            <Monogram className="hdr__mono" />
+            <span className="hdr__word">CORSO</span>
           </Link>
           <div className="hdr__right">
             <Link href="/account" className="icon-btn hide-sm" aria-label="Особистий кабінет">
@@ -147,8 +149,8 @@ export function Header({ items }: { items: SearchItem[] }) {
           <button className="icon-btn" aria-label="Закрити меню" onClick={() => setMenu(false)}>
             <IconClose />
           </button>
-          <Link href="/" className="menu__logo" onClick={() => setMenu(false)}>
-            CORSO
+          <Link href="/" className="menu__logo" aria-label="CORSO — на головну" onClick={() => setMenu(false)}>
+            <Monogram />
           </Link>
           <span className="icon-btn" />
         </div>

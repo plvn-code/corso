@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { IconArrow, IconInstagram, IconTelegram } from "./Icons";
+import { Monogram } from "./Monogram";
 
 const COLS = [
   {
@@ -103,7 +104,9 @@ export function Footer() {
       </div>
 
       <div className="ftr__mark" aria-hidden>
-        CORSO
+        <Monogram className="ftr__mono" />
+        <p className="ftr__word">CORSO EDIT CLUB</p>
+        <p className="ftr__tag">Style has an address</p>
       </div>
       <div className="ftr__base">
         <span>© {new Date().getFullYear()} CORSO · Ukrainian clothing brand</span>
