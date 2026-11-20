@@ -6,7 +6,6 @@ import { Rail } from "@/components/Rail";
 import { getProduct, products, toCard } from "@/lib/catalog";
 import { site } from "@/lib/site";
 import { IconArrow, IconInstagram, IconPin, IconTelegram } from "@/components/Icons";
-import { BotButton } from "@/components/BotChat";
 
 const pick = (slugs: string[]) => slugs.map((s) => getProduct(s)!).filter(Boolean).map(toCard);
 
@@ -188,9 +187,9 @@ export default function Home() {
             <a href={site.maps} target="_blank" rel="noopener noreferrer" className="btn btn--dark">
               Прокласти маршрут
             </a>
-            <BotButton topic="showroom" className="btn btn--line">
+            <a href={site.manager} target="_blank" rel="noopener noreferrer" className="btn btn--line">
               Записатися на примірку
-            </BotButton>
+            </a>
           </div>
         </div>
       </section>

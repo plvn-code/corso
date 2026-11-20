@@ -1,7 +1,7 @@
 /**
- * Minimal Telegram Bot API client (server only).
+ * Minimal Telegram Bot API client (server only) — order notifications to the managers' chat.
  * TELEGRAM_BOT_TOKEN — bot token from @BotFather; TELEGRAM_CHAT_ID — managers' chat/group.
- * Without a token every call is only logged (demo mode), so the site works before the bot exists.
+ * Without a token every call is only logged (demo mode), so the site works before it is set up.
  */
 export const tgConfigured = () => Boolean(process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID);
 

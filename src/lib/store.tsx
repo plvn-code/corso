@@ -63,10 +63,6 @@ interface StoreValue {
   addOrder: (o: DemoOrder) => void;
   measurements: Measurements | null;
   setMeasurements: (m: Measurements) => void;
-  /** Quick-contact chat (demo of the CORSO Telegram bot). `context` = what the client asks about. */
-  bot: { open: boolean; topic?: string; context?: string; n: number };
-  openBot: (opts?: { topic?: string; context?: string }) => void;
-  closeBot: () => void;
 }
 
 const K = { bag: "corso.bag.v1", wish: "corso.wish.v1", user: "corso.user.v1", orders: "corso.orders.v1", measure: "corso.measure.v1" };
@@ -98,7 +94,6 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [orders, setOrders] = useState<DemoOrder[]>([]);
   const [measurements, setMeasurements] = useState<Measurements | null>(null);
   const [bagOpen, setBagOpen] = useState(false);
-  const [bot, setBot] = useState<StoreValue["bot"]>({ open: false, n: 0 });
 
   useEffect(() => {
     setBag(read(K.bag, []));
@@ -157,14 +152,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       addOrder: (o) => setOrders((prev) => [o, ...prev]),
       measurements,
       setMeasurements,
-      bot,
-      openBot: (opts) => {
-        setBagOpen(false);
-        setBot((b) => ({ open: true, topic: opts?.topic, context: opts?.context, n: b.n + 1 }));
-      },
-      closeBot: () => setBot((b) => ({ ...b, open: false })),
     }),
-    [ready, bag, bagOpen, add, setQty, wishlist, user, orders, measurements, bot],
+    [ready, bag, bagOpen, add, setQty, wishlist, user, orders, measurements],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { IconArrow, IconInstagram, IconTelegram } from "./Icons";
 import { Monogram } from "./Monogram";
-import { BotButton } from "./BotChat";
 
 const COLS = [
   {
@@ -89,7 +88,9 @@ export function Footer() {
           </p>
           <p>
             Замовлення та питання:{" "}
-            <BotButton>чат з менеджером →</BotButton>
+            <a href={site.manager} target="_blank" rel="noopener noreferrer">
+              {site.managerHandle}
+            </a>
           </p>
           <div className="ftr__social">
             <a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">

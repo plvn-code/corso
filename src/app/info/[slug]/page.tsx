@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SizeTable } from "@/components/ProductView";
 import { site } from "@/lib/site";
-import { BotButton } from "@/components/BotChat";
 
 type Page = { title: string; en: string; body: React.ReactNode };
 
@@ -41,7 +40,11 @@ const PAGES: Record<string, Page> = {
           <li>Перед відправкою менеджер допоможе підібрати розмір за вашими параметрами, щоб обмін не знадобився.</li>
         </ul>
         <p>
-          З питань обміну пишіть нам у <BotButton topic="exchange">чат на сайті</BotButton> — менеджери відповідають швидко.
+          З питань обміну пишіть менеджеру:{" "}
+          <a href={site.manager} target="_blank" rel="noopener noreferrer">
+            {site.managerHandle}
+          </a>
+          .
         </p>
       </>
     ),
@@ -81,7 +84,11 @@ const PAGES: Record<string, Page> = {
           <li>Накладеного платежу на опт немає.</li>
         </ul>
         <p>
-          Напишіть нам у <BotButton context="Співпраця та опт">чат на сайті</BotButton> — менеджер надішле умови.
+          Напишіть менеджеру:{" "}
+          <a href={site.manager} target="_blank" rel="noopener noreferrer">
+            {site.managerHandle}
+          </a>{" "}
+          — надішлемо умови.
         </p>
       </>
     ),

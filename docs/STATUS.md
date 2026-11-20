@@ -7,22 +7,13 @@
 - Home (magazine cover hero with giant CORSO masthead), catalogue with filters + 1/2-column view on phones, product page (swipe gallery, colours, sizes, size chart, sticky buy bar, accordions), lookbook, about, showroom, info pages.
 - Bag drawer, checkout with delivery/payment choice, **demo** card payment (Apple Pay / Google Pay / card form), thank-you page, **demo** account (login/registration, order history, profile) — all in localStorage.
 - Checkout step «Параметри фігури» (client request 2026-11-20: height / bust / waist / hips, cm, required — CORSO adapts models in-house). Saved in the store (`measurements`, localStorage `corso.measure.v1`), pre-filled on the next order, editable in account → «Параметри»; sent with the order (API validates ranges) and shown in order history. With a real backend: store on the customer profile.
-- Quick contact (2026-11-20, client: the old manager @ShkurkoTatyana left): floating chat button on every page = **demo of the CORSO Telegram bot** — topic buttons (size, stock/price, delivery, showroom fitting, order status, exchange, manager), free text → asks phone/@nick once → `/api/contact` → managers' Telegram chat. «Запитати про модель» on product pages, «Записатися на примірку», footer, showroom and info pages open the same chat.
-- Real bot webhook ready: `/api/telegram` (see «Telegram-бот» below).
+- Manager contact everywhere (footer, showroom, product «Запитати менеджера», size guide, info pages): **@karina_kulikova** (2026-11-20; the on-site demo bot was removed at the client's request).
 - Orders POST to `/api/orders` (Telegram when env is set).
 
 ## Next
 - Prices: client sends the price list → fill `PRICES` in `src/lib/catalog.ts`.
 - Real payment provider (LiqPay / WayForPay / Monobank Acquiring) + real accounts (Supabase/NextAuth) — later stage.
 - GitHub: github.com/plvn-code/corso (main). Vercel — ask the user first.
-
-## Telegram-бот — launch checklist
-1. Client creates the bot in @BotFather (name «CORSO Edit Club», avatar = monogram `public/images/monogram.svg`), sends us the token.
-2. Create a managers' group, add the bot, get the group id (e.g. via @RawDataBot) → `TELEGRAM_CHAT_ID`.
-3. Vercel env: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `TELEGRAM_WEBHOOK_SECRET` (random), `NEXT_PUBLIC_TELEGRAM_BOT` (username), `NEXT_PUBLIC_SITE_URL`.
-4. `curl "https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<domain>/api/telegram&secret_token=<SECRET>&allowed_updates=[\"message\",\"callback_query\"]"`
-5. Managers answer clients by **Reply** to the bot's message in the group. Orders and site-chat requests arrive in the same group.
-Later (with a DB): two-way chat on the site (manager replies shown in the widget), CRM.
 
 ## Open questions for the client
 1. Price list (we show only «₴» for now).
@@ -31,7 +22,7 @@ Later (with a DB): two-way chat on the site (manager replies shown in the widget
 4. Which models/colours are still in stock (summer collection, archive sale).
 5. Original photos (Telegram web gives only 800 px) — ideally studio files ≥ 1600 px.
 6. ~~Logo file~~ — received 2026-11-20 (Canva PDF); ask for the original SVG/AI if they have it.
-7. Telegram bot token + managers' group (see checklist above), payment provider choice, domain.
+7. Telegram bot token + managers' chat id for order notifications, payment provider choice, domain.
 8. Exchange/return policy wording, public offer and privacy policy texts.
 
 ## Prices seen in the Telegram channel (reference only, may be outdated)
