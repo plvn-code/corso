@@ -3224,20 +3224,21 @@ ol {
 }
 /* top right: «Gift certificate» with the monogram under it */
 .gcard__top {
+  justify-self: end;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   gap: 3.2cqw;
   padding-top: 1cqw;
 }
 .gcard__mono {
   height: 12cqw;
   width: auto;
-  margin-right: 0.6cqw;
 }
 .gcard__kind {
   font-size: 2.6cqw;
   letter-spacing: 0.3em;
+  padding-left: 0.3em; /* balance the trailing tracking so the monogram sits at the optical centre */
   text-transform: uppercase;
   opacity: 0.75;
 }
