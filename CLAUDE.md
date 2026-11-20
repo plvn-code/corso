@@ -4,7 +4,9 @@ Store for **CORSO** (Instagram @corso.edit.club, 30K; Telegram channel t.me/emot
 
 Brief (2026-11-19): expensive, premium, modern, **Vogue style**, white site modelled on kulakovsky.ua with grey/black as the second colour; **mobile first** (must be perfect on phones), desktop too. Product photos mostly from the Telegram channel. **No prices yet** — every price shows only «₴» until the client sends a price list. Online payment and personal accounts are **DEMO** for now (to be built later).
 
-**Talk to the user in Russian.** Site copy is **Ukrainian**; brand lines stay in English (Noir Shell, Deep Navy, Edit Club…).
+**Talk to the user in Russian.** Site copy is **Ukrainian + English** (switch УКР / ENG at the bottom of the menu and in the footer, 2026-11-20); brand lines stay in English (Noir Shell, Deep Navy, Edit Club…).
+
+**i18n:** language in cookie `corso_lang` (uk default). Server: `const { lang, tr } = await getTr()` (`src/i18n/server.ts`); client: `const { lang, tr } = useLang()` (`src/i18n/client.tsx`). Write texts inline as `tr("укр", "eng")` — every new visible string needs both. Product texts: Ukrainian in `products.json`, English in `src/data/products.en.json` (same arrays per slug) → `localize(p, lang)` / `getProduct(slug, lang)`. Colour names are English in data. Orders/manager messages stay Ukrainian.
 Read `docs/STATUS.md` first (done / next / open questions).
 
 ## Commands

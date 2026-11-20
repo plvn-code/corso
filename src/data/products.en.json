@@ -1,0 +1,361 @@
+{
+  "noir-shell-cropped": {
+    "name": "NOIR SHELL Cropped Puffer",
+    "description": [
+      "The icon of the CORSO winter wardrobe in a cropped version. Flawless technology, where every detail is an example of premium design.",
+      "Two readings: a striking GLOSSY with a patent-leather shine and a restrained MATTE BLACK with a deep matte texture."
+    ],
+    "details": [
+      "Innovative eco-down — a weightless hypoallergenic filling",
+      "Premium water-repellent technical membrane",
+      "Matte water-resistant AquaGuard zip",
+      "Sculptural stand-up collar that protects from the wind",
+      "Drawcords with stoppers at the hem and Velcro cuffs with elastic inserts"
+    ],
+    "composition": ["Filling: eco-down", "Shell: water-repellent membrane"]
+  },
+  "noir-shell": {
+    "name": "NOIR SHELL Puffer",
+    "description": [
+      "NOIR SHELL is the icon of the CORSO winter wardrobe. Architectural volume, a monumental stand-up collar and technology that looks like part of a fashion concept."
+    ],
+    "details": [
+      "Innovative eco-down — a weightless hypoallergenic filling",
+      "Premium water-repellent membrane",
+      "Matte water-resistant AquaGuard zip",
+      "Drawcords with stoppers and Velcro cuffs"
+    ],
+    "composition": ["Filling: eco-down", "Shell: water-repellent membrane"]
+  },
+  "noir-shell-midi": {
+    "name": "NOIR SHELL MIDI Puffer",
+    "description": [
+      "The long version of NOIR SHELL — the same technology and sculptural collar, in a midi length for the coldest days."
+    ],
+    "details": ["Eco-down, membrane, water-resistant zip", "Sculptural stand-up collar", "Midi length"],
+    "composition": ["Filling: eco-down", "Shell: water-repellent membrane"]
+  },
+  "puhovyk-corso": {
+    "name": "CORSO Puffer",
+    "description": [
+      "The legendary CORSO puffer with a patent shine. Light as a cloud and keeps its shape season after season."
+    ],
+    "details": [
+      "Filling: high-tech eco-down — does not clump when washed and keeps its volume perfectly",
+      "Temperature rating: down to −25 °C"
+    ],
+    "composition": ["Filling: eco-down"]
+  },
+  "palto-cashmere": {
+    "name": "Double-Breasted Maxi Coat",
+    "description": [
+      "Premium Italian YSL fabric — a blend of natural warmth, exceptional softness and a noble texture.",
+      "An architectural maxi silhouette in a deep graphite shade. Bold lapels, a double-breasted fastening and statement epaulettes let you change the mood of the coat — from striking classic to restrained minimalism."
+    ],
+    "details": ["Double-breasted fastening", "Bold lapels and epaulettes", "Maxi length", "Limited edition"],
+    "composition": ["50% virgin wool", "45% cashmere", "5% polyester"]
+  },
+  "palto-pure-wool": {
+    "name": "PURE WOOL Maxi Coat",
+    "description": [
+      "A maxi coat in a deep graphite shade. Dense Italian wool creates a strong silhouette and keeps you comfortable in the cool season.",
+      "Deep graphite — a timeless classic with character that adds quiet luxury to any look."
+    ],
+    "details": ["Clean design with statement details", "Maxi length", "Soft lining, pleasant to the touch"],
+    "composition": ["100% Italian wool", "Lining: 100% viscose"]
+  },
+  "palto-grey": {
+    "name": "Straight-Cut Grey Coat",
+    "description": [
+      "A new coat in a refined grey shade. A straight silhouette, double-breasted fastening and epaulettes — a staple that works with denim, knitwear and tailored trousers."
+    ],
+    "details": ["Straight silhouette", "Double-breasted fastening", "Epaulettes"],
+    "composition": []
+  },
+  "palto-deep-blue": {
+    "name": "DEEP BLUE Coat",
+    "description": [
+      "A coat in deep blue — the outer layer of the CORSO MATCH capsule. Works on its own or with the insulated anorak set and the striped shirt for a layered total look."
+    ],
+    "details": ["Double-breasted fastening", "Epaulettes", "Maxi length"],
+    "composition": []
+  },
+  "trench-coat": {
+    "name": "Midi Trench Coat",
+    "description": [
+      "The kind of piece you see once and fall in love with forever. Premium Italian fabric and the perfect midi length.",
+      "A staple with a long story ahead — in three colours: sky blue, light beige and black."
+    ],
+    "details": ["Midi length", "Belt included", "Stand-up collar"],
+    "composition": ["60% cotton", "40% polyester (premium)"]
+  },
+  "parka-corso": {
+    "name": "Oversized Parka",
+    "description": [
+      "Architectural volume meets premium Burberry cotton. Functional pockets, a stand-up collar and an adjustable waist — details that make the parka a strong part of the autumn capsule.",
+      "Easy to style with classic jeans, knitwear, white denim or more feminine pieces."
+    ],
+    "details": ["Functional pockets", "Stand-up collar", "Adjustable waist"],
+    "composition": ["Shell: 100% Burberry cotton", "Lining: viscose"]
+  },
+  "bomber-corso": {
+    "name": "CORSO Bomber",
+    "description": [
+      "The cult CORSO bomber — the absolute leader of your wish lists. Voluminous sleeves and a dense fabric that feels flawless to the touch."
+    ],
+    "details": ["Voluminous sleeves", "Stand-up collar", "Oversized fit"],
+    "composition": ["Main fabric: 100% Burberry cotton", "Lining: 100% viscose"]
+  },
+  "bomber-grey": {
+    "name": "Long Insulated Bomber",
+    "description": [
+      "A long grey bomber with insulation and a hood — keeps you comfortable even at temperatures down to −5 °C."
+    ],
+    "details": ["Insulated down to −5 °C", "Hood", "Oversized fit"],
+    "composition": []
+  },
+  "set-anorak-winter": {
+    "name": "Insulated Anorak Set",
+    "description": [
+      "The winter take on function in the CORSO collection. Incredibly soft cotton, pleasant to the body, with warm sheared fleece inside.",
+      "A sharp shoulder line, sculptural cut and delicate gold hardware create a complete look where every considered detail becomes a synonym for modern luxury."
+    ],
+    "details": ["Zip-up anorak with a stand-up collar", "Wide trousers", "Gold hardware", "Sheared fleece inside"],
+    "composition": ["100% cotton", "Insulation: sheared fleece"]
+  },
+  "set-navy-bomber-skirt": {
+    "name": "Bomber + Midi Skirt Set",
+    "description": [
+      "A set of a voluminous bomber and a fitted midi skirt in refined Italian 100% cotton. For when you want to step beyond the usual.",
+      "Deep Navy — the new colour of the collection as an alternative to classic black: restrained and striking at once."
+    ],
+    "details": ["Voluminous bomber", "Fitted midi skirt with a slit"],
+    "composition": ["100% Italian cotton"]
+  },
+  "kostium-lampas": {
+    "name": "Double-Stripe Tracksuit",
+    "description": [
+      "The cult CORSO sets: an oversized track jacket with a stand-up collar and palazzo trousers with a double waistband — a set that never gets lost in the crowd.",
+      "Adjustable volume at the hem: toggles let you wear the trousers as palazzos or as joggers."
+    ],
+    "details": [
+      "Double waistband, soft waist hold",
+      "Track jacket with a mesh lining",
+      "Quality hardware and a premium zip",
+      "Adjustable toggles at the trouser hem"
+    ],
+    "composition": []
+  },
+  "set-denim-blue": {
+    "name": "Track Jacket + Skort Set",
+    "description": [
+      "A feminine, light set considered down to the details, in trending DENIM BLUE with a fine side stripe.",
+      "Instead of a regular skirt — a skort: it looks elegant yet lets you move freely. Build your set: track jacket + palazzos or track jacket + skort."
+    ],
+    "details": ["Fine side stripe", "Functional pockets", "Your choice: skort or palazzos"],
+    "composition": []
+  },
+  "set-zip-italian-knit": {
+    "name": "Zip Jacket + Palazzo Set",
+    "description": [
+      "A zip jacket with palazzos or joggers — your choice. One basic set, different vibes. Style it your way, wear it your way.",
+      "Premium Italian knit quality."
+    ],
+    "details": ["Zip jacket", "Trousers: palazzo or joggers"],
+    "composition": ["Italian knit"]
+  },
+  "leather-jacket": {
+    "name": "Structured Leather Jacket",
+    "description": [
+      "A refined play of shape and silhouette: voluminous shoulders contrast smoothly with a fitted waist, creating a striking sculptural line.",
+      "The high collar adds drama. Finish the look with a matching mini or midi skirt for a complete monochrome set."
+    ],
+    "details": ["Voluminous shoulders", "Fitted silhouette", "High collar"],
+    "composition": ["Soft matte eco-leather"]
+  },
+  "leather-skirt": {
+    "name": "Leather Skirt",
+    "description": [
+      "A skirt from the CORSO leather line — mini or midi, depending on your mood. Build a full leather set or choose each piece separately."
+    ],
+    "details": ["Length: mini or midi", "Pairs with the jacket and bomber of the line"],
+    "composition": ["Soft matte eco-leather"]
+  },
+  "leather-bomber-set": {
+    "name": "Leather Bomber + Skirt Set",
+    "description": [
+      "A play on contrast, delicacy and volume. A refined midi skirt that softly follows the lines, and an oversized bomber in soft premium eco-leather.",
+      "A set that highlights a flawless silhouette and carries an aristocratic vibe."
+    ],
+    "details": ["Bomber with voluminous sleeves", "Midi skirt"],
+    "composition": ["Premium eco-leather", "Lining: 100% viscose"],
+    "sizeNote": "Bomber — one size, skirt — XS–L"
+  },
+  "sorochka-vuzol": {
+    "name": "Knot Shirt",
+    "description": [
+      "A shirt where a precise cut meets feminine aesthetics. A piece created beyond seasons.",
+      "An architectural shoulder line, a delicately shaped knot at the waist with beautiful draping, a refined stand-up collar and long cuffs with statement hardware."
+    ],
+    "details": ["Knot at the waist", "Architectural shoulder line", "Stand-up collar", "Long cuffs"],
+    "composition": ["100% dense Italian-quality cotton"]
+  },
+  "sorochka-vidkryta-spyna": {
+    "name": "Open-Back Shirt",
+    "description": [
+      "A shirt where a basic meets character. Statement shoulders — a manifesto of strength, clean lines and a silhouette that stands out instantly.",
+      "A half-open back — the fine line between restraint and hidden magnetism. Wear it with denim, relaxed trousers or leather."
+    ],
+    "details": ["Statement shoulders", "Half-open back", "Sleeveless"],
+    "composition": ["100% cotton"]
+  },
+  "sorochka-dvosharova": {
+    "name": "Two-Layer Insulated Shirt",
+    "description": [
+      "An oversized two-layer shirt for those who love quality you can feel. The outer layer is the cult fabric of the house of Gucci, the lining is pure cotton.",
+      "It counts as outerwear: wear it instead of a jacket on cool days or over a basic look."
+    ],
+    "details": ["Two layers", "Oversized fit", "Limited collection"],
+    "composition": ["Outer: 100% cotton (Gucci house fabric)", "Lining: 100% cotton"]
+  },
+  "suknia-sorochka": {
+    "name": "Shirt Dress",
+    "description": [
+      "A shirt dress that looks new every time. With jeans — as a light trench, with leggings — as a dress, with wide trousers — for layering."
+    ],
+    "details": ["Midi length", "Belt", "Wear as a dress or a light trench"],
+    "composition": []
+  },
+  "lehinsy-shtrypky": {
+    "name": "Stirrup Leggings",
+    "description": [
+      "That subtle yet decisive touch that instantly pulls a look into refined sartorial. The perfect pair for a parka, trench or jacket."
+    ],
+    "details": [
+      "Dense matte sport spandex — 100% opaque on the body",
+      "Maximum stretch that never restricts movement",
+      "Mid rise that flatters the legs",
+      "Stirrups"
+    ],
+    "composition": ["Matte sport spandex"]
+  },
+  "longsliv-corso": {
+    "name": "CORSO Long Sleeve",
+    "description": [
+      "An essential basic for cool weather. Goes with any bottoms — zero stress at the wardrobe and a flawless look."
+    ],
+    "details": ["Fitted silhouette", "Goes under any outer layer and with any bottoms"],
+    "composition": []
+  },
+  "longsliv-lion": {
+    "name": "Textured Linen-Blend Long Sleeve",
+    "description": [
+      "A textured long sleeve with added linen — fine, semi-sheer, with a noble texture. Wear it on its own or as a second layer."
+    ],
+    "details": ["Textured fabric", "Fitted silhouette"],
+    "composition": ["Linen blend"]
+  },
+  "longsliv-vovna": {
+    "name": "100% Wool Long Sleeve",
+    "description": ["A grey long sleeve in 100% wool — a warm basic that works with the whole wardrobe."],
+    "details": ["A warm basic for the cold season"],
+    "composition": ["100% wool"]
+  },
+  "manishka": {
+    "name": "Knit Dickey",
+    "description": [
+      "What only yesterday seemed a practical detail is today one of the most interesting accessories of the cold season. Wear it under a coat, trench or jacket."
+    ],
+    "details": ["High collar", "Under any outerwear"],
+    "composition": []
+  },
+  "set-satin": {
+    "name": "Satin Top + Palazzo Set",
+    "description": [
+      "The bestseller of the CORSO summer collection. Noble lines and a dense weave that makes the fabric opaque and resistant to damage.",
+      "Perfect both for a special evening and for a refined daytime look."
+    ],
+    "details": ["Thin-strap top with lace", "Palazzo trousers"],
+    "composition": ["Premium satin"]
+  },
+  "satin-shorts-lace": {
+    "name": "Satin Shorts with Lace",
+    "description": [
+      "The very shorts from your saved Pinterest pins. The milky shade of premium satin highlights a tan, and the lace trim adds French chic."
+    ],
+    "details": ["Lace trim", "Elastic waist"],
+    "composition": ["Premium satin"]
+  },
+  "set-tencel": {
+    "name": "Tencel Set",
+    "description": [
+      "An oversized shirt and palazzos in weightless tencel. A relaxed silhouette and a noble, barely visible texture that plays softly in the sun."
+    ],
+    "details": ["Anti-static", "Quick-drying", "Hypoallergenic"],
+    "composition": ["Tencel"]
+  },
+  "set-tencel-bando": {
+    "name": "Bandeau Top + Harem Pants Set",
+    "description": [
+      "Airy volume, snow-white colour and lightness — tencel that seems made of sunlight and warm wind."
+    ],
+    "details": ["Bandeau top with statement volume", "Harem pants with an elastic drawstring waist", "Pockets and ties at the hem"],
+    "composition": ["Premium tencel"]
+  },
+  "set-linen": {
+    "name": "Linen Shirt + Shorts Set",
+    "description": [
+      "A collection of linen sets in natural linen, in the juicy and basic colours of the season. Sometimes the right colour sets the mood for the whole day."
+    ],
+    "details": ["Oversized shirt", "Elastic-waist shorts"],
+    "composition": ["100% linen"]
+  },
+  "sorochka-poppy": {
+    "name": "Sheer Linen Shirt",
+    "description": [
+      "A shirt in semi-sheer linen in a stunning poppy red shade — instantly makes any street-style look the centre of attention."
+    ],
+    "details": ["Oversized fit", "Semi-sheer linen"],
+    "composition": ["100% linen"]
+  },
+  "set-polo-skirt": {
+    "name": "Polo + Skirt Set",
+    "description": [
+      "A polo and a voluminous two-layer lined skirt that adds that effortless volume. The perfect balance of proportions."
+    ],
+    "details": ["Two-layer lined skirt", "Utility pockets", "Statement belt"],
+    "composition": ["100% cotton"]
+  },
+  "set-jacket-shorts": {
+    "name": "Jacket + Shorts Set",
+    "description": [
+      "A light, breathable cotton set: a jacket with an on-trend stand-up collar and high-waisted shorts."
+    ],
+    "details": ["Stand-up collar", "Voluminous sleeves", "High-waisted shorts"],
+    "composition": ["100% cotton"],
+    "sizeNote": "Jacket — oversized, shorts — XS/S, M/L"
+  },
+  "sorochka-smuzhka": {
+    "name": "Striped Shirt with Lace",
+    "description": ["A lace trim — a signature CORSO detail that makes you stand out."],
+    "details": ["Lace trim", "Oversized fit"],
+    "composition": ["Cotton"]
+  },
+  "suknia-lion": {
+    "name": "Knitted Linen Maxi Dress",
+    "description": [
+      "A dress in Italian knitted linen that softly wraps the figure, flows with every movement and lets the body breathe.",
+      "An open back, adjustable fit at the back and maxi length create a silhouette that looks expensive without extra details."
+    ],
+    "details": ["Open back", "Adjustable fit", "Maxi length"],
+    "composition": ["100% Italian linen"]
+  },
+  "set-satin-trio": {
+    "name": "Satin Three-Piece Set",
+    "description": [
+      "A shirt jacket, top and shorts in a restrained total black. The noble shine and fresh feel of smooth satin turn a basic concept into pure pleasure."
+    ],
+    "details": ["Shirt jacket", "Top", "Shorts"],
+    "composition": ["Satin"]
+  }
+}

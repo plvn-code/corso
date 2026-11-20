@@ -17,6 +17,8 @@ export interface BagLine {
   image: string;
   price: number | null;
   qty: number;
+  /** product name in both site languages (bag shows the current one) */
+  names?: { uk: string; en: string };
 }
 
 export interface DemoUser {

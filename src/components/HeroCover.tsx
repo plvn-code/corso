@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useLang } from "@/i18n/client";
 
 /** Magazine-cover hero: one photo on phones, a pair side by side from 760px. */
 const SLIDES = [
@@ -13,6 +14,7 @@ const SLIDES = [
     ],
     kicker: "Noir Shell · Glossy Burgundy",
     title: "Зима в прочитанні CORSO",
+    titleEn: "Winter, the CORSO way",
     href: "/catalog?c=puhovyky",
   },
   {
@@ -22,6 +24,7 @@ const SLIDES = [
     ],
     kicker: "Basic Collection · Deep Blue",
     title: "Архітектура силуету",
+    titleEn: "The architecture of a silhouette",
     href: "/catalog?c=new",
   },
   {
@@ -31,11 +34,13 @@ const SLIDES = [
     ],
     kicker: "Camel · Burgundy",
     title: "Колір, що пасує внутрішньому стану",
+    titleEn: "A colour that matches your mood",
     href: "/catalog?col=fw26",
   },
 ];
 
 export function HeroCover() {
+  const { lang, tr } = useLang();
   const [i, setI] = useState(0);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -44,7 +49,7 @@ export function HeroCover() {
   }, [i]);
   const s = SLIDES[i];
   return (
-    <section className="cover" aria-label="CORSO — осінь-зима 26/27">
+    <section className="cover" aria-label={tr("CORSO — осінь-зима 26/27", "CORSO — fall winter 26/27")}>
       {SLIDES.map((sl, k) => (
         <div key={k} className={`cover__img${k === i ? " is-on" : ""}`} aria-hidden={k !== i}>
           {sl.imgs.map((im, j) => (
@@ -73,21 +78,21 @@ export function HeroCover() {
           {s.kicker}
         </p>
         <Link href={s.href} className="cover__title" key={`t${i}`}>
-          {s.title}
+          {lang === "en" ? s.titleEn : s.title}
         </Link>
       </div>
       <h1 className="cover__mast">CORSO</h1>
       <div className="cover__foot">
         <Link href="/catalog?col=fw26" className="ulink">
-          Дивитись колекцію
+          {tr("Дивитись колекцію", "Shop the collection")}
         </Link>
-        <div className="cover__dots" role="tablist" aria-label="Слайди">
+        <div className="cover__dots" role="tablist" aria-label={tr("Слайди", "Slides")}>
           {SLIDES.map((sl, k) => (
             <button
               key={k}
               role="tab"
               aria-selected={k === i}
-              aria-label={`Слайд ${k + 1}`}
+              aria-label={`${tr("Слайд", "Slide")} ${k + 1}`}
               onClick={() => setI(k)}
               className={k === i ? "is-on" : ""}
             />

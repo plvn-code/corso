@@ -1,4 +1,6 @@
 import raw from "@/data/products.json";
+import rawEn from "@/data/products.en.json";
+import type { Lang } from "@/i18n/lang";
 
 export type CategorySlug = "puhovyky" | "palta" | "kurtky" | "sety" | "shkira" | "sorochky" | "sukni" | "basic";
 export type CollectionSlug = "fw26" | "ss26";
@@ -54,28 +56,45 @@ export const products: Product[] = (raw as Omit<Product, "price">[]).map((p) => 
   price: PRICES[p.slug] ?? null,
 }));
 
+/** English texts per slug (src/data/products.en.json); Ukrainian stays in products.json. */
+type EnText = Pick<Product, "name" | "description" | "details" | "composition"> & { sizeNote?: string };
+const EN = rawEn as Record<string, EnText>;
+
+/** Product with texts in the requested language (falls back to Ukrainian). */
+export function localize(p: Product, lang: Lang): Product {
+  const en = lang === "en" ? EN[p.slug] : undefined;
+  return en ? { ...p, ...en, sizeNote: en.sizeNote ?? p.sizeNote } : p;
+}
+
 export function photo(slug: string, id: string) {
   return `/images/p/${slug}/${id}.jpg`;
 }
 
-export function getProduct(slug: string) {
-  return products.find((p) => p.slug === slug);
+export function getProduct(slug: string, lang: Lang = "uk") {
+  const p = products.find((x) => x.slug === slug);
+  return p && localize(p, lang);
 }
 
-export function categoryName(slug: string) {
-  return CATEGORIES.find((c) => c.slug === slug)?.name ?? "";
+export function categoryName(slug: string, lang: Lang = "uk") {
+  const c = CATEGORIES.find((x) => x.slug === slug);
+  return c ? (lang === "en" ? c.en : c.name) : "";
+}
+
+export function collectionName(slug: string, lang: Lang = "uk") {
+  const c = COLLECTIONS.find((x) => x.slug === slug);
+  return c ? (lang === "en" ? c.en : c.name) : "";
 }
 
 /** Colour families used by the catalogue filter. */
-export const COLOR_FAMILIES: { slug: string; name: string; hex: string; match: RegExp }[] = [
-  { slug: "black", name: "Чорний", hex: "#111111", match: /black|graphite|чорн/i },
-  { slug: "milk", name: "Молочний", hex: "#efe8da", match: /milk|white|ecru|cream|біл|light beige/i },
-  { slug: "beige", name: "Бежевий / кемел", hex: "#b48a5c", match: /camel|beige|caramel|cappuccino|бежев/i },
-  { slug: "grey", name: "Сірий", hex: "#9a9a9a", match: /grey|melange|сір/i },
-  { slug: "blue", name: "Синій / блакитний", hex: "#3b5a8c", match: /blue|navy|lagoon/i },
-  { slug: "red", name: "Червоний / бордо", hex: "#b3182a", match: /red|burgundy|poppy/i },
-  { slug: "pink", name: "Рожевий / ліловий", hex: "#d9a6c4", match: /pink|powder|lilac|purple/i },
-  { slug: "green", name: "Зелений", hex: "#7fb58d", match: /green|mint/i },
+export const COLOR_FAMILIES: { slug: string; name: string; en: string; hex: string; match: RegExp }[] = [
+  { slug: "black", name: "Чорний", en: "Black", hex: "#111111", match: /black|graphite/i },
+  { slug: "milk", name: "Молочний", en: "Milk / white", hex: "#efe8da", match: /milk|white|ecru|cream|light beige/i },
+  { slug: "beige", name: "Бежевий / кемел", en: "Beige / camel", hex: "#b48a5c", match: /camel|beige|caramel|cappuccino/i },
+  { slug: "grey", name: "Сірий", en: "Grey", hex: "#9a9a9a", match: /grey|melange/i },
+  { slug: "blue", name: "Синій / блакитний", en: "Blue", hex: "#3b5a8c", match: /blue|navy|lagoon/i },
+  { slug: "red", name: "Червоний / бордо", en: "Red / burgundy", hex: "#b3182a", match: /red|burgundy|poppy/i },
+  { slug: "pink", name: "Рожевий / ліловий", en: "Pink / lilac", hex: "#d9a6c4", match: /pink|powder|lilac|purple/i },
+  { slug: "green", name: "Зелений", en: "Green", hex: "#7fb58d", match: /green|mint/i },
 ];
 
 export function colorFamilies(p: Product) {
@@ -93,8 +112,8 @@ export function sizeFamilies(p: Product) {
 
 export type Sort = "new" | "az";
 
-export function query(opts: { c?: string; col?: string; color?: string; size?: string; sort?: string; q?: string }) {
-  let list = products.slice();
+export function query(opts: { c?: string; col?: string; color?: string; size?: string; sort?: string; q?: string }, lang: Lang = "uk") {
+  let list = products.map((p) => localize(p, lang));
   if (opts.c === "new") list = list.filter((p) => p.tags.includes("new"));
   else if (opts.c === "bestseller") list = list.filter((p) => p.tags.includes("bestseller"));
   else if (opts.c) list = list.filter((p) => p.category === opts.c);
@@ -104,17 +123,20 @@ export function query(opts: { c?: string; col?: string; color?: string; size?: s
   if (opts.q) {
     const q = opts.q.toLowerCase().trim();
     list = list.filter((p) =>
-      [p.name, p.line, categoryName(p.category), ...p.colors.map((c) => c.name)].join(" ").toLowerCase().includes(q),
+      [p.name, EN[p.slug]?.name ?? "", products.find((x) => x.slug === p.slug)!.name, p.line, categoryName(p.category), categoryName(p.category, "en"), ...p.colors.map((c) => c.name)]
+        .join(" ")
+        .toLowerCase()
+        .includes(q),
     );
   }
-  if (opts.sort === "az") list.sort((a, b) => a.name.localeCompare(b.name, "uk"));
+  if (opts.sort === "az") list.sort((a, b) => a.name.localeCompare(b.name, lang));
   return list;
 }
 
-export function related(p: Product, n = 4) {
+export function related(p: Product, n = 4, lang: Lang = "uk") {
   const same = products.filter((x) => x.slug !== p.slug && x.category === p.category);
   const rest = products.filter((x) => x.slug !== p.slug && x.category !== p.category && x.collection === p.collection);
-  return [...same, ...rest].slice(0, n);
+  return [...same, ...rest].slice(0, n).map((x) => localize(x, lang));
 }
 
 /** Serializable card payload for client components. */

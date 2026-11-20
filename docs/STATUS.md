@@ -8,6 +8,7 @@
 - Bag drawer, checkout with delivery/payment choice, **demo** card payment (Apple Pay / Google Pay / card form), thank-you page, **demo** account (login/registration, order history, profile) — all in localStorage.
 - Checkout step «Параметри фігури» (client request 2026-11-20: height / bust / waist / hips, cm, required — CORSO adapts models in-house). Saved in the store (`measurements`, localStorage `corso.measure.v1`), pre-filled on the next order, editable in account → «Параметри»; sent with the order (API validates ranges) and shown in order history. With a real backend: store on the customer profile.
 - Manager contact everywhere (footer, showroom, product «Запитати менеджера», size guide, info pages): **@karina_kulikova** (2026-11-20; the on-site demo bot was removed at the client's request).
+- Two languages (2026-11-20): Ukrainian + English across the whole site incl. all 40 product descriptions; switch УКР / ENG at the bottom of the menu and in the footer (cookie). English product texts are our translation — ask the client to review.
 - Orders POST to `/api/orders` (Telegram when env is set).
 
 ## Next

@@ -1,5 +1,6 @@
 "use client";
 
+import { useLang } from "@/i18n/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -23,6 +24,8 @@ export interface ViewData {
   details: string[];
   composition: string[];
   colors: { name: string; hex: string; images: string[] }[];
+  /** name in both languages — stored with the bag line */
+  names: { uk: string; en: string };
 }
 
 function Accordion({ title, children, open = false }: { title: string; children: React.ReactNode; open?: boolean }) {
@@ -43,6 +46,7 @@ function Accordion({ title, children, open = false }: { title: string; children:
 export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor?: number }) {
   const router = useRouter();
   const { add, wishlist, toggleWish, ready } = useStore();
+  const { tr } = useLang();
   const [ci, setCi] = useState(Math.min(initialColor, p.colors.length - 1));
   const [size, setSize] = useState<string | null>(p.sizes.length === 1 ? p.sizes[0] : null);
   const [warn, setWarn] = useState(false);
@@ -83,7 +87,7 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
       document.getElementById("sizes")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    add({ slug: p.slug, name: p.name, color: color.name, size, image: color.images[0], price: p.price }, !goCheckout);
+    add({ slug: p.slug, name: p.name, names: p.names, color: color.name, size, image: color.images[0], price: p.price }, !goCheckout);
     if (goCheckout) router.push("/checkout");
   }
 
@@ -96,10 +100,10 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
           onScroll={(e) => setSlide(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))}
         >
           {color.images.map((src, i) => (
-            <button key={src} className="gal__item" onClick={() => setZoom(i)} aria-label={`Збільшити фото ${i + 1}`}>
+            <button key={src} className="gal__item" onClick={() => setZoom(i)} aria-label={`${tr("Збільшити фото", "Zoom photo")} ${i + 1}`}>
               <Image
                 src={src}
-                alt={`${p.name} — ${color.name}, фото ${i + 1}`}
+                alt={`${p.name} — ${color.name}, ${tr("фото", "photo")} ${i + 1}`}
                 fill
                 sizes="(max-width: 960px) 100vw, 33vw"
                 priority={i < 2}
@@ -120,8 +124,8 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
 
       <div className="pdp__info">
         <div className="pdp__sticky">
-          <nav className="crumbs" aria-label="Навігація">
-            <Link href="/catalog">Каталог</Link>
+          <nav className="crumbs" aria-label={tr("Навігація", "Breadcrumbs")}>
+            <Link href="/catalog">{tr("Каталог", "Shop")}</Link>
             <span>/</span>
             <Link href={`/catalog?c=${p.category}`}>{p.categoryName}</Link>
           </nav>
@@ -129,12 +133,12 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
           <h1 className="pdp__name">{p.name}</h1>
           <p className="pdp__price">
             {formatPrice(p.price)}
-            {p.price == null && <span className="pdp__price-note">ціна уточнюється</span>}
+            {p.price == null && <span className="pdp__price-note">{tr("ціна уточнюється", "price on request")}</span>}
           </p>
 
           <div className="pdp__block">
             <p className="pdp__label">
-              Колір: <b>{color.name}</b>
+              {tr("Колір", "Colour")}: <b>{color.name}</b>
             </p>
             <div className="swatches">
               {p.colors.map((c, i) => (
@@ -155,10 +159,15 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
           <div className="pdp__block" id="sizes">
             <div className="pdp__label pdp__label--row">
               <span>
-                Розмір{size && <>: <b>{size}</b></>}
+                {tr("Розмір", "Size")}
+                {size && (
+                  <>
+                    : <b>{size}</b>
+                  </>
+                )}
               </span>
               <button className="link-btn" onClick={() => setGuide(true)}>
-                Розмірна сітка
+                {tr("Розмірна сітка", "Size guide")}
               </button>
             </div>
             <div className={`sizes${warn && !size ? " is-warn" : ""}`}>
@@ -177,17 +186,17 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
               ))}
             </div>
             {p.sizeNote && <p className="muted small">{p.sizeNote}</p>}
-            {warn && !size && <p className="warn">Оберіть, будь ласка, розмір</p>}
+            {warn && !size && <p className="warn">{tr("Оберіть, будь ласка, розмір", "Please select a size")}</p>}
           </div>
 
           <div className="pdp__cta" ref={ctaRef}>
             <div className="pdp__cta-row">
               <button className="btn btn--line btn--grow" onClick={() => addToBag(false)}>
-                Додати в кошик
+                {tr("Додати в кошик", "Add to bag")}
               </button>
               <button
                 className={`btn btn--line btn--square${wished ? " is-on" : ""}`}
-                aria-label={wished ? "Прибрати з обраного" : "Додати в обране"}
+                aria-label={wished ? tr("Прибрати з обраного", "Remove from wishlist") : tr("Додати в обране", "Add to wishlist")}
                 aria-pressed={wished}
                 onClick={() => toggleWish(p.slug)}
               >
@@ -195,21 +204,21 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
               </button>
             </div>
             <button className="btn btn--dark btn--block" onClick={() => addToBag(true)}>
-              Купити зараз
+              {tr("Купити зараз", "Buy now")}
             </button>
           </div>
 
           <ul className="pdp__perks">
-            <li>Відправка Новою поштою за 1–2 дні</li>
-            <li>Примірка в шоурумі у Дніпрі</li>
-            <li>Оплата онлайн, при отриманні або на рахунок</li>
+            <li>{tr("Відправка Новою поштою за 1–2 дні", "Nova Poshta shipping in 1–2 days")}</li>
+            <li>{tr("Примірка в шоурумі у Дніпрі", "Fitting at our Dnipro showroom")}</li>
+            <li>{tr("Оплата онлайн, при отриманні або на рахунок", "Pay online, on delivery or by bank transfer")}</li>
           </ul>
           <a href={site.manager} target="_blank" rel="noopener noreferrer" className="pdp__ask">
-            <IconTelegram width={16} height={16} /> Запитати менеджера в Telegram
+            <IconTelegram width={16} height={16} /> {tr("Запитати менеджера в Telegram", "Ask our manager on Telegram")}
           </a>
 
           <div className="accs">
-            <Accordion title="Опис" open>
+            <Accordion title={tr("Опис", "Description")} open>
               {p.description.map((t) => (
                 <p key={t}>{t}</p>
               ))}
@@ -221,7 +230,7 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
                 </ul>
               )}
             </Accordion>
-            <Accordion title="Склад і догляд">
+            <Accordion title={tr("Склад і догляд", "Composition & care")}>
               {p.composition.length > 0 ? (
                 <ul className="dash">
                   {p.composition.map((d) => (
@@ -229,24 +238,35 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
                   ))}
                 </ul>
               ) : (
-                <p>Склад уточнюйте в менеджера.</p>
+                <p>{tr("Склад уточнюйте в менеджера.", "Please ask our manager about the composition.")}</p>
               )}
               <p>
-                Делікатне прання або хімчистка. Детальніше —{" "}
-                <Link href="/info/dohliad">догляд за виробами</Link>.
+                {tr("Делікатне прання або хімчистка. Детальніше —", "Delicate wash or dry clean. More in")}{" "}
+                <Link href="/info/dohliad">{tr("догляд за виробами", "garment care")}</Link>.
               </p>
             </Accordion>
-            <Accordion title="Оплата і доставка">
-              <p>Відправка Новою поштою по Україні протягом 1–2 днів. Самовивіз — шоурум у Дніпрі.</p>
+            <Accordion title={tr("Оплата і доставка", "Payment & delivery")}>
               <p>
-                Оплата карткою онлайн, на рахунок ФОП (IBAN) або накладеним платежем з передоплатою 250 грн.{" "}
-                <Link href="/info/oplata-i-dostavka">Детальніше</Link>
+                {tr(
+                  "Відправка Новою поштою по Україні протягом 1–2 днів. Самовивіз — шоурум у Дніпрі.",
+                  "Nova Poshta shipping across Ukraine within 1–2 days. Pickup from our showroom in Dnipro.",
+                )}
+              </p>
+              <p>
+                {tr(
+                  "Оплата карткою онлайн, на рахунок ФОП (IBAN) або накладеним платежем з передоплатою 250 грн.",
+                  "Pay by card online, by bank transfer (IBAN) or cash on delivery with a 250 UAH prepayment.",
+                )}{" "}
+                <Link href="/info/oplata-i-dostavka">{tr("Детальніше", "Details")}</Link>
               </p>
             </Accordion>
-            <Accordion title="Обмін і повернення">
+            <Accordion title={tr("Обмін і повернення", "Exchanges & returns")}>
               <p>
-                Обмін на інший розмір — за рахунок покупця. Повернення — у разі виявлення браку під час огляду на пошті.{" "}
-                <Link href="/info/obmin-i-povernennia">Умови</Link>
+                {tr(
+                  "Обмін на інший розмір — за рахунок покупця. Повернення — у разі виявлення браку під час огляду на пошті.",
+                  "Size exchanges are at the buyer's expense. Returns — if a defect is found when inspecting the parcel at the post office.",
+                )}{" "}
+                <Link href="/info/obmin-i-povernennia">{tr("Умови", "Terms")}</Link>
               </p>
             </Accordion>
           </div>
@@ -260,14 +280,14 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
           <span>{formatPrice(p.price)}</span>
         </div>
         <button className="btn btn--dark" onClick={() => addToBag(false)}>
-          {size ? "В кошик" : "Обрати розмір"}
+          {size ? tr("В кошик", "Add to bag") : tr("Обрати розмір", "Select size")}
         </button>
       </div>
 
       {/* Zoom */}
       {zoom !== null && (
-        <div className="zoom" role="dialog" aria-label="Фото товару">
-          <button className="icon-btn zoom__close" aria-label="Закрити" onClick={() => setZoom(null)}>
+        <div className="zoom" role="dialog" aria-label={tr("Фото товару", "Product photos")}>
+          <button className="icon-btn zoom__close" aria-label={tr("Закрити", "Close")} onClick={() => setZoom(null)}>
             <IconClose />
           </button>
           <div
@@ -278,7 +298,7 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
           >
             {color.images.map((src, i) => (
               <div key={src} className="zoom__img">
-                <Image src={src} alt={`${p.name}, фото ${i + 1}`} width={1000} height={1500} sizes="(max-width: 960px) 100vw, 60vw" quality={90} />
+                <Image src={src} alt={`${p.name}, ${tr("фото", "photo")} ${i + 1}`} width={1000} height={1500} sizes="(max-width: 960px) 100vw, 60vw" quality={90} />
               </div>
             ))}
           </div>
@@ -287,19 +307,22 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
 
       {/* Size guide */}
       {guide && (
-        <div className="modal" role="dialog" aria-label="Розмірна сітка" onClick={() => setGuide(false)}>
+        <div className="modal" role="dialog" aria-label={tr("Розмірна сітка", "Size guide")} onClick={() => setGuide(false)}>
           <div className="modal__box" onClick={(e) => e.stopPropagation()}>
             <div className="modal__head">
-              <p className="eyebrow">Розмірна сітка</p>
-              <button className="icon-btn" aria-label="Закрити" onClick={() => setGuide(false)}>
+              <p className="eyebrow">{tr("Розмірна сітка", "Size guide")}</p>
+              <button className="icon-btn" aria-label={tr("Закрити", "Close")} onClick={() => setGuide(false)}>
                 <IconClose />
               </button>
             </div>
             <SizeTable />
             <p className="muted small">
-              Орієнтовні заміри тіла. Для моделей oversize та one size підкажемо посадку за вашими параметрами —{" "}
+              {tr(
+                "Орієнтовні заміри тіла. Для моделей oversize та one size підкажемо посадку за вашими параметрами —",
+                "Approximate body measurements. For oversize and one-size pieces we will advise the fit for your measurements —",
+              )}{" "}
               <a href={site.manager} target="_blank" rel="noopener noreferrer">
-                напишіть менеджеру {site.managerHandle}
+                {tr("напишіть менеджеру", "message our manager")} {site.managerHandle}
               </a>
               .
             </p>
@@ -311,6 +334,7 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
 }
 
 export function SizeTable() {
+  const { tr } = useLang();
   const rows = [
     ["XS", "40", "80–84", "60–64", "86–90"],
     ["S", "42", "84–88", "64–68", "90–94"],
@@ -323,11 +347,11 @@ export function SizeTable() {
       <table className="table">
         <thead>
           <tr>
-            <th>Розмір</th>
+            <th>{tr("Розмір", "Size")}</th>
             <th>UA</th>
-            <th>Груди</th>
-            <th>Талія</th>
-            <th>Стегна</th>
+            <th>{tr("Груди", "Bust")}</th>
+            <th>{tr("Талія", "Waist")}</th>
+            <th>{tr("Стегна", "Hips")}</th>
           </tr>
         </thead>
         <tbody>

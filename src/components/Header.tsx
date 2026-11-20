@@ -7,6 +7,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "@/lib/store";
 import { site } from "@/lib/site";
 import { Monogram } from "./Monogram";
+import { LangSwitch } from "./LangSwitch";
+import { useLang } from "@/i18n/client";
 import { IconBag, IconClose, IconHeart, IconInstagram, IconMenu, IconSearch, IconTelegram, IconUser } from "./Icons";
 
 export interface SearchItem {
@@ -18,37 +20,38 @@ export interface SearchItem {
 }
 
 const MENU = [
-  { href: "/catalog?c=new", label: "Новинки", en: "New In" },
-  { href: "/catalog?col=fw26", label: "Осінь — зима", en: "FW 26/27" },
-  { href: "/catalog?c=puhovyky", label: "Пуховики", en: "Puffers" },
-  { href: "/catalog?c=palta", label: "Пальта і тренчі", en: "Coats" },
-  { href: "/catalog?c=kurtky", label: "Бомбери і парки", en: "Outerwear" },
-  { href: "/catalog?c=shkira", label: "Шкіряна лінійка", en: "Leather" },
-  { href: "/catalog?c=sety", label: "Сети і костюми", en: "Sets" },
-  { href: "/catalog?c=sorochky", label: "Сорочки", en: "Shirts" },
-  { href: "/catalog?c=basic", label: "База", en: "Basics" },
-  { href: "/catalog?col=ss26", label: "Літо 26", en: "Summer" },
+  { href: "/catalog?c=new", uk: "Новинки", en: "New in" },
+  { href: "/catalog?col=fw26", uk: "Осінь — зима", en: "Fall — Winter" },
+  { href: "/catalog?c=puhovyky", uk: "Пуховики", en: "Puffers" },
+  { href: "/catalog?c=palta", uk: "Пальта і тренчі", en: "Coats & trenches" },
+  { href: "/catalog?c=kurtky", uk: "Бомбери і парки", en: "Bombers & parkas" },
+  { href: "/catalog?c=shkira", uk: "Шкіряна лінійка", en: "Leather" },
+  { href: "/catalog?c=sety", uk: "Сети і костюми", en: "Sets" },
+  { href: "/catalog?c=sorochky", uk: "Сорочки", en: "Shirts" },
+  { href: "/catalog?c=basic", uk: "База", en: "Basics" },
+  { href: "/catalog?col=ss26", uk: "Літо 26", en: "Summer 26" },
 ];
 
 const SECONDARY = [
-  { href: "/lookbook", label: "Лукбук" },
-  { href: "/about", label: "Про бренд" },
-  { href: "/showroom", label: "Шоурум у Дніпрі" },
-  { href: "/info/oplata-i-dostavka", label: "Оплата і доставка" },
-  { href: "/info/rozmirna-sitka", label: "Розмірна сітка" },
-  { href: "/account", label: "Особистий кабінет" },
+  { href: "/lookbook", uk: "Лукбук", en: "Lookbook" },
+  { href: "/about", uk: "Про бренд", en: "About" },
+  { href: "/showroom", uk: "Шоурум у Дніпрі", en: "Showroom in Dnipro" },
+  { href: "/info/oplata-i-dostavka", uk: "Оплата і доставка", en: "Payment & delivery" },
+  { href: "/info/rozmirna-sitka", uk: "Розмірна сітка", en: "Size guide" },
+  { href: "/account", uk: "Особистий кабінет", en: "My account" },
 ];
 
 const NOTES = [
-  "Офлайн-примірка · Дніпро, Вернадського 16",
-  "Відправка по Україні 1–2 дні",
-  "Італійські тканини · Made in Ukraine",
+  { uk: "Офлайн-примірка · Дніпро, Вернадського 16", en: "Fitting in our showroom · Dnipro, Vernadskoho 16" },
+  { uk: "Відправка по Україні 1–2 дні", en: "Shipping across Ukraine in 1–2 days" },
+  { uk: "Італійські тканини · Made in Ukraine", en: "Italian fabrics · Made in Ukraine" },
 ];
 
 export function Header({ items }: { items: SearchItem[] }) {
   const pathname = usePathname();
   const router = useRouter();
   const { count, openBag, wishlist, ready } = useStore();
+  const { lang, tr } = useLang();
   const home = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [menu, setMenu] = useState(false);
@@ -102,40 +105,40 @@ export function Header({ items }: { items: SearchItem[] }) {
     <>
       <div className="note-bar" aria-live="polite">
         {NOTES.map((n, i) => (
-          <span key={n} className={i === note ? "is-on" : ""}>
-            {n}
+          <span key={n.uk} className={i === note ? "is-on" : ""}>
+            {n[lang]}
           </span>
         ))}
       </div>
       <header className={`hdr${solid ? " hdr--solid" : ""}${home ? " hdr--home" : ""}`}>
         <div className="hdr__in">
           <div className="hdr__left">
-            <button className="icon-btn" aria-label="Меню" onClick={() => setMenu(true)}>
+            <button className="icon-btn" aria-label={tr("Меню", "Menu")} onClick={() => setMenu(true)}>
               <IconMenu />
             </button>
-            <button className="icon-btn" aria-label="Пошук" onClick={() => setSearch(true)}>
+            <button className="icon-btn" aria-label={tr("Пошук", "Search")} onClick={() => setSearch(true)}>
               <IconSearch />
             </button>
-            <nav className="hdr__nav" aria-label="Основне меню">
-              <Link href="/catalog?c=new">Новинки</Link>
-              <Link href="/catalog">Каталог</Link>
-              <Link href="/lookbook">Лукбук</Link>
-              <Link href="/about">Про бренд</Link>
+            <nav className="hdr__nav" aria-label={tr("Основне меню", "Main menu")}>
+              <Link href="/catalog?c=new">{tr("Новинки", "New in")}</Link>
+              <Link href="/catalog">{tr("Каталог", "Shop")}</Link>
+              <Link href="/lookbook">{tr("Лукбук", "Lookbook")}</Link>
+              <Link href="/about">{tr("Про бренд", "About")}</Link>
             </nav>
           </div>
-          <Link href="/" className="hdr__logo" aria-label="CORSO — на головну">
+          <Link href="/" className="hdr__logo" aria-label={tr("CORSO — на головну", "CORSO — home")}>
             <Monogram className="hdr__mono" />
             <span className="hdr__word">CORSO</span>
           </Link>
           <div className="hdr__right">
-            <Link href="/account" className="icon-btn hide-sm" aria-label="Особистий кабінет">
+            <Link href="/account" className="icon-btn hide-sm" aria-label={tr("Особистий кабінет", "My account")}>
               <IconUser />
             </Link>
-            <Link href="/wishlist" className="icon-btn" aria-label="Обране">
+            <Link href="/wishlist" className="icon-btn" aria-label={tr("Обране", "Wishlist")}>
               <IconHeart />
               {ready && wishlist.length > 0 && <i className="dot-count">{wishlist.length}</i>}
             </Link>
-            <button className="icon-btn" aria-label="Кошик" onClick={openBag}>
+            <button className="icon-btn" aria-label={tr("Кошик", "Bag")} onClick={openBag}>
               <IconBag />
               {ready && count > 0 && <i className="dot-count">{count}</i>}
             </button>
@@ -146,10 +149,10 @@ export function Header({ items }: { items: SearchItem[] }) {
       {/* Menu */}
       <div className={`menu${menu ? " is-open" : ""}`} aria-hidden={!menu}>
         <div className="menu__top">
-          <button className="icon-btn" aria-label="Закрити меню" onClick={() => setMenu(false)}>
+          <button className="icon-btn" aria-label={tr("Закрити меню", "Close menu")} onClick={() => setMenu(false)}>
             <IconClose />
           </button>
-          <Link href="/" className="menu__logo" aria-label="CORSO — на головну" onClick={() => setMenu(false)}>
+          <Link href="/" className="menu__logo" aria-label={tr("CORSO — на головну", "CORSO — home")} onClick={() => setMenu(false)}>
             <Monogram />
           </Link>
           <span className="icon-btn" />
@@ -160,8 +163,7 @@ export function Header({ items }: { items: SearchItem[] }) {
               <li key={m.href} style={{ "--i": i } as React.CSSProperties}>
                 <Link href={m.href} onClick={() => setMenu(false)}>
                   <span className="menu__num">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="menu__label">{m.label}</span>
-                  <span className="menu__en">{m.en}</span>
+                  <span className="menu__label">{m[lang]}</span>
                 </Link>
               </li>
             ))}
@@ -170,7 +172,7 @@ export function Header({ items }: { items: SearchItem[] }) {
             {SECONDARY.map((m) => (
               <li key={m.href}>
                 <Link href={m.href} onClick={() => setMenu(false)}>
-                  {m.label}
+                  {m[lang]}
                 </Link>
               </li>
             ))}
@@ -180,9 +182,10 @@ export function Header({ items }: { items: SearchItem[] }) {
               <IconInstagram width={18} height={18} /> {site.instagramHandle}
             </a>
             <a href={site.telegram} target="_blank" rel="noopener noreferrer">
-              <IconTelegram width={18} height={18} /> Telegram-канал
+              <IconTelegram width={18} height={18} /> {tr("Telegram-канал", "Telegram channel")}
             </a>
           </div>
+          <LangSwitch className="menu__lang" />
         </div>
       </div>
 
@@ -200,11 +203,11 @@ export function Header({ items }: { items: SearchItem[] }) {
               ref={inputRef}
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Пошук: тренч, пуховик, сатин…"
-              aria-label="Пошук по каталогу"
+              placeholder={tr("Пошук: тренч, пуховик, сатин…", "Search: trench, puffer, satin…")}
+              aria-label={tr("Пошук по каталогу", "Search the shop")}
             />
           </form>
-          <button className="icon-btn" aria-label="Закрити пошук" onClick={() => setSearch(false)}>
+          <button className="icon-btn" aria-label={tr("Закрити пошук", "Close search")} onClick={() => setSearch(false)}>
             <IconClose />
           </button>
         </div>
@@ -225,9 +228,12 @@ export function Header({ items }: { items: SearchItem[] }) {
             </ul>
           ) : (
             <div className="search__hint">
-              <p className="eyebrow">Популярне</p>
+              <p className="eyebrow">{tr("Популярне", "Popular")}</p>
               <div className="chips">
-                {["Пуховик", "Тренч", "Пальто", "Бомбер", "Шкіра", "Сорочка", "Сатин", "Льон"].map((w) => (
+                {(lang === "en"
+                  ? ["Puffer", "Trench", "Coat", "Bomber", "Leather", "Shirt", "Satin", "Linen"]
+                  : ["Пуховик", "Тренч", "Пальто", "Бомбер", "Шкіра", "Сорочка", "Сатин", "Льон"]
+                ).map((w) => (
                   <button key={w} className="chip" onClick={() => setQ(w)}>
                     {w}
                   </button>

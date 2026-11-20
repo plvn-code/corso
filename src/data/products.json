@@ -160,7 +160,7 @@
     ],
     "colors": [
       {
-        "name": "Чорний",
+        "name": "Black",
         "hex": "#0b0b0b",
         "photos": [
           "1102_0",
@@ -169,7 +169,7 @@
         ]
       },
       {
-        "name": "Білий",
+        "name": "White",
         "hex": "#f3f1ec",
         "photos": [
           "1195_0"
@@ -293,7 +293,7 @@
     "composition": [],
     "colors": [
       {
-        "name": "Сірий меланж",
+        "name": "Grey Melange",
         "hex": "#8d8c8a",
         "photos": [
           "g04"

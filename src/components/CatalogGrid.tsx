@@ -1,5 +1,6 @@
 "use client";
 
+import { useLang } from "@/i18n/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -24,6 +25,7 @@ interface Props {
 
 export function CatalogGrid({ cards, params, chips, collections, colors, sizes, title }: Props) {
   const router = useRouter();
+  const { tr } = useLang();
   const [cols, setCols] = useState<1 | 2>(2);
   const [sheet, setSheet] = useState(false);
   const [draft, setDraft] = useState(params);
@@ -65,16 +67,16 @@ export function CatalogGrid({ cards, params, chips, collections, colors, sizes, 
           ))}
         </div>
         <div className="cat-tools">
-          <span className="muted small">{cards.length} моделей</span>
+          <span className="muted small">{cards.length} {tr("моделей", "pieces")}</span>
           <div className="cat-tools__r">
-            <button className={`icon-btn view-btn${cols === 1 ? " is-on" : ""}`} aria-label="Одна колонка" onClick={() => setView(1)}>
+            <button className={`icon-btn view-btn${cols === 1 ? " is-on" : ""}`} aria-label={tr("Одна колонка", "One column")} onClick={() => setView(1)}>
               <IconGrid1 width={18} height={18} />
             </button>
-            <button className={`icon-btn view-btn${cols === 2 ? " is-on" : ""}`} aria-label="Дві колонки" onClick={() => setView(2)}>
+            <button className={`icon-btn view-btn${cols === 2 ? " is-on" : ""}`} aria-label={tr("Дві колонки", "Two columns")} onClick={() => setView(2)}>
               <IconGrid2 width={18} height={18} />
             </button>
             <button className="link-btn filter-btn" onClick={() => setSheet(true)}>
-              Фільтр{active ? ` (${active})` : ""}
+              {tr("Фільтр", "Filter")}{active ? ` (${active})` : ""}
             </button>
           </div>
         </div>
@@ -82,10 +84,10 @@ export function CatalogGrid({ cards, params, chips, collections, colors, sizes, 
 
       {cards.length === 0 ? (
         <div className="empty">
-          <p className="title-sm">Нічого не знайдено</p>
-          <p className="muted">Спробуйте змінити фільтри.</p>
+          <p className="title-sm">{tr("Нічого не знайдено", "Nothing found")}</p>
+          <p className="muted">{tr("Спробуйте змінити фільтри.", "Try changing the filters.")}</p>
           <Link href="/catalog" className="btn btn--dark">
-            Скинути фільтри
+            {tr("Скинути фільтри", "Reset filters")}
           </Link>
         </div>
       ) : (
@@ -99,16 +101,16 @@ export function CatalogGrid({ cards, params, chips, collections, colors, sizes, 
       )}
 
       <div className={`scrim${sheet ? " is-open" : ""}`} onClick={() => setSheet(false)} />
-      <aside className={`sheet${sheet ? " is-open" : ""}`} aria-hidden={!sheet} aria-label="Фільтр">
+      <aside className={`sheet${sheet ? " is-open" : ""}`} aria-hidden={!sheet} aria-label={tr("Фільтр", "Filter")}>
         <div className="drawer__head">
-          <p className="eyebrow">Фільтр</p>
-          <button className="icon-btn" aria-label="Закрити" onClick={() => setSheet(false)}>
+          <p className="eyebrow">{tr("Фільтр", "Filter")}</p>
+          <button className="icon-btn" aria-label={tr("Закрити", "Close")} onClick={() => setSheet(false)}>
             <IconClose />
           </button>
         </div>
         <div className="sheet__body">
           <fieldset>
-            <legend>Колекція</legend>
+            <legend>{tr("Колекція", "Collection")}</legend>
             <div className="chips">
               {collections.map((o) => (
                 <button key={o.slug} className={`chip${draft.col === o.slug ? " is-on" : ""}`} onClick={() => toggle("col", o.slug)}>
@@ -118,7 +120,7 @@ export function CatalogGrid({ cards, params, chips, collections, colors, sizes, 
             </div>
           </fieldset>
           <fieldset>
-            <legend>Колір</legend>
+            <legend>{tr("Колір", "Colour")}</legend>
             <div className="color-opts">
               {colors.map((o) => (
                 <button key={o.slug} className={`color-opt${draft.color === o.slug ? " is-on" : ""}`} onClick={() => toggle("color", o.slug)}>
@@ -129,7 +131,7 @@ export function CatalogGrid({ cards, params, chips, collections, colors, sizes, 
             </div>
           </fieldset>
           <fieldset>
-            <legend>Розмір</legend>
+            <legend>{tr("Розмір", "Size")}</legend>
             <div className="chips">
               {sizes.map((o) => (
                 <button key={o.slug} className={`chip chip--size${draft.size === o.slug ? " is-on" : ""}`} onClick={() => toggle("size", o.slug)}>
@@ -139,23 +141,23 @@ export function CatalogGrid({ cards, params, chips, collections, colors, sizes, 
             </div>
           </fieldset>
           <fieldset>
-            <legend>Сортування</legend>
+            <legend>{tr("Сортування", "Sort")}</legend>
             <div className="chips">
               <button className={`chip${!draft.sort ? " is-on" : ""}`} onClick={() => setDraft((d) => ({ ...d, sort: undefined }))}>
-                Рекомендовані
+                {tr("Рекомендовані", "Recommended")}
               </button>
               <button className={`chip${draft.sort === "az" ? " is-on" : ""}`} onClick={() => setDraft((d) => ({ ...d, sort: "az" }))}>
-                За назвою А–Я
+                {tr("За назвою А–Я", "Name A–Z")}
               </button>
             </div>
           </fieldset>
         </div>
         <div className="drawer__foot sheet__foot">
           <button className="btn btn--line" onClick={() => apply({ c: params.c, q: params.q })}>
-            Скинути
+            {tr("Скинути", "Reset")}
           </button>
           <button className="btn btn--dark" onClick={() => apply(draft)}>
-            Показати
+            {tr("Показати", "Show")}
           </button>
         </div>
       </aside>

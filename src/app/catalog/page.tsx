@@ -1,33 +1,37 @@
 import type { Metadata } from "next";
 import { CatalogGrid } from "@/components/CatalogGrid";
 import { CATEGORIES, COLLECTIONS, COLOR_FAMILIES, query, toCard } from "@/lib/catalog";
+import { getTr } from "@/i18n/server";
+import type { Tr } from "@/i18n/lang";
 
 type SP = Promise<Record<string, string | string[] | undefined>>;
 
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) || undefined;
 
-function heading(p: Record<string, string | undefined>) {
-  if (p.q) return { kicker: "Пошук", title: `«${p.q}»` };
-  if (p.c === "new") return { kicker: "New In", title: "Новинки" };
-  if (p.c === "bestseller") return { kicker: "Bestsellers", title: "Бестселери" };
+function heading(p: Record<string, string | undefined>, tr: Tr) {
+  if (p.q) return { kicker: tr("Пошук", "Search"), title: `«${p.q}»` };
+  if (p.c === "new") return { kicker: "New In", title: tr("Новинки", "New in") };
+  if (p.c === "bestseller") return { kicker: "Bestsellers", title: tr("Бестселери", "Bestsellers") };
   const cat = CATEGORIES.find((c) => c.slug === p.c);
-  if (cat) return { kicker: cat.en, title: cat.name };
+  if (cat) return { kicker: tr(cat.en, "Category"), title: tr(cat.name, cat.en) };
   const col = COLLECTIONS.find((c) => c.slug === p.col);
-  if (col) return { kicker: col.en, title: col.name };
-  return { kicker: "The Collection", title: "Каталог" };
+  if (col) return { kicker: tr(col.en, "Collection"), title: tr(col.name, col.en) };
+  return { kicker: "The Collection", title: tr("Каталог", "Shop") };
 }
 
 export async function generateMetadata({ searchParams }: { searchParams: SP }): Promise<Metadata> {
   const sp = await searchParams;
-  const h = heading({ c: one(sp.c), col: one(sp.col), q: one(sp.q) });
+  const { tr } = await getTr();
+  const h = heading({ c: one(sp.c), col: one(sp.col), q: one(sp.q) }, tr);
   return { title: h.title };
 }
 
 export default async function CatalogPage({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
   const params = { c: one(sp.c), col: one(sp.col), color: one(sp.color), size: one(sp.size), sort: one(sp.sort), q: one(sp.q) };
-  const list = query(params);
-  const h = heading(params);
+  const { lang, tr } = await getTr();
+  const list = query(params, lang);
+  const h = heading(params, tr);
   const keep = (c?: string) => {
     const s = new URLSearchParams();
     if (c) s.set("c", c);
@@ -35,9 +39,9 @@ export default async function CatalogPage({ searchParams }: { searchParams: SP }
     return `/catalog${s.size ? `?${s}` : ""}`;
   };
   const chips = [
-    { href: keep(), label: "Усі", on: !params.c },
-    { href: keep("new"), label: "Новинки", on: params.c === "new" },
-    ...CATEGORIES.map((c) => ({ href: keep(c.slug), label: c.name, on: params.c === c.slug })),
+    { href: keep(), label: tr("Усі", "All"), on: !params.c },
+    { href: keep("new"), label: tr("Новинки", "New in"), on: params.c === "new" },
+    ...CATEGORIES.map((c) => ({ href: keep(c.slug), label: tr(c.name, c.en), on: params.c === c.slug })),
   ];
   return (
     <div className="cat">
@@ -50,8 +54,8 @@ export default async function CatalogPage({ searchParams }: { searchParams: SP }
         params={params}
         chips={chips}
         title={h.title}
-        collections={COLLECTIONS.map((c) => ({ slug: c.slug, name: c.name }))}
-        colors={COLOR_FAMILIES.map((c) => ({ slug: c.slug, name: c.name, hex: c.hex }))}
+        collections={COLLECTIONS.map((c) => ({ slug: c.slug, name: tr(c.name, c.en) }))}
+        colors={COLOR_FAMILIES.map((c) => ({ slug: c.slug, name: tr(c.name, c.en), hex: c.hex }))}
         sizes={[
           { slug: "XS", name: "XS" },
           { slug: "S", name: "S" },

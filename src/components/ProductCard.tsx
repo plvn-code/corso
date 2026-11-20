@@ -1,5 +1,6 @@
 "use client";
 
+import { useLang } from "@/i18n/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -18,6 +19,7 @@ export interface CardData {
 
 export function ProductCard({ p, priority = false, sizes }: { p: CardData; priority?: boolean; sizes?: string }) {
   const { wishlist, toggleWish, ready } = useStore();
+  const { tr } = useLang();
   const [ci, setCi] = useState(0);
   const [slide, setSlide] = useState(0);
   const track = useRef<HTMLAnchorElement>(null);
@@ -61,7 +63,7 @@ export function ProductCard({ p, priority = false, sizes }: { p: CardData; prior
         {p.tag && <span className="card__tag">{p.tag}</span>}
         <button
           className={`card__wish${wished ? " is-on" : ""}`}
-          aria-label={wished ? "Прибрати з обраного" : "Додати в обране"}
+          aria-label={wished ? tr("Прибрати з обраного", "Remove from wishlist") : tr("Додати в обране", "Add to wishlist")}
           aria-pressed={wished}
           onClick={() => toggleWish(p.slug)}
         >
@@ -74,7 +76,7 @@ export function ProductCard({ p, priority = false, sizes }: { p: CardData; prior
         </Link>
         <p className="card__price">{formatPrice(p.price)}</p>
         {p.colors.length > 1 && (
-          <div className="card__colors" role="radiogroup" aria-label="Колір">
+          <div className="card__colors" role="radiogroup" aria-label={tr("Колір", "Colour")}>
             {p.colors.map((c, i) => (
               <button
                 key={c.name}

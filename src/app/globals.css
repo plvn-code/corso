@@ -489,7 +489,7 @@ ol {
 }
 .menu__list a {
   display: grid;
-  grid-template-columns: 30px 1fr auto;
+  grid-template-columns: 30px 1fr;
   align-items: baseline;
   padding: 13px 0;
 }
@@ -504,12 +504,6 @@ ol {
   letter-spacing: 0.16em;
   line-height: 1.3;
   text-transform: uppercase;
-}
-.menu__en {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--grey);
 }
 .menu__sub {
   margin-top: 28px;
@@ -531,6 +525,56 @@ ol {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+/* language switch: УКР / ENG */
+.lang {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.lang__item {
+  display: inline-flex;
+  align-items: center;
+}
+.lang i {
+  font-style: normal;
+  color: var(--grey-2);
+  margin: 0 4px;
+}
+.lang button {
+  min-height: 44px;
+  padding: 0 8px;
+  color: var(--grey);
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transition: color 0.25s;
+}
+.lang button.is-on {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+.lang button:hover {
+  color: var(--ink);
+}
+.menu__lang {
+  display: flex;
+  margin-top: 22px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.menu__lang .lang__item:first-child button {
+  padding-left: 0;
+}
+.ftr__lang {
+  font-size: 11px;
+  margin: -14px 0;
+}
+.ftr__lang .lang__item:first-child button {
+  padding-left: 0;
 }
 @media (min-width: 960px) {
   .menu__body {
