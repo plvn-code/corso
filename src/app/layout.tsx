@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { StoreProvider } from "@/lib/store";
 import { Header, type SearchItem } from "@/components/Header";
 import { BagDrawer } from "@/components/BagDrawer";
+import { BotChat } from "@/components/BotChat";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import { products, photo, categoryName } from "@/lib/catalog";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <Footer />
           <BagDrawer />
+          <BotChat />
           <Suspense>
             <Reveal />
           </Suspense>

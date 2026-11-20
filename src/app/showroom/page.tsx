@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { site } from "@/lib/site";
 import { IconInstagram, IconPin, IconTelegram } from "@/components/Icons";
+import { BotButton } from "@/components/BotChat";
 
 export const metadata: Metadata = { title: "Шоурум у Дніпрі", description: `Офлайн-примірка CORSO: ${site.city}, ${site.address}.` };
 
@@ -25,9 +26,9 @@ export default function Showroom() {
             </dd>
             <dt>Замовлення та запис</dt>
             <dd>
-              <a href={site.manager} target="_blank" rel="noopener noreferrer">
-                <IconTelegram width={16} height={16} /> {site.managerHandle}
-              </a>
+              <BotButton topic="showroom">
+                <IconTelegram width={16} height={16} /> Чат з менеджером
+              </BotButton>
             </dd>
             <dt>Instagram</dt>
             <dd>
@@ -46,9 +47,9 @@ export default function Showroom() {
             <a href={site.maps} target="_blank" rel="noopener noreferrer" className="btn btn--dark">
               Прокласти маршрут
             </a>
-            <a href={site.manager} target="_blank" rel="noopener noreferrer" className="btn btn--line">
+            <BotButton topic="showroom" className="btn btn--line">
               Записатися на примірку
-            </a>
+            </BotButton>
           </div>
         </div>
       </section>

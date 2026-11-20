@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useStore } from "@/lib/store";
 import { formatPrice } from "@/lib/format";
-import { IconClose, IconHeart, IconPlus } from "./Icons";
+import { IconClose, IconHeart, IconPlus, IconTelegram } from "./Icons";
+import { BotButton } from "./BotChat";
 
 export interface ViewData {
   slug: string;
@@ -203,6 +204,9 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
             <li>Примірка в шоурумі у Дніпрі</li>
             <li>Оплата онлайн, при отриманні або на рахунок</li>
           </ul>
+          <BotButton className="pdp__ask" context={`${p.name} — ${color.name}${size ? `, ${size}` : ""}`}>
+            <IconTelegram width={16} height={16} /> Запитати про модель
+          </BotButton>
 
           <div className="accs">
             <Accordion title="Опис" open>
@@ -294,9 +298,9 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
             <SizeTable />
             <p className="muted small">
               Орієнтовні заміри тіла. Для моделей oversize та one size підкажемо посадку за вашими параметрами —{" "}
-              <a href="https://t.me/ShkurkoTatyana" target="_blank" rel="noopener noreferrer">
-                напишіть менеджеру
-              </a>
+              <BotButton topic="size" context={p.name}>
+                напишіть нам у чат
+              </BotButton>
               .
             </p>
           </div>

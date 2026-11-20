@@ -3068,3 +3068,323 @@ ol {
     transform: none;
   }
 }
+
+/* ---------- quick contact chat (demo of the CORSO Telegram bot) ---------- */
+.link-inline {
+  display: inline;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.contacts dd .link-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.pdp__ask {
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 4px;
+  padding: 6px 0;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.bot-fab {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 35;
+  height: 52px;
+  min-width: 52px;
+  padding: 0 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  transition: transform 0.45s var(--ease), opacity 0.3s, bottom 0.45s var(--ease);
+}
+.bot-fab__label {
+  display: none;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.bot-fab.is-hidden {
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+}
+/* product page: keep above the sticky buy bar on phones */
+.bot-fab--lift {
+  bottom: calc(84px + env(safe-area-inset-bottom));
+}
+html.is-menu .bot-fab {
+  opacity: 0;
+  pointer-events: none;
+}
+.bot-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 89;
+  background: rgba(17, 17, 17, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s, visibility 0.35s;
+}
+.bot-scrim.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.bot {
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  visibility: hidden;
+  transform: translateY(24px);
+  opacity: 0;
+  transition: opacity 0.35s, transform 0.45s var(--ease), visibility 0.35s;
+}
+.bot.is-open {
+  visibility: visible;
+  transform: none;
+  opacity: 1;
+}
+html.is-chat {
+  overflow: hidden;
+}
+.bot__head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: calc(10px + env(safe-area-inset-top)) 6px 10px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.bot__ava {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+}
+.bot__ava svg {
+  height: 22px;
+  width: auto;
+}
+.bot__who {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.bot__who b {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.bot__who small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--grey);
+}
+.bot__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3aa564;
+}
+.bot__list {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 18px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--soft);
+}
+.bmsg {
+  max-width: 84%;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: bmsgIn 0.35s var(--ease) both;
+}
+.bmsg p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bmsg--bot {
+  align-self: flex-start;
+  background: #fff;
+  border-radius: 2px 16px 16px 16px;
+}
+.bmsg--me {
+  align-self: flex-end;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 16px 2px 16px 16px;
+}
+.bmsg__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 8px;
+}
+.bmsg__links a {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+@keyframes bmsgIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.bmsg--typing {
+  display: flex;
+  gap: 4px;
+  padding: 14px 16px;
+}
+.bmsg--typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--grey-2);
+  animation: typing 1s infinite ease-in-out;
+}
+.bmsg--typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.bmsg--typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes typing {
+  50% {
+    transform: translateY(-4px);
+    background: var(--grey);
+  }
+}
+.bot__keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 0 6px;
+}
+.bot__keys button {
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  transition: background 0.25s, color 0.25s;
+}
+.bot__keys button:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.bot__bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 10px 10px 10px 16px;
+  border-top: 1px solid var(--line);
+  background: #fff;
+}
+.bot__bar textarea {
+  flex: 1;
+  min-width: 0;
+  max-height: 120px;
+  min-height: 44px;
+  padding: 11px 0;
+  border: 0;
+  resize: none;
+  outline: 0;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+  background: none;
+}
+.bot__send {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: #fff;
+  transition: opacity 0.25s;
+}
+.bot__send:disabled {
+  opacity: 0.25;
+}
+.bot__fine {
+  margin: 0;
+  padding: 0 16px calc(10px + env(safe-area-inset-bottom));
+  font-size: 10.5px;
+  color: var(--grey);
+  background: #fff;
+}
+@media (min-width: 960px) {
+  .bot-fab {
+    right: 28px;
+    bottom: 28px;
+    padding: 0 22px 0 18px;
+  }
+  .bot-fab__label {
+    display: inline;
+  }
+  .bot-fab--lift {
+    bottom: 28px;
+  }
+  html.is-chat {
+    overflow: auto;
+  }
+  .bot-scrim {
+    display: none;
+  }
+  .bot {
+    inset: auto 28px 28px auto;
+    width: 400px;
+    height: min(640px, calc(100vh - 140px));
+    border: 1px solid var(--line);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
+  }
+  .bot__head {
+    padding-top: 10px;
+  }
+  .bot__fine {
+    padding-bottom: 10px;
+  }
+}

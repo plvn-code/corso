@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { getProduct } from "@/lib/catalog";
+import { clip, notifyManagers } from "@/lib/telegram";
 
 /**
  * Order intake. DEMO stage: validates the order against the catalogue and forwards it to
  * Telegram when TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID are set; otherwise only logs it.
  * Online payment is not connected yet (see docs/STATUS.md).
  */
-const clip = (v: unknown, n = 200) => String(v ?? "").slice(0, n).replace(/[<>]/g, "");
 
 /** Body measurements (cm) — CORSO sews in-house and adapts each model to them. */
 const MEASURES = [
@@ -60,20 +60,10 @@ export async function POST(req: Request) {
     .filter(Boolean)
     .join("\n");
 
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chat = process.env.TELEGRAM_CHAT_ID;
-  if (token && chat) {
-    try {
-      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: chat, text }),
-      });
-    } catch {
-      return NextResponse.json({ ok: false, error: "notify failed" }, { status: 502 });
-    }
-  } else {
-    console.log("[order:demo]\n" + text);
+  try {
+    await notifyManagers(text);
+  } catch {
+    return NextResponse.json({ ok: false, error: "notify failed" }, { status: 502 });
   }
   return NextResponse.json({ ok: true });
 }
