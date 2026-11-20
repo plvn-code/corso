@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useStore, type DemoOrder } from "@/lib/store";
+import { useStore, type DemoOrder, type Measurements } from "@/lib/store";
+import { EMPTY_MEASUREMENTS, MeasureFields, hasMeasurements } from "@/components/MeasureFields";
 import { formatPrice } from "@/lib/format";
 import { IconCheck, IconClose, IconLock } from "@/components/Icons";
 
@@ -23,17 +24,27 @@ const PAYMENT = [
 type Stage = "form" | "pay" | "done";
 
 export function CheckoutForm() {
-  const { bag, ready, clearBag, user, addOrder } = useStore();
+  const { bag, ready, clearBag, user, addOrder, measurements, setMeasurements } = useStore();
   const [delivery, setDelivery] = useState(DELIVERY[0].id);
   const [payment, setPayment] = useState(PAYMENT[0].id);
   const [stage, setStage] = useState<Stage>("form");
   const [busy, setBusy] = useState(false);
   const [orderId, setOrderId] = useState("");
   const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", branch: "", comment: "" });
+  const [measure, setMeasure] = useState<Measurements>(EMPTY_MEASUREMENTS);
+  const [savedMeasure, setSavedMeasure] = useState(false);
 
   useEffect(() => {
     if (user) setForm((f) => ({ ...f, name: f.name || user.name, phone: f.phone || user.phone, email: f.email || user.email }));
   }, [user]);
+
+  // Saved measurements (account / previous order) fill the panel once; the client can still edit them.
+  useEffect(() => {
+    if (ready && hasMeasurements(measurements) && !savedMeasure) {
+      setMeasure(measurements);
+      setSavedMeasure(true);
+    }
+  }, [ready, measurements, savedMeasure]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("is-menu", stage === "pay");
@@ -52,6 +63,7 @@ export function CheckoutForm() {
         body: JSON.stringify({
           id,
           customer: form,
+          measurements: measure,
           delivery: DELIVERY.find((d) => d.id === delivery)?.label,
           payment: PAYMENT.find((p) => p.id === payment)?.label,
           lines: bag.map((l) => ({ slug: l.slug, color: l.color, size: l.size, qty: l.qty })),
@@ -64,11 +76,13 @@ export function CheckoutForm() {
       id,
       date: new Date().toISOString(),
       lines: bag,
+      measurements: measure,
       delivery: DELIVERY.find((d) => d.id === delivery)!.label,
       payment: PAYMENT.find((p) => p.id === payment)!.label,
       status: payment === "card" ? "Оплачено (демо)" : "Очікує підтвердження",
     };
     addOrder(order);
+    setMeasurements(measure);
     clearBag();
     setOrderId(id);
     setBusy(false);
@@ -148,9 +162,26 @@ export function CheckoutForm() {
             </div>
           </section>
 
+          <section className="co-measure">
+            <h2 className="co-h">
+              <span>02</span> Параметри фігури
+            </h2>
+            <p className="muted small co-measure__lead">
+              Ми шиємо на власному виробництві й адаптуємо модель під вашу фігуру. Вкажіть параметри в сантиметрах.
+            </p>
+            <MeasureFields value={measure} onChange={setMeasure} required />
+            <p className="muted small co-measure__note">
+              {savedMeasure
+                ? "Підставили збережені параметри — за потреби змініть їх."
+                : user
+                  ? "Збережемо у вашому кабінеті — наступного разу вводити не доведеться."
+                  : "Запамʼятаємо для наступних замовлень. Змінити можна в особистому кабінеті."}
+            </p>
+          </section>
+
           <section>
             <h2 className="co-h">
-              <span>02</span> Доставка
+              <span>03</span> Доставка
             </h2>
             <div className="opts">
               {DELIVERY.map((d) => (
@@ -178,7 +209,7 @@ export function CheckoutForm() {
 
           <section>
             <h2 className="co-h">
-              <span>03</span> Оплата
+              <span>04</span> Оплата
             </h2>
             <div className="opts">
               {PAYMENT.map((p) => (
@@ -192,7 +223,7 @@ export function CheckoutForm() {
             </div>
             <label className="field field--wide">
               <span>Коментар до замовлення</span>
-              <textarea rows={3} value={form.comment} onChange={set("comment")} placeholder="Зріст, параметри, побажання щодо посадки" />
+              <textarea rows={3} value={form.comment} onChange={set("comment")} placeholder="Побажання щодо посадки, довжини, термінів" />
             </label>
           </section>
         </form>

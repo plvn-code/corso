@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useStore } from "@/lib/store";
+import { useStore, type Measurements } from "@/lib/store";
+import { EMPTY_MEASUREMENTS, MeasureFields, hasMeasurements, measurementsLine } from "@/components/MeasureFields";
 
-type Tab = "orders" | "profile" | "addresses";
+type Tab = "orders" | "measure" | "profile" | "addresses";
 
 export function AccountView() {
   const { user, ready, signIn, signOut, orders, wishlist } = useStore();
@@ -79,6 +80,9 @@ export function AccountView() {
         <button className={tab === "orders" ? "is-on" : ""} onClick={() => setTab("orders")}>
           Замовлення
         </button>
+        <button className={tab === "measure" ? "is-on" : ""} onClick={() => setTab("measure")}>
+          Параметри
+        </button>
         <button className={tab === "profile" ? "is-on" : ""} onClick={() => setTab("profile")}>
           Профіль
         </button>
@@ -112,10 +116,13 @@ export function AccountView() {
                 <p className="muted small">
                   {o.delivery} · {o.payment}
                 </p>
+                {hasMeasurements(o.measurements) && <p className="muted small">{measurementsLine(o.measurements)}</p>}
               </li>
             ))}
           </ul>
         ))}
+
+      {tab === "measure" && <MeasurePanel />}
 
       {tab === "profile" && (
         <div className="profile">
@@ -144,5 +151,39 @@ export function AccountView() {
       )}
       <p className="demo-note">Демо-кабінет: повноцінна авторизація та синхронізація з CRM — на наступному етапі.</p>
     </div>
+  );
+}
+
+function MeasurePanel() {
+  const { measurements, setMeasurements } = useStore();
+  const [m, setM] = useState<Measurements>(measurements ?? EMPTY_MEASUREMENTS);
+  const [saved, setSaved] = useState(false);
+  return (
+    <form
+      className="measure-panel"
+      onSubmit={(e) => {
+        e.preventDefault();
+        setMeasurements(m);
+        setSaved(true);
+      }}
+    >
+      <p className="title-sm">Мої параметри</p>
+      <p className="muted small">
+        Ми шиємо на власному виробництві й адаптуємо кожну модель під вашу фігуру. Параметри автоматично підставляються під час
+        оформлення замовлення.
+      </p>
+      <MeasureFields
+        value={m}
+        onChange={(v) => {
+          setM(v);
+          setSaved(false);
+        }}
+        required
+      />
+      <div className="measure-panel__foot">
+        <button className="btn btn--dark">Зберегти</button>
+        {saved && <span className="muted small">Збережено</span>}
+      </div>
+    </form>
   );
 }

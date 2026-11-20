@@ -6,6 +6,7 @@
 - 40 products from the Telegram channel (FW 26/27 + Summer 26), 236 product photos cropped 2:3, 27 editorial frames (12 high-res from Instagram).
 - Home (magazine cover hero with giant CORSO masthead), catalogue with filters + 1/2-column view on phones, product page (swipe gallery, colours, sizes, size chart, sticky buy bar, accordions), lookbook, about, showroom, info pages.
 - Bag drawer, checkout with delivery/payment choice, **demo** card payment (Apple Pay / Google Pay / card form), thank-you page, **demo** account (login/registration, order history, profile) — all in localStorage.
+- Checkout step «Параметри фігури» (client request 2026-11-20: height / bust / waist / hips, cm, required — CORSO adapts models in-house). Saved in the store (`measurements`, localStorage `corso.measure.v1`), pre-filled on the next order, editable in account → «Параметри»; sent with the order (API validates ranges) and shown in order history. With a real backend: store on the customer profile.
 - Orders POST to `/api/orders` (Telegram when env is set).
 
 ## Next

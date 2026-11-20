@@ -8,6 +8,25 @@ import { getProduct } from "@/lib/catalog";
  */
 const clip = (v: unknown, n = 200) => String(v ?? "").slice(0, n).replace(/[<>]/g, "");
 
+/** Body measurements (cm) — CORSO sews in-house and adapts each model to them. */
+const MEASURES = [
+  { key: "height", label: "Зріст", min: 140, max: 200 },
+  { key: "bust", label: "Груди", min: 70, max: 150 },
+  { key: "waist", label: "Талія", min: 50, max: 140 },
+  { key: "hips", label: "Стегна", min: 75, max: 160 },
+] as const;
+
+function readMeasurements(raw: unknown): string | null {
+  const m = (raw ?? {}) as Record<string, unknown>;
+  const parts: string[] = [];
+  for (const f of MEASURES) {
+    const v = Number(String(m[f.key] ?? "").replace(",", "."));
+    if (!Number.isFinite(v) || v < f.min || v > f.max) return null;
+    parts.push(`${f.label} ${v}`);
+  }
+  return parts.join(" · ") + " см";
+}
+
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
   try {
@@ -25,7 +44,8 @@ export async function POST(req: Request) {
       return `• ${p.name} — ${clip(l.color, 40)}, ${clip(l.size, 20)} × ${qty}`;
     })
     .filter(Boolean);
-  if (!clip(c.name) || !clip(c.phone) || lines.length === 0) {
+  const measurements = readMeasurements(body.measurements);
+  if (!clip(c.name) || !clip(c.phone) || lines.length === 0 || !measurements) {
     return NextResponse.json({ ok: false, error: "invalid order" }, { status: 422 });
   }
   const text = [
@@ -33,6 +53,7 @@ export async function POST(req: Request) {
     `${clip(c.name)} · ${clip(c.phone, 40)}${c.email ? ` · ${clip(c.email)}` : ""}`,
     `${clip(body.delivery)}${c.city ? ` — ${clip(c.city)}, ${clip(c.branch)}` : ""}`,
     `Оплата: ${clip(body.payment)}`,
+    `📏 ${measurements}`,
     ...lines,
     c.comment ? `💬 ${clip(c.comment, 500)}` : "",
   ]
