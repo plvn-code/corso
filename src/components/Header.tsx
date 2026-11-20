@@ -52,20 +52,11 @@ export function Header({ items }: { items: SearchItem[] }) {
   const router = useRouter();
   const { count, openBag, wishlist, ready } = useStore();
   const { lang, tr } = useLang();
-  const home = pathname === "/";
-  const [scrolled, setScrolled] = useState(false);
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const [q, setQ] = useState("");
   const [note, setNote] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > (home ? window.innerHeight * 0.55 : 8));
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [home]);
 
   useEffect(() => {
     const t = setInterval(() => setNote((n) => (n + 1) % NOTES.length), 4200);
@@ -99,8 +90,6 @@ export function Header({ items }: { items: SearchItem[] }) {
     return items.filter((i) => i.keywords.includes(s)).slice(0, 6);
   }, [q, items]);
 
-  const solid = !home || scrolled || menu || search;
-
   return (
     <>
       <div className="note-bar" aria-live="polite">
@@ -110,7 +99,7 @@ export function Header({ items }: { items: SearchItem[] }) {
           </span>
         ))}
       </div>
-      <header className={`hdr${solid ? " hdr--solid" : ""}${home ? " hdr--home" : ""}`}>
+      <header className="hdr">
         <div className="hdr__in">
           <div className="hdr__left">
             <button className="icon-btn" aria-label={tr("Меню", "Menu")} onClick={() => setMenu(true)}>

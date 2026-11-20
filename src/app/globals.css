@@ -267,15 +267,12 @@ ol {
   height: 16px;
   padding: 0 4px;
   border-radius: 8px;
-  background: var(--ink);
-  color: #fff;
+  background: #fff;
+  color: var(--ink);
   font-size: 10px;
   font-style: normal;
   line-height: 16px;
   text-align: center;
-}
-.hdr:not(.hdr--solid) .dot-count {
-  background: var(--ink);
 }
 .chips {
   display: flex;
@@ -323,6 +320,7 @@ ol {
   position: relative;
   height: var(--note);
   background: var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
   font-size: 10.5px;
   letter-spacing: 0.16em;
@@ -346,21 +344,15 @@ ol {
   transform: none;
 }
 
+/* black header bar, white brand mark and icons (client request 2026-11-20) */
 .hdr {
   position: sticky;
   top: 0;
   z-index: 40;
   height: var(--hdr);
-  background: rgba(255, 255, 255, 0);
-  border-bottom: 1px solid transparent;
-  transition: background 0.4s, border-color 0.4s;
-}
-.hdr--solid {
-  background: #fff;
-  border-color: var(--line);
-}
-.hdr--home {
-  margin-bottom: calc(var(--hdr) * -1);
+  background: var(--ink);
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .hdr__in {
   height: 100%;
@@ -398,11 +390,6 @@ ol {
 }
 .hdr__word {
   margin-right: -0.42em;
-}
-.hdr--home:not(.hdr--solid) .hdr__logo {
-  opacity: 0;
-  transform: translateY(6px);
-  pointer-events: none;
 }
 .hide-sm {
   display: none;
@@ -461,7 +448,8 @@ ol {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 calc(var(--pad) - 10px);
-  border-bottom: 1px solid var(--line);
+  background: var(--ink);
+  color: #fff;
 }
 .menu__logo {
   display: block;
@@ -656,7 +644,7 @@ ol {
 /* ---------- cover (home hero) ---------- */
 .cover {
   position: relative;
-  height: calc(100svh - var(--note));
+  height: calc(100svh - var(--note) - var(--hdr));
   min-height: 560px;
   max-height: 1100px;
   overflow: hidden;
@@ -731,7 +719,7 @@ ol {
 }
 .cover__issue {
   position: absolute;
-  top: calc(var(--hdr) + 10px);
+  top: 18px;
   left: var(--pad);
   right: var(--pad);
   display: flex;
