@@ -8,7 +8,15 @@ export const GIFT_MAX = 100000;
 export const GIFT_PRESETS = [1000, 2000, 3000, 5000, 10000];
 export const GIFT_MESSAGE_MAX = 300;
 /** Validity from the date of payment (client, 2026-11-20). */
-export const GIFT_VALID_MONTHS = 3;
+export const GIFT_VALID_MONTHS = 6;
+
+/** «6 місяців» / «3 місяці» / «1 місяць» */
+export function monthsUk(n: number) {
+  const d = n % 10, h = n % 100;
+  const w = d === 1 && h !== 11 ? "місяць" : d >= 2 && d <= 4 && (h < 12 || h > 14) ? "місяці" : "місяців";
+  return `${n} ${w}`;
+}
+export const GIFT_VALID_UK = monthsUk(GIFT_VALID_MONTHS);
 
 export const GIFT_DESIGNS = [
   { id: "noir", uk: "Noir", en: "Noir" },
