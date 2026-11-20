@@ -9,12 +9,16 @@
 - Checkout step «Параметри фігури» (client request 2026-11-20: height / bust / waist / hips, cm, required — CORSO adapts models in-house). Saved in the store (`measurements`, localStorage `corso.measure.v1`), pre-filled on the next order, editable in account → «Параметри»; sent with the order (API validates ranges) and shown in order history. With a real backend: store on the customer profile.
 - Manager contact everywhere (footer, showroom, product «Запитати менеджера», size guide, info pages): **@karina_kulikova** (2026-11-20; the on-site demo bot was removed at the client's request).
 - Two languages (2026-11-20): Ukrainian + English across the whole site incl. all 40 product descriptions; switch УКР / ENG at the bottom of the menu and in the footer (cookie). English product texts are our translation — ask the client to review.
+- Gift certificate `/gift-certificate` (2026-11-20, modelled on onebyone.ua/gift-certificate): amount from 1 000 ₴ (presets 1/2/3/5/10k or own, max 100 000), design Noir/Milk with live card preview, recipient name + e-mail, greeting (300), sender name/phone/e-mail, send now or on a date → step «Оплата» (demo: pay button disabled). `/api/gift` validates and sends the request to the managers' Telegram as «очікує оплати». Rules in `src/lib/gift.ts`.
 - Orders POST to `/api/orders` (Telegram when env is set).
 
 ## Next
 - Prices: client sends the price list → fill `PRICES` in `src/lib/catalog.ts`.
 - Real payment provider (LiqPay / WayForPay / Monobank Acquiring) + real accounts (Supabase/NextAuth) — later stage.
 - GitHub: github.com/plvn-code/corso (main). Vercel — ask the user first.
+
+## Gift certificate — next stage
+Payment provider → on success generate a unique code, e-mail the certificate to the recipient (on `sendOn` date) and a receipt to the sender; field «Сертифікат» at checkout to redeem (balance check). Needs a DB.
 
 ## Open questions for the client
 1. Price list (we show only «₴» for now).
@@ -44,3 +48,6 @@
 - Polo 1 950 + skirt 2 950 UAH; cotton jacket 3 950 + shorts 2 950 UAH; beige windbreaker 4 800 UAH
 - Vest + shorts (Touch of Nature) — 5 440 UAH; satin trio: top 1 660, shorts 2 050, shirt-jacket 2 800 UAH
 - Striped shirt with lace — 2 400 UAH; CORSO CLUB T-shirt — 1 800 UAH
+
+### Gift certificate — confirm with the client
+- Terms on the page are a draft: validity 12 months, no cash refund, pay the difference if the purchase costs more, usable online + showroom, one-time vs. partial use of the balance, max amount (we set 100 000 ₴).

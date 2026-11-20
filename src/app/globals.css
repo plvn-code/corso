@@ -3115,3 +3115,352 @@ ol {
   color: var(--ink);
   border-bottom: 1px solid var(--ink);
 }
+
+/* ---------- gift certificate ---------- */
+.gift-page {
+  padding-bottom: 40px;
+}
+.gift-page__lead {
+  max-width: 46ch;
+  margin: 14px auto 0;
+}
+.gift {
+  padding: 0 var(--pad);
+  max-width: 1240px;
+  margin: 0 auto 56px;
+}
+.gift__steps {
+  display: flex;
+  gap: 18px;
+  margin: 0 0 28px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+.gift__steps span {
+  margin-right: 4px;
+}
+.gift__steps .is-on {
+  color: var(--ink);
+}
+.gift__steps .is-done {
+  color: var(--grey);
+}
+.gift__grid {
+  display: grid;
+  gap: 32px;
+}
+.gift__preview {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+.gift__msg {
+  margin: 0;
+  padding: 14px 16px;
+  background: var(--soft);
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.gift__hint {
+  margin: 0;
+}
+
+/* the card */
+.gcard {
+  position: relative;
+  aspect-ratio: 1.6 / 1;
+  width: 100%;
+  padding: 7% 7.5% 6%;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  overflow: hidden;
+  container-type: inline-size;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
+  transition: background 0.5s, color 0.5s;
+}
+.gcard--noir {
+  background: radial-gradient(120% 140% at 85% 0%, #2a2a2a 0%, #111 55%, #0a0a0a 100%);
+  color: #fff;
+}
+.gcard--milk {
+  background: radial-gradient(120% 140% at 85% 0%, #fbf8f2 0%, #efe8da 60%, #e6dccb 100%);
+  color: var(--ink);
+}
+.gcard::after {
+  content: "";
+  position: absolute;
+  inset: 4.5%;
+  border: 1px solid currentColor;
+  opacity: 0.18;
+  pointer-events: none;
+}
+.gcard__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.gcard__mono {
+  height: 13cqw;
+  width: auto;
+}
+.gcard__kind {
+  font-size: 2.6cqw;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.gcard__amount {
+  align-self: center;
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 11cqw;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.gcard__people {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4cqw;
+  font-size: 3.4cqw;
+  letter-spacing: 0.06em;
+  margin-bottom: 4cqw;
+}
+.gcard__people span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gcard__people small {
+  font-size: 2.2cqw;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 0.6cqw;
+}
+.gcard__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 2.3cqw;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.gcard__word {
+  font-family: var(--display);
+  letter-spacing: 0.42em;
+}
+
+/* form */
+.gift-form {
+  display: grid;
+  gap: 36px;
+}
+.gift__amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.gift__amounts .chip {
+  height: 44px;
+  padding: 0 18px;
+  letter-spacing: 0.04em;
+}
+.gift__amounts .chip.is-on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.gift__amounts.is-err .chip {
+  border-color: var(--danger);
+}
+.gift__custom {
+  margin-top: 6px;
+}
+.gift__sum {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.gift__sum input {
+  flex: 1;
+  border: 0 !important;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  font-family: var(--display);
+  font-size: 22px !important;
+  font-weight: 300;
+}
+.gift__sum input::-webkit-outer-spin-button,
+.gift__sum input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.gift__sum i {
+  font-style: normal;
+  color: var(--grey);
+}
+.gift__sum:focus-within {
+  border-color: var(--ink);
+}
+.field.is-err input,
+.field.is-err textarea,
+.field.is-err .gift__sum {
+  border-color: var(--danger);
+}
+.field.is-err > span:first-child {
+  color: var(--danger);
+}
+.gift__designs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 18px;
+}
+.gift__designs .pdp__label {
+  margin: 0 6px 0 0;
+}
+.gift__design {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.gift__design i {
+  width: 34px;
+  height: 22px;
+  border: 1px solid var(--line);
+  outline: 1px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color 0.25s;
+}
+.gift__design--noir i {
+  background: #111;
+}
+.gift__design--milk i {
+  background: #efe8da;
+}
+.gift__design.is-on {
+  color: var(--ink);
+}
+.gift__design.is-on i {
+  outline-color: var(--ink);
+}
+.gift__total {
+  display: grid;
+  gap: 12px;
+  padding: 20px var(--pad);
+  margin: 0 calc(var(--pad) * -1);
+  background: var(--soft);
+}
+.gift__total .btn {
+  gap: 10px;
+}
+.gift__total a {
+  text-decoration: underline;
+}
+
+/* payment step (demo) */
+.gift-pay {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+.gift-pay .h-title {
+  margin: 0;
+}
+.gift-pay__sum {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 18px;
+  margin: 0;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.gift-pay__sum dt {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding-top: 3px;
+}
+.gift-pay__sum dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.gift-pay__box {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--ink);
+}
+.gift-pay__box .btn {
+  gap: 10px;
+}
+.gift-pay__box .btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.gift-pay__box .demo-note {
+  margin: 0;
+}
+
+.gift-how {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.gift-terms {
+  padding-top: 48px;
+}
+.gift-terms .h-title {
+  margin-bottom: 16px;
+}
+@media (min-width: 960px) {
+  .gift__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .gift__preview {
+    position: sticky;
+    top: calc(var(--hdr) + 32px);
+  }
+  .gift__total {
+    margin: 0;
+    padding: 24px;
+  }
+  .gift-how {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .gift-how .perk {
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+  .gift-how .perk:last-child {
+    border-right: 0;
+  }
+}

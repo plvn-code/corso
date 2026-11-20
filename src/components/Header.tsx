@@ -36,6 +36,7 @@ const SECONDARY = [
   { href: "/lookbook", uk: "Лукбук", en: "Lookbook" },
   { href: "/about", uk: "Про бренд", en: "About" },
   { href: "/showroom", uk: "Шоурум у Дніпрі", en: "Showroom in Dnipro" },
+  { href: "/gift-certificate", uk: "Подарунковий сертифікат", en: "Gift certificate" },
   { href: "/info/oplata-i-dostavka", uk: "Оплата і доставка", en: "Payment & delivery" },
   { href: "/info/rozmirna-sitka", uk: "Розмірна сітка", en: "Size guide" },
   { href: "/account", uk: "Особистий кабінет", en: "My account" },

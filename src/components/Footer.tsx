@@ -23,6 +23,7 @@ const COLS = [
     uk: "Клієнтам",
     en: "Client care",
     links: [
+      { href: "/gift-certificate", uk: "Подарунковий сертифікат", en: "Gift certificate" },
       { href: "/info/oplata-i-dostavka", uk: "Оплата і доставка", en: "Payment & delivery" },
       { href: "/info/obmin-i-povernennia", uk: "Обмін і повернення", en: "Exchanges & returns" },
       { href: "/info/rozmirna-sitka", uk: "Розмірна сітка", en: "Size guide" },
