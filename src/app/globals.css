@@ -557,6 +557,24 @@ ol {
 .menu__lang .lang__item:first-child button {
   padding-left: 0;
 }
+.ftr__base-r {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.ftr__gift {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-right: 22px;
+  border-right: 1px solid var(--line);
+  color: var(--ink);
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+.ftr__gift:hover {
+  text-decoration: underline;
+}
 .ftr__lang {
   font-size: 11px;
   margin: -14px 0;
@@ -1570,6 +1588,7 @@ ol {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   gap: 8px;
   font-size: 11px;
   letter-spacing: 0.12em;

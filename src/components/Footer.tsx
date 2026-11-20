@@ -115,7 +115,12 @@ export function Footer() {
       </div>
       <div className="ftr__base">
         <span>© {new Date().getFullYear()} CORSO · Ukrainian clothing brand</span>
-        <LangSwitch className="ftr__lang" />
+        <div className="ftr__base-r">
+          <Link href="/gift-certificate" className="ftr__gift">
+            {tr("Сертифікат", "Gift card")}
+          </Link>
+          <LangSwitch className="ftr__lang" />
+        </div>
       </div>
     </footer>
   );
