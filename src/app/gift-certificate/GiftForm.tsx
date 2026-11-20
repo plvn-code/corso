@@ -36,8 +36,8 @@ export function GiftCard({
   return (
     <div className={`gcard gcard--${design}`} aria-label={tr("Подарунковий сертифікат CORSO", "CORSO gift certificate")}>
       <div className="gcard__top">
-        <Monogram className="gcard__mono" />
         <span className="gcard__kind">Gift certificate</span>
+        <Monogram className="gcard__mono" />
       </div>
       <p className="gcard__amount">{amount ? formatPrice(amount) : "₴"}</p>
       <div className="gcard__people">
