@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { GIFT_DESIGNS, GIFT_MESSAGE_MAX, isEmail, isPhone, validAmount } from "@/lib/gift";
+import { GIFT_DESIGNS, GIFT_MESSAGE_MAX, GIFT_VALID_MONTHS, isEmail, isPhone, validAmount } from "@/lib/gift";
 import { clip, notifyManagers } from "@/lib/telegram";
 
 /**
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     `Сума: ${new Intl.NumberFormat("uk-UA").format(amount)} грн · дизайн ${design}`,
     `Кому: ${clip(to.name, 80)} · ${clip(to.email, 120)}`,
     `Від: ${clip(from.name, 80)} · ${clip(from.phone, 40)} · ${clip(from.email, 120)}`,
-    `Надіслати: ${sendOn || "одразу після оплати"}`,
+    `Надіслати: ${sendOn || "одразу після оплати"} · діє ${GIFT_VALID_MONTHS} міс. з дня оплати`,
     b.message ? `💬 ${clip(b.message, GIFT_MESSAGE_MAX)}` : "",
   ]
     .filter(Boolean)

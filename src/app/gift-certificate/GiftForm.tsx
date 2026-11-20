@@ -12,6 +12,7 @@ import {
   GIFT_MESSAGE_MAX,
   GIFT_MIN,
   GIFT_PRESETS,
+  GIFT_VALID_MONTHS,
   isEmail,
   isPhone,
   validAmount,
@@ -155,8 +156,8 @@ export function GiftForm() {
           {f.message.trim() && <p className="gift__msg">«{f.message.trim()}»</p>}
           <p className="muted small gift__hint">
             {tr(
-              "Так виглядатиме сертифікат, який отримає ваш друг на e-mail.",
-              "This is the certificate your friend will receive by e-mail.",
+              `Так виглядатиме сертифікат, який отримає ваш друг на e-mail. Діє ${GIFT_VALID_MONTHS} місяці з дня оплати.`,
+              `This is the certificate your friend will receive by e-mail. Valid for ${GIFT_VALID_MONTHS} months from payment.`,
             )}
           </p>
         </div>
@@ -332,6 +333,8 @@ export function GiftForm() {
               </dd>
               <dt>{tr("Надсилання", "Sending")}</dt>
               <dd>{sendLabel}</dd>
+              <dt>{tr("Діє", "Valid")}</dt>
+              <dd>{tr(`${GIFT_VALID_MONTHS} місяці з дня оплати`, `${GIFT_VALID_MONTHS} months from payment`)}</dd>
             </dl>
             <div className="gift-pay__box">
               <p className="title-sm">{tr("Онлайн-оплата підключається", "Online payment is being connected")}</p>

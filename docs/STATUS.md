@@ -50,4 +50,5 @@ Payment provider → on success generate a unique code, e-mail the certificate t
 - Striped shirt with lace — 2 400 UAH; CORSO CLUB T-shirt — 1 800 UAH
 
 ### Gift certificate — confirm with the client
-- Terms on the page are a draft: validity 12 months, no cash refund, pay the difference if the purchase costs more, usable online + showroom, one-time vs. partial use of the balance, max amount (we set 100 000 ₴).
+- Validity: **3 months from payment** (confirmed by the client 2026-11-20, `GIFT_VALID_MONTHS` in src/lib/gift.ts).
+- Still a draft: no cash refund, pay the difference if the purchase costs more, usable online + showroom, one-time vs. partial use of the balance, max amount (we set 100 000 ₴).

@@ -7,6 +7,8 @@ export const GIFT_MIN = 1000;
 export const GIFT_MAX = 100000;
 export const GIFT_PRESETS = [1000, 2000, 3000, 5000, 10000];
 export const GIFT_MESSAGE_MAX = 300;
+/** Validity from the date of payment (client, 2026-11-20). */
+export const GIFT_VALID_MONTHS = 3;
 
 export const GIFT_DESIGNS = [
   { id: "noir", uk: "Noir", en: "Noir" },

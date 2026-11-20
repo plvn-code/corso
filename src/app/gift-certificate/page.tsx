@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTr } from "@/i18n/server";
 import { formatPrice } from "@/lib/format";
-import { GIFT_MIN } from "@/lib/gift";
+import { GIFT_MIN, GIFT_VALID_MONTHS } from "@/lib/gift";
 import { GiftForm } from "./GiftForm";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,7 +24,7 @@ export default async function GiftPage() {
     tr("Сертифікат діє на всі товари CORSO — на сайті та в шоурумі у Дніпрі.", "Valid for all CORSO pieces — online and at our showroom in Dnipro."),
     tr(`Номінал — від ${min}, сума обирається при покупці.`, `Amount — from ${min}, chosen at purchase.`),
     tr("Сертифікат надсилається отримувачу на e-mail лише після повної оплати.", "The certificate is e-mailed to the recipient only after full payment."),
-    tr("Термін дії — 12 місяців з дня покупки.", "Valid for 12 months from the date of purchase."),
+    tr(`Термін дії — ${GIFT_VALID_MONTHS} місяці з дня оплати.`, `Valid for ${GIFT_VALID_MONTHS} months from the date of payment.`),
     tr("Якщо покупка дорожча за номінал — різницю можна доплатити.", "If the purchase costs more than the certificate, you can pay the difference."),
     tr("Сертифікат не обмінюється на гроші та не підлягає поверненню.", "The certificate cannot be exchanged for cash or refunded."),
     tr(
