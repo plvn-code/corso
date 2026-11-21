@@ -9,6 +9,7 @@ import { useStore } from "@/lib/store";
 import { formatPrice } from "@/lib/format";
 import { IconClose, IconHeart, IconPlus, IconTelegram } from "./Icons";
 import { site } from "@/lib/site";
+import { PREPAY_HREF, PREPAY_MIN } from "@/lib/prepay";
 
 export interface ViewData {
   slug: string;
@@ -81,14 +82,14 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
     window.history.replaceState(null, "", url);
   }
 
-  function addToBag(goCheckout: boolean) {
+  function addToBag(goCheckout: boolean | string) {
     if (!size) {
       setWarn(true);
       document.getElementById("sizes")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
     add({ slug: p.slug, name: p.name, names: p.names, color: color.name, size, image: color.images[0], price: p.price }, !goCheckout);
-    if (goCheckout) router.push("/checkout");
+    if (goCheckout) router.push(typeof goCheckout === "string" ? goCheckout : "/checkout");
   }
 
   return (
@@ -206,6 +207,12 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
             <button className="btn btn--dark btn--block" onClick={() => addToBag(true)}>
               {tr("Купити зараз", "Buy now")}
             </button>
+            <button className="btn btn--line btn--block btn--prepay" onClick={() => addToBag(PREPAY_HREF)}>
+              {tr("Замовити з передоплатою", "Order with prepayment")}
+              <small>
+                {tr("від", "from")} {formatPrice(PREPAY_MIN)}
+              </small>
+            </button>
           </div>
 
           <ul className="pdp__perks">
@@ -254,8 +261,8 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
               </p>
               <p>
                 {tr(
-                  "Оплата карткою онлайн, на рахунок ФОП (IBAN) або накладеним платежем з передоплатою 250 грн.",
-                  "Pay by card online, by bank transfer (IBAN) or cash on delivery with a 250 UAH prepayment.",
+                  `Оплата карткою онлайн, на рахунок ФОП (IBAN) або накладеним платежем з передоплатою від ${PREPAY_MIN} грн.`,
+                  `Pay by card online, by bank transfer (IBAN) or cash on delivery with a prepayment from ${PREPAY_MIN} UAH.`,
                 )}{" "}
                 <Link href="/info/oplata-i-dostavka">{tr("Детальніше", "Details")}</Link>
               </p>

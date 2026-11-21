@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useStore, type Measurements } from "@/lib/store";
 import { optionLabel } from "@/app/checkout/CheckoutForm";
+import { formatPrice } from "@/lib/format";
 import { locale } from "@/i18n/lang";
 import { EMPTY_MEASUREMENTS, MeasureFields, hasMeasurements, measurementsLine } from "@/components/MeasureFields";
 
@@ -119,6 +120,7 @@ export function AccountView() {
                 </div>
                 <p className="muted small">
                   {optionLabel(o.delivery, lang)} · {optionLabel(o.payment, lang)}
+                  {o.prepay ? ` · ${tr("передоплата", "prepaid")} ${formatPrice(o.prepay)}` : ""}
                 </p>
                 {hasMeasurements(o.measurements) && <p className="muted small">{measurementsLine(o.measurements, lang)}</p>}
               </li>

@@ -40,6 +40,8 @@ export interface DemoOrder {
   date: string;
   lines: BagLine[];
   measurements?: Measurements;
+  /** cash on delivery: prepayment paid online, UAH */
+  prepay?: number;
   delivery: string;
   payment: string;
   status: string;

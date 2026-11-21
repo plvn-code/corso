@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { SizeTable } from "@/components/ProductView";
 import { site } from "@/lib/site";
 import { getTr } from "@/i18n/server";
+import { PREPAY_MIN } from "@/lib/prepay";
 
 type Page = { title: string; en: string; body: React.ReactNode; bodyEn: React.ReactNode };
 
@@ -29,7 +30,10 @@ const PAGES: Record<string, Page> = {
         <ul className="dash">
           <li>Карткою онлайн на сайті — Visa, Mastercard, Apple Pay, Google Pay (підключається).</li>
           <li>Офіційна оплата на рахунок ФОП за реквізитами IBAN або на картку ПриватБанку.</li>
-          <li>Накладений платіж з передоплатою 250 грн.</li>
+          <li>
+            Накладений платіж з передоплатою — стартова передоплата від {PREPAY_MIN} грн онлайн. Можна внести більше: сума передоплати на ваш
+            вибір, але не менше {PREPAY_MIN} грн. Решту сплачуєте при отриманні на пошті.
+          </li>
         </ul>
         <h2>Опт</h2>
         <p>Опт — від 6 одиниць однієї моделі. Накладеного платежу на опт немає.</p>
@@ -47,7 +51,10 @@ const PAGES: Record<string, Page> = {
         <ul className="dash">
           <li>By card online — Visa, Mastercard, Apple Pay, Google Pay (being connected).</li>
           <li>Official bank transfer to our business account (IBAN) or to a PrivatBank card.</li>
-          <li>Cash on delivery with a 250 UAH prepayment.</li>
+          <li>
+            Cash on delivery with prepayment — a starting prepayment from {PREPAY_MIN} UAH online. You can pay more: the amount is up to you,
+            but not less than {PREPAY_MIN} UAH. The rest is paid on delivery at the post office.
+          </li>
         </ul>
         <h2>Wholesale</h2>
         <p>Wholesale — from 6 pieces of one style. No cash on delivery for wholesale orders.</p>

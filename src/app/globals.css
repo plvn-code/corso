@@ -3488,3 +3488,83 @@ ol {
     border-right: 0;
   }
 }
+
+/* ---------- cash on delivery with prepayment (from 400 UAH) ---------- */
+#co-pay {
+  scroll-margin-top: calc(var(--hdr) + 16px);
+}
+.btn--prepay {
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.btn--prepay small {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+}
+.drawer__cart {
+  justify-self: center;
+  min-height: 36px;
+}
+.prepay {
+  margin: 4px 0 14px;
+  padding: 16px;
+  background: var(--soft);
+  display: grid;
+  gap: 8px;
+}
+.prepay.is-err {
+  outline: 1px solid var(--danger);
+}
+.prepay__t {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.prepay .muted {
+  margin: 0;
+}
+.prepay__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.prepay__chips .chip {
+  height: 40px;
+  background: #fff;
+  letter-spacing: 0.04em;
+}
+.prepay__chips .chip.is-on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.prepay .field {
+  padding-bottom: 0;
+}
+.prepay .warn {
+  margin: 0;
+}
+.pay__amount {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px;
+  background: var(--soft);
+  text-align: center;
+}
+.pay__amount span {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.pay__amount b {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+}

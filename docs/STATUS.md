@@ -10,6 +10,7 @@
 - Manager contact everywhere (footer, showroom, product «Запитати менеджера», size guide, info pages): **@karina_kulikova** (2026-11-20; the on-site demo bot was removed at the client's request).
 - Two languages (2026-11-20): Ukrainian + English across the whole site incl. all 40 product descriptions; switch УКР / ENG at the bottom of the menu and in the footer (cookie). English product texts are our translation — ask the client to review.
 - Gift certificate `/gift-certificate` (2026-11-20, modelled on onebyone.ua/gift-certificate): amount from 1 000 ₴ (presets 1/2/3/5/10k or own, max 100 000), design Noir/Milk with live card preview, recipient name + e-mail, greeting (300), sender name/phone/e-mail, send now or on a date → step «Оплата» (demo: pay button disabled). `/api/gift` validates and sends the request to the managers' Telegram as «очікує оплати». Rules in `src/lib/gift.ts`.
+- Cash on delivery with prepayment (client 2026-11-21): starting prepayment **from 400 ₴**, the client may pay more (chips 400/500/1 000/2 000 or own amount ≥ 400). Button «Замовити з передоплатою» under «Оформити замовлення» in the bag drawer and cart page and under «Купити зараз» on product pages → `/checkout?pay=prepay` (option preselected). Prepayment goes through the demo card modal; `/api/orders` rejects COD without prepay ≥ 400 and tells the manager the amount. Rule: `src/lib/prepay.ts`. Payment/Delivery texts updated.
 - Orders POST to `/api/orders` (Telegram when env is set).
 
 ## Next

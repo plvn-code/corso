@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getProduct } from "@/lib/catalog";
 import { clip, notifyManagers } from "@/lib/telegram";
+import { validPrepay } from "@/lib/prepay";
 
 /**
  * Order intake. DEMO stage: validates the order against the catalogue and forwards it to
@@ -45,6 +46,12 @@ export async function POST(req: Request) {
     })
     .filter(Boolean);
   const measurements = readMeasurements(body.measurements);
+  // Cash on delivery requires an online prepayment of at least PREPAY_MIN
+  const cod = /накладений/i.test(clip(body.payment));
+  const prepay = Number(body.prepay);
+  if (cod && !validPrepay(prepay)) {
+    return NextResponse.json({ ok: false, error: "prepayment" }, { status: 422 });
+  }
   if (!clip(c.name) || !clip(c.phone) || lines.length === 0 || !measurements) {
     return NextResponse.json({ ok: false, error: "invalid order" }, { status: 422 });
   }
@@ -52,7 +59,7 @@ export async function POST(req: Request) {
     `🛍 Нове замовлення ${clip(body.id, 20)}`,
     `${clip(c.name)} · ${clip(c.phone, 40)}${c.email ? ` · ${clip(c.email)}` : ""}`,
     `${clip(body.delivery)}${c.city ? ` — ${clip(c.city)}, ${clip(c.branch)}` : ""}`,
-    `Оплата: ${clip(body.payment)}`,
+    `Оплата: ${clip(body.payment)}${cod ? ` — передоплата ${new Intl.NumberFormat("uk-UA").format(prepay)} грн (демо), решта при отриманні` : ""}`,
     `📏 ${measurements}`,
     ...lines,
     c.comment ? `💬 ${clip(c.comment, 500)}` : "",

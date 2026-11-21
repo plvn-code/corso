@@ -4,6 +4,8 @@ import { useLang } from "@/i18n/client";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
 import { BagLines } from "@/components/BagDrawer";
+import { formatPrice } from "@/lib/format";
+import { PREPAY_HREF, PREPAY_MIN } from "@/lib/prepay";
 
 export function CartView() {
   const { bag, ready, count } = useStore();
@@ -41,6 +43,18 @@ export function CartView() {
             <Link href="/checkout" className="btn btn--dark btn--block">
               {tr("Оформити замовлення", "Checkout")}
             </Link>
+            <Link href={PREPAY_HREF} className="btn btn--line btn--block btn--prepay">
+              {tr("Замовити з передоплатою", "Order with prepayment")}
+              <small>
+                {tr("від", "from")} {formatPrice(PREPAY_MIN)}
+              </small>
+            </Link>
+            <p className="muted small">
+              {tr(
+                `Накладений платіж: передоплата від ${formatPrice(PREPAY_MIN)} онлайн, решта — при отриманні.`,
+                `Cash on delivery: prepay from ${formatPrice(PREPAY_MIN)} online, the rest on delivery.`,
+              )}
+            </p>
           </aside>
         </div>
       )}

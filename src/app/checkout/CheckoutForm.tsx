@@ -8,6 +8,7 @@ import { useStore, type DemoOrder, type Measurements } from "@/lib/store";
 import { EMPTY_MEASUREMENTS, MeasureFields, hasMeasurements } from "@/components/MeasureFields";
 import { formatPrice } from "@/lib/format";
 import { IconCheck, IconClose, IconLock } from "@/components/Icons";
+import { PREPAY_MIN, PREPAY_PRESETS, validPrepay } from "@/lib/prepay";
 
 // Labels: `label` (Ukrainian) goes to the manager and the order history; `en` is shown on the English site.
 export const DELIVERY = [
@@ -20,10 +21,21 @@ export const DELIVERY = [
 export const PAYMENT = [
   { id: "card", label: "Оплата карткою онлайн", en: "Card payment online", note: "Visa · Mastercard · Apple Pay · Google Pay", noteEn: "Visa · Mastercard · Apple Pay · Google Pay" },
   { id: "iban", label: "На рахунок ФОП (IBAN)", en: "Bank transfer (IBAN)", note: "Реквізити надішле менеджер", noteEn: "Our manager will send the details" },
-  { id: "cod", label: "Накладений платіж", en: "Cash on delivery", note: "Передоплата 250 грн, решта — при отриманні", noteEn: "250 UAH prepayment, the rest on delivery" },
+  {
+    id: "cod",
+    label: "Накладений платіж з передоплатою",
+    en: "Cash on delivery with prepayment",
+    note: `Передоплата від ${PREPAY_MIN} грн онлайн — решта при отриманні`,
+    noteEn: `Prepay from ${PREPAY_MIN} UAH online — the rest on delivery`,
+  },
 ];
 
-export const STATUS_EN: Record<string, string> = { "Оплачено (демо)": "Paid (demo)", "Очікує підтвердження": "Awaiting confirmation" };
+export const STATUS_EN: Record<string, string> = {
+  "Оплачено (демо)": "Paid (demo)",
+  "Передоплату внесено (демо)": "Prepayment received (demo)",
+  "Очікує підтвердження": "Awaiting confirmation",
+  "Накладений платіж": "Cash on delivery",
+};
 
 /** Order-history labels are stored in Ukrainian; show them in the site language. */
 export function optionLabel(uk: string, lang: string) {
@@ -44,6 +56,19 @@ export function CheckoutForm() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", branch: "", comment: "" });
   const [measure, setMeasure] = useState<Measurements>(EMPTY_MEASUREMENTS);
   const [savedMeasure, setSavedMeasure] = useState(false);
+  const [prepay, setPrepay] = useState(String(PREPAY_MIN));
+  const [prepayTried, setPrepayTried] = useState(false);
+  const prepayN = Number(prepay);
+  const prepayOk = validPrepay(prepayN);
+  const cod = payment === "cod";
+
+  // «Замовити з передоплатою» buttons open /checkout?pay=prepay → preselect it and show the amount block.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("pay") === "prepay") {
+      setPayment("cod");
+      setTimeout(() => document.getElementById("co-pay")?.scrollIntoView({ behavior: "smooth", block: "start" }), 400);
+    }
+  }, []);
 
   useEffect(() => {
     if (user) setForm((f) => ({ ...f, name: f.name || user.name, phone: f.phone || user.phone, email: f.email || user.email }));
@@ -77,6 +102,7 @@ export function CheckoutForm() {
           measurements: measure,
           delivery: DELIVERY.find((d) => d.id === delivery)?.label,
           payment: PAYMENT.find((p) => p.id === payment)?.label,
+          prepay: cod ? prepayN : undefined,
           lines: bag.map((l) => ({ slug: l.slug, color: l.color, size: l.size, qty: l.qty })),
         }),
       });
@@ -90,7 +116,8 @@ export function CheckoutForm() {
       measurements: measure,
       delivery: DELIVERY.find((d) => d.id === delivery)!.label,
       payment: PAYMENT.find((p) => p.id === payment)!.label,
-      status: payment === "card" ? "Оплачено (демо)" : "Очікує підтвердження",
+      prepay: cod ? prepayN : undefined,
+      status: payment === "card" ? "Оплачено (демо)" : cod ? "Передоплату внесено (демо)" : "Очікує підтвердження",
     };
     addOrder(order);
     setMeasurements(measure);
@@ -103,7 +130,12 @@ export function CheckoutForm() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (payment === "card") setStage("pay");
+    if (cod && !prepayOk) {
+      setPrepayTried(true);
+      document.getElementById("co-pay")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    if (payment === "card" || cod) setStage("pay");
     else place();
   }
 
@@ -227,7 +259,7 @@ export function CheckoutForm() {
             )}
           </section>
 
-          <section>
+          <section id="co-pay">
             <h2 className="co-h">
               <span>04</span> {tr("Оплата", "Payment")}
             </h2>
@@ -241,6 +273,42 @@ export function CheckoutForm() {
                 </label>
               ))}
             </div>
+            {cod && (
+              <div className={`prepay${prepayTried && !prepayOk ? " is-err" : ""}`}>
+                <p className="prepay__t">{tr("Сума передоплати", "Prepayment amount")}</p>
+                <p className="muted small">
+                  {tr(
+                    `Мінімум ${formatPrice(PREPAY_MIN)}. Можна внести більше — тоді при отриманні сплатите менше.`,
+                    `Minimum ${formatPrice(PREPAY_MIN)}. You can pay more — then you pay less on delivery.`,
+                  )}
+                </p>
+                <div className="prepay__chips">
+                  {PREPAY_PRESETS.map((n) => (
+                    <button type="button" key={n} className={`chip${prepayN === n ? " is-on" : ""}`} aria-pressed={prepayN === n} onClick={() => setPrepay(String(n))}>
+                      {formatPrice(n)}
+                    </button>
+                  ))}
+                </div>
+                <label className="field">
+                  <span>{tr("Своя сума", "Your amount")}</span>
+                  <span className="gift__sum">
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      min={PREPAY_MIN}
+                      step={50}
+                      value={prepay}
+                      onChange={(e) => setPrepay(e.target.value.replace(/[^\d]/g, ""))}
+                      onBlur={() => setPrepayTried(true)}
+                    />
+                    <i>₴</i>
+                  </span>
+                </label>
+                {prepayTried && !prepayOk && (
+                  <p className="warn">{tr(`Передоплата — не менше ${formatPrice(PREPAY_MIN)}`, `Prepayment — at least ${formatPrice(PREPAY_MIN)}`)}</p>
+                )}
+              </div>
+            )}
             <label className="field field--wide">
               <span>{tr("Коментар до замовлення", "Order notes")}</span>
               <textarea rows={3} value={form.comment} onChange={set("comment")} placeholder={tr("Побажання щодо посадки, довжини, термінів", "Wishes about fit, length, timing")} />
@@ -272,8 +340,24 @@ export function CheckoutForm() {
             <span>{tr("Разом", "Total")}</span>
             <span>₴</span>
           </div>
+          {cod && (
+            <>
+              <div className="sum-row">
+                <span>{tr("Передоплата зараз", "Prepayment now")}</span>
+                <b>{prepayOk ? formatPrice(prepayN) : "—"}</b>
+              </div>
+              <div className="sum-row">
+                <span>{tr("Решта", "The rest")}</span>
+                <span>{tr("при отриманні", "on delivery")}</span>
+              </div>
+            </>
+          )}
           <button form="co" className="btn btn--dark btn--block" disabled={busy}>
-            {payment === "card" ? (
+            {cod ? (
+              <>
+                <IconLock width={16} height={16} /> {tr("Сплатити передоплату", "Pay prepayment")} {prepayOk ? formatPrice(prepayN) : ""}
+              </>
+            ) : payment === "card" ? (
               <>
                 <IconLock width={16} height={16} /> {tr("Перейти до оплати", "Continue to payment")}
               </>
@@ -288,12 +372,12 @@ export function CheckoutForm() {
         </aside>
       </div>
 
-      {stage === "pay" && <PayDemo onClose={() => setStage("form")} onPaid={place} busy={busy} />}
+      {stage === "pay" && <PayDemo onClose={() => setStage("form")} onPaid={place} busy={busy} prepay={cod ? prepayN : undefined} />}
     </div>
   );
 }
 
-function PayDemo({ onClose, onPaid, busy }: { onClose: () => void; onPaid: () => void; busy: boolean }) {
+function PayDemo({ onClose, onPaid, busy, prepay }: { onClose: () => void; onPaid: () => void; busy: boolean; prepay?: number }) {
   const [card, setCard] = useState({ num: "4242 4242 4242 4242", exp: "12/28", cvv: "123" });
   const { tr } = useLang();
   return (
@@ -307,6 +391,13 @@ function PayDemo({ onClose, onPaid, busy }: { onClose: () => void; onPaid: () =>
             <IconClose />
           </button>
         </div>
+        {prepay != null && (
+          <div className="pay__amount">
+            <span>{tr("Передоплата за замовлення", "Order prepayment")}</span>
+            <b>{formatPrice(prepay)}</b>
+            <small className="muted">{tr("Решту сплатите при отриманні на пошті", "You pay the rest on delivery")}</small>
+          </div>
+        )}
         <div className="pay__wallets">
           <button className="btn btn--dark btn--block" onClick={onPaid} disabled={busy}>
             Apple Pay
@@ -337,7 +428,7 @@ function PayDemo({ onClose, onPaid, busy }: { onClose: () => void; onPaid: () =>
             </label>
           </div>
           <button className="btn btn--dark btn--block" disabled={busy}>
-            {busy ? tr("Обробка…", "Processing…") : tr("Оплатити", "Pay")}
+            {busy ? tr("Обробка…", "Processing…") : `${tr("Оплатити", "Pay")}${prepay != null ? ` ${formatPrice(prepay)}` : ""}`}
           </button>
         </form>
         <p className="muted small">

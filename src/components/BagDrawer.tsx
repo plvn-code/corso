@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useStore } from "@/lib/store";
 import { formatPrice } from "@/lib/format";
+import { PREPAY_HREF, PREPAY_MIN } from "@/lib/prepay";
 import { IconClose, IconMinus, IconPlus } from "./Icons";
 
 export function BagLines({ compact = false }: { compact?: boolean }) {
@@ -90,7 +91,13 @@ export function BagDrawer() {
               <Link href="/checkout" className="btn btn--dark btn--block" onClick={closeBag}>
                 {tr("Оформити замовлення", "Checkout")}
               </Link>
-              <Link href="/cart" className="btn btn--line btn--block" onClick={closeBag}>
+              <Link href={PREPAY_HREF} className="btn btn--line btn--block btn--prepay" onClick={closeBag}>
+                {tr("Замовити з передоплатою", "Order with prepayment")}
+                <small>
+                  {tr("від", "from")} {formatPrice(PREPAY_MIN)}
+                </small>
+              </Link>
+              <Link href="/cart" className="link-btn drawer__cart" onClick={closeBag}>
                 {tr("Переглянути кошик", "View bag")}
               </Link>
             </div>
