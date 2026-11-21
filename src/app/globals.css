@@ -3493,6 +3493,12 @@ ol {
 #co-pay {
   scroll-margin-top: calc(var(--hdr) + 16px);
 }
+/* long labels on full-width buttons wrap instead of overflowing narrow phones */
+.btn--block {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+}
 .btn--prepay {
   flex-direction: column;
   gap: 2px;
