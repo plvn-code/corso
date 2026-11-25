@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { StoreProvider } from "@/lib/store";
 import { Header, type SearchItem } from "@/components/Header";
 import { BagDrawer } from "@/components/BagDrawer";
+import { WelcomePopup } from "@/components/WelcomePopup";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import { products, photo, categoryName, localize } from "@/lib/catalog";
@@ -59,6 +60,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main id="main">{children}</main>
           <Footer />
           <BagDrawer />
+          <WelcomePopup />
           <Suspense>
             <Reveal />
           </Suspense>

@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useStore } from "@/lib/store";
 import { formatPrice } from "@/lib/format";
 import { PREPAY_HREF, PREPAY_MIN } from "@/lib/prepay";
+import { DiscountRow, TotalValue } from "@/components/DiscountRow";
 import { IconClose, IconMinus, IconPlus } from "./Icons";
 
 export function BagLines({ compact = false }: { compact?: boolean }) {
@@ -83,9 +84,12 @@ export function BagDrawer() {
               <BagLines compact />
             </div>
             <div className="drawer__foot">
+              <DiscountRow onNavigate={closeBag} />
               <div className="sum-row">
                 <span>{tr("Разом", "Total")}</span>
-                <span>₴</span>
+                <span>
+                  <TotalValue />
+                </span>
               </div>
               <p className="muted small">{tr("Вартість підтвердить менеджер. Доставка — за тарифами перевізника.", "Our manager will confirm the price. Delivery at carrier rates.")}</p>
               <Link href="/checkout" className="btn btn--dark btn--block" onClick={closeBag}>

@@ -33,7 +33,7 @@ const MENU = [
 
 const SECONDARY = [
   { href: "/lookbook", uk: "Лукбук", en: "Lookbook" },
-  { href: "/about", uk: "Про бренд", en: "About" },
+  { href: "/about", uk: "Про нас", en: "About us" },
   { href: "/gift-certificate", uk: "Подарунковий сертифікат", en: "Gift certificate" },
   { href: "/info/oplata-i-dostavka", uk: "Оплата і доставка", en: "Payment & delivery" },
   { href: "/info/rozmirna-sitka", uk: "Розмірна сітка", en: "Size guide" },
@@ -41,10 +41,13 @@ const SECONDARY = [
   { href: "/contacts", uk: "Контакти", en: "Contacts" },
 ];
 
+// Rotating theses in the top bar (client, 2026-11-25)
 const NOTES = [
-  { uk: "Офлайн-примірка · Дніпро, Вернадського 16", en: "Fitting in our store · Dnipro, Vernadskoho 16" },
-  { uk: "Відправка по Україні 1–2 дні", en: "Shipping across Ukraine in 1–2 days" },
-  { uk: "Італійські тканини · Made in Ukraine", en: "Italian fabrics · Made in Ukraine" },
+  { uk: "Преміальна італійська якість", en: "Premium Italian quality" },
+  { uk: "Власне виробництво", en: "Our own production" },
+  { uk: "Made in Ukraine", en: "Made in Ukraine" },
+  { uk: "Створено з увагою до кожної деталі", en: "Made with attention to every detail" },
+  { uk: "CORSO EDIT CLUB — культура власного стилю", en: "CORSO EDIT CLUB — a culture of personal style" },
 ];
 
 export function Header({ items }: { items: SearchItem[] }) {
@@ -112,7 +115,7 @@ export function Header({ items }: { items: SearchItem[] }) {
               <Link href="/catalog?c=new">{tr("Новинки", "New in")}</Link>
               <Link href="/catalog">{tr("Каталог", "Shop")}</Link>
               <Link href="/lookbook">{tr("Лукбук", "Lookbook")}</Link>
-              <Link href="/about">{tr("Про бренд", "About")}</Link>
+              <Link href="/about">{tr("Про нас", "About us")}</Link>
             </nav>
           </div>
           <Link href="/" className="hdr__logo" aria-label={tr("CORSO — на головну", "CORSO — home")}>

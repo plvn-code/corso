@@ -329,7 +329,7 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
                 "Approximate body measurements. For oversize and one-size pieces we will advise the fit for your measurements —",
               )}{" "}
               <a href={site.manager} target="_blank" rel="noopener noreferrer">
-                {tr("напишіть менеджеру", "message our manager")} {site.managerHandle}
+                {tr("напишіть менеджеру CORSO", "message the CORSO manager")}
               </a>
               .
             </p>

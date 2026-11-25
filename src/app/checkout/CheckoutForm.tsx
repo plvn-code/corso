@@ -9,6 +9,8 @@ import { EMPTY_MEASUREMENTS, MeasureFields, hasMeasurements } from "@/components
 import { formatPrice } from "@/lib/format";
 import { IconCheck, IconClose, IconLock } from "@/components/Icons";
 import { PREPAY_MIN, PREPAY_PRESETS, validPrepay } from "@/lib/prepay";
+import { DiscountRow, TotalValue } from "@/components/DiscountRow";
+import { FIRST_ORDER_PCT, useBagTotals } from "@/lib/discount";
 
 // Labels: `label` (Ukrainian) goes to the manager and the order history; `en` is shown on the English site.
 export const DELIVERY = [
@@ -61,6 +63,7 @@ export function CheckoutForm() {
   const prepayN = Number(prepay);
   const prepayOk = validPrepay(prepayN);
   const cod = payment === "cod";
+  const { eligible: firstOrder } = useBagTotals();
 
   // «Замовити з передоплатою» buttons open /checkout?pay=prepay → preselect it and show the amount block.
   useEffect(() => {
@@ -103,6 +106,7 @@ export function CheckoutForm() {
           delivery: DELIVERY.find((d) => d.id === delivery)?.label,
           payment: PAYMENT.find((p) => p.id === payment)?.label,
           prepay: cod ? prepayN : undefined,
+          discountPct: firstOrder ? FIRST_ORDER_PCT : undefined,
           lines: bag.map((l) => ({ slug: l.slug, color: l.color, size: l.size, qty: l.qty })),
         }),
       });
@@ -117,6 +121,7 @@ export function CheckoutForm() {
       delivery: DELIVERY.find((d) => d.id === delivery)!.label,
       payment: PAYMENT.find((p) => p.id === payment)!.label,
       prepay: cod ? prepayN : undefined,
+      discountPct: firstOrder ? FIRST_ORDER_PCT : undefined,
       status: payment === "card" ? "Оплачено (демо)" : cod ? "Передоплату внесено (демо)" : "Очікує підтвердження",
     };
     addOrder(order);
@@ -336,9 +341,12 @@ export function CheckoutForm() {
             <span>{tr("Доставка", "Delivery")}</span>
             <span>{tr("за тарифами", "carrier rates")}</span>
           </div>
+          <DiscountRow />
           <div className="sum-row sum-row--total">
             <span>{tr("Разом", "Total")}</span>
-            <span>₴</span>
+            <span>
+              <TotalValue />
+            </span>
           </div>
           {cod && (
             <>

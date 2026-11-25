@@ -6,6 +6,7 @@ import { useStore } from "@/lib/store";
 import { BagLines } from "@/components/BagDrawer";
 import { formatPrice } from "@/lib/format";
 import { PREPAY_HREF, PREPAY_MIN } from "@/lib/prepay";
+import { DiscountRow, TotalValue } from "@/components/DiscountRow";
 
 export function CartView() {
   const { bag, ready, count } = useStore();
@@ -35,9 +36,12 @@ export function CartView() {
               <span>{tr("Доставка", "Delivery")}</span>
               <span>{tr("за тарифами перевізника", "carrier rates")}</span>
             </div>
+            <DiscountRow />
             <div className="sum-row sum-row--total">
               <span>{tr("Разом", "Total")}</span>
-              <span>₴</span>
+              <span>
+                <TotalValue />
+              </span>
             </div>
             <p className="muted small">{tr("Ціни на сайті оновлюються — точну суму підтвердить менеджер.", "Prices are being updated — our manager will confirm the exact total.")}</p>
             <Link href="/checkout" className="btn btn--dark btn--block">

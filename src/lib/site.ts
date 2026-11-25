@@ -10,8 +10,8 @@ export const site = {
   instagramHandle: "@corso.edit.club",
   telegram: "https://t.me/emotionbrand",
   /** Manager for orders and questions (Telegram) — changed 2026-11-20 */
+  // Never show the personal nickname on the site — only brand wording «Звʼязок з менеджером» (client, 2026-11-25)
   manager: "https://t.me/karina_kulikova",
-  managerHandle: "@karina_kulikova",
   city: "Дніпро",
   address: "вул. Володимира Вернадського, 16",
   cityEn: "Dnipro",

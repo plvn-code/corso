@@ -8,9 +8,9 @@ import { OfferEn, OfferUk, PaymentDeliveryEn, PaymentDeliveryUk, PrivacyEn, Priv
 
 type Page = { title: string; en: string; body: React.ReactNode; bodyEn: React.ReactNode };
 
-const Manager = () => (
+const Manager = ({ children }: { children: React.ReactNode }) => (
   <a href={site.manager} target="_blank" rel="noopener noreferrer">
-    {site.managerHandle}
+    {children}
   </a>
 );
 
@@ -78,7 +78,7 @@ const PAGES: Record<string, Page> = {
           <li>Накладеного платежу на опт немає.</li>
         </ul>
         <p>
-          Напишіть менеджеру: <Manager /> — надішлемо умови.
+          <Manager>Напишіть менеджеру CORSO в Telegram</Manager> — надішлемо умови.
         </p>
       </>
     ),
@@ -90,7 +90,7 @@ const PAGES: Record<string, Page> = {
           <li>No cash on delivery for wholesale orders.</li>
         </ul>
         <p>
-          Message our manager: <Manager /> — we will send you the terms.
+          <Manager>Message the CORSO manager on Telegram</Manager> — we will send you the terms.
         </p>
       </>
     ),

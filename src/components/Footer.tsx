@@ -13,7 +13,7 @@ const COLS = [
     uk: "Про CORSO",
     en: "About CORSO",
     links: [
-      { href: "/about", uk: "Про бренд", en: "About the brand" },
+      { href: "/about", uk: "Про нас", en: "About us" },
       { href: "/lookbook", uk: "Лукбук", en: "Lookbook" },
       { href: "/contacts", uk: "Контакти", en: "Contacts" },
       { href: "/info/opt", uk: "Співпраця та опт", en: "Wholesale" },
@@ -92,9 +92,8 @@ export function Footer() {
           <p className="eyebrow">{tr("Магазини", "Stores")}</p>
           <p>{tr(`${site.city}, ${site.address}`, `${site.addressEn}, ${site.cityEn}`)}</p>
           <p>
-            {tr("Замовлення та питання:", "Orders & questions:")}{" "}
             <a href={site.manager} target="_blank" rel="noopener noreferrer">
-              {site.managerHandle}
+              {tr("Звʼязок з менеджером", "Contact our manager")}
             </a>
           </p>
           <div className="ftr__social">

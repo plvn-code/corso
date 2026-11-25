@@ -10,9 +10,10 @@ import { ReturnForm } from "@/components/ReturnForm";
  */
 
 const L = site.legal;
-const Manager = () => (
+/** Link to the manager on Telegram — brand wording only, never a personal nickname (client, 2026-11-25). */
+const Manager = ({ children = "Telegram" }: { children?: React.ReactNode }) => (
   <a href={site.manager} target="_blank" rel="noopener noreferrer">
-    {site.managerHandle}
+    {children}
   </a>
 );
 const Insta = () => (
@@ -167,7 +168,7 @@ export const ReturnsUk = (
     <p>Витрати на доставку товару під час повернення або обміну оплачує покупець.</p>
     <p>
       <b>
-        З питань повернення та обміну можна звернутися до менеджера CORSO в Telegram <Manager /> або через Instagram <Insta />.
+        З питань повернення та обміну можна звернутися до менеджера CORSO в <Manager /> або через Instagram <Insta />.
       </b>
     </p>
 
@@ -220,7 +221,7 @@ export const ReturnsEn = (
     <p>Shipping costs for returns and exchanges are paid by the buyer.</p>
     <p>
       <b>
-        For returns and exchanges contact the CORSO manager on Telegram <Manager /> or via Instagram <Insta />.
+        For returns and exchanges contact the CORSO manager on <Manager /> or via Instagram <Insta />.
       </b>
     </p>
 
@@ -261,7 +262,7 @@ export const OfferUk = (
     </p>
 
     <h2>4. Оформлення замовлення</h2>
-    <p>4.1. Покупець оформлює замовлення на Сайті, через менеджера в Telegram ({site.managerHandle}) або в магазині Продавця.</p>
+    <p>4.1. Покупець оформлює замовлення на Сайті, через менеджера CORSO в Telegram або в магазині Продавця.</p>
     <p>4.2. Покупець надає достовірні контактні дані та дані для доставки. Продавець не несе відповідальності за наслідки надання недостовірних даних.</p>
     <p>
       4.3. Після оформлення менеджер підтверджує замовлення: наявність, розмір, вартість і спосіб доставки. Адаптація моделі під параметри
@@ -318,7 +319,7 @@ export const OfferUk = (
     <h2>12. Реквізити Продавця</h2>
     <RequisitesUk />
     <p>
-      Магазин: {site.city}, {site.address}. Замовлення та питання: <Manager />. Instagram: <Insta />.
+      Магазин: {site.city}, {site.address}. Замовлення та питання: <Manager>звʼязок з менеджером у Telegram</Manager>. Instagram: <Insta />.
     </p>
   </>
 );
@@ -347,7 +348,7 @@ export const OfferEn = (
     <p>3.2. Goods in photos may differ slightly from the original due to screen settings. Description, composition and sizes are given on the product page.</p>
 
     <h2>4. Placing an order</h2>
-    <p>4.1. The Buyer orders on the Site, through the manager on Telegram ({site.managerHandle}) or in the Seller&apos;s store.</p>
+    <p>4.1. The Buyer orders on the Site, through the CORSO manager on Telegram or in the Seller&apos;s store.</p>
     <p>4.2. The Buyer provides accurate contact and delivery details. The Seller is not liable for the consequences of inaccurate details.</p>
     <p>4.3. After the order is placed the manager confirms availability, size, price and delivery. Adapting a piece to the Buyer&apos;s measurements is possible by prior agreement with the manager.</p>
 
@@ -395,7 +396,7 @@ export const OfferEn = (
     <h2>12. Seller details</h2>
     <RequisitesEn />
     <p>
-      Store: {site.addressEn}, {site.cityEn}. Orders and questions: <Manager />. Instagram: <Insta />.
+      Store: {site.addressEn}, {site.cityEn}. Orders and questions: <Manager>contact our manager on Telegram</Manager>. Instagram: <Insta />.
     </p>
   </>
 );
@@ -415,7 +416,7 @@ export const PrivacyUk = (
     <p>Лише службі доставки та платіжному сервісу — в обсязі, потрібному для виконання замовлення. Третім особам для реклами дані не передаються.</p>
     <h2>Ваші права</h2>
     <p>
-      Ви можете попросити переглянути, виправити або видалити свої дані — напишіть менеджеру <Manager />.
+      Ви можете попросити переглянути, виправити або видалити свої дані — <Manager>напишіть менеджеру CORSO</Manager>.
     </p>
   </>
 );
@@ -433,7 +434,7 @@ export const PrivacyEn = (
     <p>Only the delivery service and the payment provider — as far as needed to fulfil the order. We never pass data to third parties for advertising.</p>
     <h2>Your rights</h2>
     <p>
-      You can ask to see, correct or delete your data — message our manager <Manager />.
+      You can ask to see, correct or delete your data — <Manager>message the CORSO manager</Manager>.
     </p>
   </>
 );

@@ -60,6 +60,7 @@ export async function POST(req: Request) {
     `${clip(c.name)} · ${clip(c.phone, 40)}${c.email ? ` · ${clip(c.email)}` : ""}`,
     `${clip(body.delivery)}${c.city ? ` — ${clip(c.city)}, ${clip(c.branch)}` : ""}`,
     `Оплата: ${clip(body.payment)}${cod ? ` — передоплата ${new Intl.NumberFormat("uk-UA").format(prepay)} грн (демо), решта при отриманні` : ""}`,
+    Number(body.discountPct) === 5 ? "🏷 Знижка −5% на перше замовлення (зареєстрований клієнт)" : "",
     `📏 ${measurements}`,
     ...lines,
     c.comment ? `💬 ${clip(c.comment, 500)}` : "",

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useLang } from "@/i18n/client";
-import { site } from "@/lib/site";
 
 const REASONS = [
   { uk: "Не підійшов розмір", en: "Wrong size" },
@@ -50,8 +49,8 @@ export function ReturnForm() {
         <p className="title-sm">{tr("Заяву прийнято", "Application received")}</p>
         <p className="muted">
           {tr(
-            `Менеджер ${site.managerHandle} звʼяжеться з вами та надішле дані для відправки Новою поштою.`,
-            `Our manager ${site.managerHandle} will contact you with the details for sending the parcel via Nova Poshta.`,
+            "Менеджер CORSO звʼяжеться з вами та надішле дані для відправки Новою поштою.",
+            "The CORSO manager will contact you with the details for sending the parcel via Nova Poshta.",
           )}
         </p>
       </div>

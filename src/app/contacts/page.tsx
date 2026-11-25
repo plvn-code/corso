@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: tr("Контакти", "Contacts"),
     description: tr(
-      `Контакти CORSO: магазин — ${site.city}, ${site.address}; замовлення та питання — ${site.managerHandle}.`,
-      `CORSO contacts: store — ${site.addressEn}, ${site.cityEn}; orders and questions — ${site.managerHandle}.`,
+      `Контакти CORSO: магазин — ${site.city}, ${site.address}; замовлення та питання — менеджер CORSO в Telegram.`,
+      `CORSO contacts: store — ${site.addressEn}, ${site.cityEn}; orders and questions — the CORSO manager on Telegram.`,
     ),
   };
 }
@@ -43,7 +43,7 @@ export default async function Contacts() {
             <dt>{tr("Замовлення та питання", "Orders & questions")}</dt>
             <dd>
               <a href={site.manager} target="_blank" rel="noopener noreferrer">
-                <IconTelegram width={16} height={16} /> {site.managerHandle}
+                <IconTelegram width={16} height={16} /> {tr("Звʼязок з менеджером", "Contact our manager")}
               </a>
             </dd>
             <dt>Instagram</dt>
@@ -57,10 +57,6 @@ export default async function Contacts() {
               <a href={site.telegram} target="_blank" rel="noopener noreferrer">
                 t.me/emotionbrand
               </a>
-            </dd>
-            <dt>{tr("Продавець", "Seller")}</dt>
-            <dd className="contacts__legal">
-              {tr(site.legal.name, site.legal.nameEn)} · {tr("ІПН", "Tax ID")} {site.legal.ipn}
             </dd>
           </dl>
           <div className="story__links">

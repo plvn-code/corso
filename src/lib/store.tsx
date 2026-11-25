@@ -42,6 +42,8 @@ export interface DemoOrder {
   measurements?: Measurements;
   /** cash on delivery: prepayment paid online, UAH */
   prepay?: number;
+  /** first-order discount applied, % */
+  discountPct?: number;
   delivery: string;
   payment: string;
   status: string;

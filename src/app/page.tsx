@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroCover } from "@/components/HeroCover";
+import { HomeMore } from "@/components/HomeMore";
 import { ProductCard } from "@/components/ProductCard";
 import { Rail } from "@/components/Rail";
 import { getProduct, localize, products, toCard } from "@/lib/catalog";
@@ -84,6 +85,8 @@ export default async function Home() {
         </blockquote>
         <p className="quote__sign">CORSO · Edit Club</p>
       </section>
+
+      <HomeMore>
 
       <section className="story">
         <div className="story__media" data-reveal>
@@ -259,6 +262,7 @@ export default async function Home() {
           </Link>
         </div>
       </section>
+      </HomeMore>
     </>
   );
 }

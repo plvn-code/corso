@@ -3,7 +3,8 @@
 import { useLang } from "@/i18n/client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FIRST_ORDER_PCT } from "@/lib/discount";
 import { useStore, type Measurements } from "@/lib/store";
 import { optionLabel } from "@/app/checkout/CheckoutForm";
 import { formatPrice } from "@/lib/format";
@@ -17,6 +18,10 @@ export function AccountView() {
   const { lang, tr } = useLang();
   const [mode, setMode] = useState<"in" | "up">("in");
   const [tab, setTab] = useState<Tab>("orders");
+  // /account?mode=up (welcome popup, discount hint) opens the registration form
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("mode") === "up") setMode("up");
+  }, []);
   const [f, setF] = useState({ name: "", email: "", phone: "", password: "" });
   const set = (k: keyof typeof f) => (e: React.ChangeEvent<HTMLInputElement>) => setF({ ...f, [k]: e.target.value });
 
@@ -32,6 +37,9 @@ export function AccountView() {
           <p className="eyebrow">CORSO Edit Club</p>
           <h1 className="h-title h-xl">{mode === "in" ? tr("Вхід", "Sign in") : tr("Реєстрація", "Create account")}</h1>
           <p className="muted">{tr("Історія замовлень, обране, швидке оформлення і доступ до закритих передзамовлень.", "Order history, wishlist, faster checkout and access to private pre-orders.")}</p>
+          <p className="auth__promo">
+            −{FIRST_ORDER_PCT}% {tr("на перше замовлення після реєстрації", "off your first order after signing up")}
+          </p>
           <div className="seg">
             <button className={mode === "in" ? "is-on" : ""} onClick={() => setMode("in")}>
               {tr("Вхід", "Sign in")}
@@ -121,6 +129,7 @@ export function AccountView() {
                 <p className="muted small">
                   {optionLabel(o.delivery, lang)} · {optionLabel(o.payment, lang)}
                   {o.prepay ? ` · ${tr("передоплата", "prepaid")} ${formatPrice(o.prepay)}` : ""}
+                  {o.discountPct ? ` · ${tr("знижка", "discount")} −${o.discountPct}%` : ""}
                 </p>
                 {hasMeasurements(o.measurements) && <p className="muted small">{measurementsLine(o.measurements, lang)}</p>}
               </li>
