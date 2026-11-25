@@ -217,7 +217,7 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
 
           <ul className="pdp__perks">
             <li>{tr("Відправка Новою поштою за 1–2 дні", "Nova Poshta shipping in 1–2 days")}</li>
-            <li>{tr("Примірка в шоурумі у Дніпрі", "Fitting at our Dnipro showroom")}</li>
+            <li>{tr("Примірка в магазині у Дніпрі", "Fitting at our Dnipro store")}</li>
             <li>{tr("Оплата онлайн, при отриманні або на рахунок", "Pay online, on delivery or by bank transfer")}</li>
           </ul>
           <a href={site.manager} target="_blank" rel="noopener noreferrer" className="pdp__ask">
@@ -255,8 +255,8 @@ export function ProductView({ p, initialColor = 0 }: { p: ViewData; initialColor
             <Accordion title={tr("Оплата і доставка", "Payment & delivery")}>
               <p>
                 {tr(
-                  "Відправка Новою поштою по Україні протягом 1–2 днів. Самовивіз — шоурум у Дніпрі.",
-                  "Nova Poshta shipping across Ukraine within 1–2 days. Pickup from our showroom in Dnipro.",
+                  "Відправка Новою поштою по Україні протягом 1–2 днів: відділення, поштомат або адресна доставка курʼєром. Самовивіз — магазин у Дніпрі.",
+                  "Nova Poshta shipping across Ukraine within 1–2 days: branch, parcel locker or courier to your door. Pickup from our store in Dnipro.",
                 )}
               </p>
               <p>

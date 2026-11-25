@@ -454,10 +454,11 @@ ol {
 .menu__logo {
   display: block;
 }
-.menu__logo svg {
-  display: block;
-  height: 34px;
-  width: auto;
+.menu__logo {
+  font-family: var(--display);
+  font-size: 19px;
+  letter-spacing: 0.42em;
+  line-height: 1;
 }
 .menu__body {
   flex: 1;
@@ -3573,4 +3574,107 @@ ol {
   font-weight: 300;
   font-size: 28px;
   letter-spacing: 0.04em;
+}
+
+/* ---------- legal / client care (requisites, steps, return application) ---------- */
+.reqs {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 18px;
+  margin: 12px 0 8px;
+  padding: 18px;
+  background: var(--soft);
+  font-size: 14px;
+}
+.reqs dt {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding-top: 3px;
+}
+.reqs dd {
+  margin: 0;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.reqs__mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+@media (max-width: 480px) {
+  .reqs {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .reqs dd + dt {
+    margin-top: 10px;
+  }
+}
+.steps {
+  margin: 10px 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+}
+.steps li::marker {
+  color: var(--grey);
+}
+.rform {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 20px;
+  border: 1px solid var(--ink);
+  scroll-margin-top: calc(var(--hdr) + 16px);
+}
+.rform__seg {
+  margin-bottom: 4px;
+}
+.rform select {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  height: 44px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  outline: 0;
+}
+.rform select:focus {
+  border-color: var(--ink);
+}
+.rform__check {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 12px;
+  align-items: start;
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.rform__check input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--ink);
+}
+.rform .warn {
+  margin: 0;
+}
+.rform--done {
+  gap: 10px;
+  text-align: center;
+  background: var(--soft);
+  border-color: var(--soft);
+}
+.rform--done .title-sm,
+.rform--done p {
+  margin: 0;
+}
+.contacts__legal {
+  font-size: 13px;
+  color: var(--grey);
 }

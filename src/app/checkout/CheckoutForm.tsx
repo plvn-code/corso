@@ -15,7 +15,7 @@ export const DELIVERY = [
   { id: "np-branch", label: "Нова пошта — відділення", en: "Nova Poshta — branch", note: "1–2 дні", noteEn: "1–2 days" },
   { id: "np-locker", label: "Нова пошта — поштомат", en: "Nova Poshta — parcel locker", note: "1–2 дні", noteEn: "1–2 days" },
   { id: "np-courier", label: "Нова пошта — кур'єр", en: "Nova Poshta — courier", note: "1–2 дні", noteEn: "1–2 days" },
-  { id: "pickup", label: "Самовивіз — шоурум, Дніпро", en: "Pickup — showroom, Dnipro", note: "Вернадського, 16", noteEn: "16 Vernadskoho St." },
+  { id: "pickup", label: "Самовивіз — магазин, Дніпро", en: "Pickup — store, Dnipro", note: "Вернадського, 16", noteEn: "16 Vernadskoho St." },
 ];
 
 export const PAYMENT = [

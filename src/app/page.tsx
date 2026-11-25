@@ -36,7 +36,7 @@ export default async function Home() {
         <div className="ticker__in">
           {Array.from({ length: 2 }).map((_, k) => (
             <span key={k}>
-              Made in Ukraine <i>✦</i> Minimalist Wardrobe <i>✦</i> Italian Fabrics <i>✦</i> {tr("Офлайн-примірка в Дніпрі", "Showroom in Dnipro")} <i>✦</i> Edit Club
+              Made in Ukraine <i>✦</i> Minimalist Wardrobe <i>✦</i> Italian Fabrics <i>✦</i> {tr("Офлайн-примірка в Дніпрі", "Store in Dnipro")} <i>✦</i> Edit Club
               <i>✦</i>{" "}
             </span>
           ))}
@@ -188,7 +188,7 @@ export default async function Home() {
           <Image src="/images/editorial/trench-beige.jpg" alt={tr("Тренч Light Beige", "Light Beige trench coat")} fill sizes="(max-width: 960px) 100vw, 50vw" />
         </div>
         <div className="showroom__text" data-reveal>
-          <p className="eyebrow">Showroom · Dnipro</p>
+          <p className="eyebrow">Store · Dnipro</p>
           <h2 className="h-title h-xl">
             {lang === "en" ? (
               <>
@@ -202,8 +202,8 @@ export default async function Home() {
           </h2>
           <p className="lead">
             {tr(
-              "Сезонні колекції CORSO представлені в шоурумі — приходьте відчути тканини та знайти свій ідеальний образ.",
-              "The seasonal CORSO collections are in our showroom — come and feel the fabrics and find your perfect look.",
+              "Сезонні колекції CORSO представлені в нашому магазині — приходьте відчути тканини та знайти свій ідеальний образ.",
+              "The seasonal CORSO collections are in our store — come and feel the fabrics and find your perfect look.",
             )}
           </p>
           <p className="showroom__addr">

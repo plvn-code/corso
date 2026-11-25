@@ -11,6 +11,7 @@
 - Two languages (2026-11-20): Ukrainian + English across the whole site incl. all 40 product descriptions; switch УКР / ENG at the bottom of the menu and in the footer (cookie). English product texts are our translation — ask the client to review.
 - Gift certificate `/gift-certificate` (2026-11-20, modelled on onebyone.ua/gift-certificate): amount from 1 000 ₴ (presets 1/2/3/5/10k or own, max 100 000), design Noir/Milk with live card preview, recipient name + e-mail, greeting (300), sender name/phone/e-mail, send now or on a date → step «Оплата» (demo: pay button disabled). `/api/gift` validates and sends the request to the managers' Telegram as «очікує оплати». Rules in `src/lib/gift.ts`.
 - Cash on delivery with prepayment (client 2026-11-21): starting prepayment **from 400 ₴**, the client may pay more (chips 400/500/1 000/2 000 or own amount ≥ 400). Button «Замовити з передоплатою» under «Оформити замовлення» in the bag drawer and cart page and under «Купити зараз» on product pages → `/checkout?pay=prepay` (option preselected). Prepayment goes through the demo card modal; `/api/orders` rejects COD without prepay ≥ 400 and tells the manager the amount. Rule: `src/lib/prepay.ts`. Payment/Delivery texts updated.
+- Client edits 2026-11-25: public offer with seller details (ФОП Вишнивецька А. В., IBAN, АТ «Універсал Банк»); payment page shows the requisites; «Обмін і повернення» rewritten from the client's reference (14 days, conditions, non-returnable bodysuits/socks/swimwear, how-to) + online return/exchange application → managers; privacy policy names the data controller; monogram removed from the header; «Шоурум» page replaced by «Контакти» (store address under «Магазини», /showroom redirects); wording «шоурум» → «магазин».
 - Orders POST to `/api/orders` (Telegram when env is set).
 
 ## Next
@@ -53,3 +54,9 @@ Payment provider → on success generate a unique code, e-mail the certificate t
 ### Gift certificate — confirm with the client
 - Validity: **6 months from payment** (client 2026-11-20; was 3 → 6, `GIFT_VALID_MONTHS` in src/lib/gift.ts).
 - Still a draft: no cash refund, pay the difference if the purchase costs more, usable online + showroom, one-time vs. partial use of the balance, max amount (we set 100 000 ₴).
+
+### Legal texts — confirm with the client
+- The offer, returns and privacy texts are drafted by us from her answers — ideally a lawyer reviews them.
+- Name spelling: we wrote «В'ячеславівна» (with apostrophe, standard Ukrainian); she typed «Вячеславівна» — check against the ФОП registration.
+- Return address for Nova Poshta: not given — the page says the manager sends the details after the application.
+- Should pieces adapted to the client's measurements be non-returnable? (common practice, not in her reference — not added).

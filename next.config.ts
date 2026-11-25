@@ -41,6 +41,10 @@ const nextConfig: NextConfig = {
     qualities: [75, 85, 90],
     deviceSizes: [640, 828, 1080, 1280, 1600, 1920, 2400],
   },
+  // The «Шоурум» page was replaced by «Контакти» (client, 2026-11-25)
+  async redirects() {
+    return [{ source: "/showroom", destination: "/contacts", permanent: true }];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

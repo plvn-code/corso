@@ -7,13 +7,17 @@ import { IconInstagram, IconPin, IconTelegram } from "@/components/Icons";
 export async function generateMetadata(): Promise<Metadata> {
   const { tr } = await getTr();
   return {
-    title: tr("Шоурум у Дніпрі", "Showroom in Dnipro"),
-    description: tr(`Офлайн-примірка CORSO: ${site.city}, ${site.address}.`, `CORSO in-store fitting: ${site.addressEn}, ${site.cityEn}.`),
+    title: tr("Контакти", "Contacts"),
+    description: tr(
+      `Контакти CORSO: магазин — ${site.city}, ${site.address}; замовлення та питання — ${site.managerHandle}.`,
+      `CORSO contacts: store — ${site.addressEn}, ${site.cityEn}; orders and questions — ${site.managerHandle}.`,
+    ),
   };
 }
 
-export default async function Showroom() {
-  const { lang, tr } = await getTr();
+/** «Контакти» replaced the separate «Шоурум» page (client, 2026-11-25); the store address lives under «Магазини». */
+export default async function Contacts() {
+  const { tr } = await getTr();
   return (
     <div className="about">
       <section className="about__hero">
@@ -21,30 +25,22 @@ export default async function Showroom() {
           <Image src="/images/editorial/trench-black.jpg" alt="" fill priority sizes="(max-width: 960px) 100vw, 50vw" />
         </div>
         <div className="about__intro">
-          <p className="eyebrow">Showroom · Dnipro</p>
-          <h1 className="h-title h-xl">
-            {lang === "en" ? (
-              <>
-                In-store <em>fitting</em>
-              </>
-            ) : (
-              <>
-                Офлайн-<em>примірка</em>
-              </>
-            )}
-          </h1>
+          <p className="eyebrow">Contacts</p>
+          <h1 className="h-title h-xl">{tr("Контакти", "Contacts")}</h1>
           <p className="lead">
             {tr(
-              "Сезонні колекції CORSO представлені офлайн — приходьте відчути тканини та знайти свій ідеальний образ.",
-              "The seasonal CORSO collections are on display in store — come and feel the fabrics and find your perfect look.",
+              "Замовлення, підбір розміру та питання — у Telegram. Приміряти колекцію можна в нашому магазині в Дніпрі.",
+              "Orders, sizing help and questions — on Telegram. You can try on the collection in our store in Dnipro.",
             )}
           </p>
           <dl className="contacts">
-            <dt>{tr("Адреса", "Address")}</dt>
+            <dt>{tr("Магазини", "Stores")}</dt>
             <dd>
-              <IconPin width={16} height={16} /> {tr(`${site.city}, ${site.address}`, `${site.addressEn}, ${site.cityEn}`)}
+              <a href={site.maps} target="_blank" rel="noopener noreferrer">
+                <IconPin width={16} height={16} /> {tr(`${site.city}, ${site.address}`, `${site.addressEn}, ${site.cityEn}`)}
+              </a>
             </dd>
-            <dt>{tr("Замовлення та запис", "Orders & appointments")}</dt>
+            <dt>{tr("Замовлення та питання", "Orders & questions")}</dt>
             <dd>
               <a href={site.manager} target="_blank" rel="noopener noreferrer">
                 <IconTelegram width={16} height={16} /> {site.managerHandle}
@@ -61,6 +57,10 @@ export default async function Showroom() {
               <a href={site.telegram} target="_blank" rel="noopener noreferrer">
                 t.me/emotionbrand
               </a>
+            </dd>
+            <dt>{tr("Продавець", "Seller")}</dt>
+            <dd className="contacts__legal">
+              {tr(site.legal.name, site.legal.nameEn)} · {tr("ІПН", "Tax ID")} {site.legal.ipn}
             </dd>
           </dl>
           <div className="story__links">

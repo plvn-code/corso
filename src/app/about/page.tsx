@@ -73,7 +73,7 @@ export default async function About() {
           ["30K", tr("спільнота в Instagram", "Instagram community")],
           ["1–2", tr("дні на відправку", "days to ship")],
           ["6+", tr("одиниць — від них діє опт", "pieces — wholesale minimum")],
-          ["16", tr("Вернадського — шоурум у Дніпрі", "Vernadskoho St. — our Dnipro showroom")],
+          ["16", tr("Вернадського — магазин у Дніпрі", "Vernadskoho St. — our Dnipro store")],
         ].map(([n, t]) => (
           <div key={t} data-reveal>
             <b>{n}</b>
@@ -98,8 +98,8 @@ export default async function About() {
             <Link href="/catalog" className="btn btn--dark">
               {tr("До каталогу", "Go to shop")}
             </Link>
-            <Link href="/showroom" className="btn btn--line">
-              {tr("Шоурум", "Showroom")}
+            <Link href="/contacts" className="btn btn--line">
+              {tr("Контакти", "Contacts")}
             </Link>
           </div>
         </div>

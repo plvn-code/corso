@@ -21,15 +21,15 @@ export default async function GiftPage() {
 
   // Terms: draft based on the brief — confirm with the client (docs/STATUS.md).
   const terms = [
-    tr("Сертифікат діє на всі товари CORSO — на сайті та в шоурумі у Дніпрі.", "Valid for all CORSO pieces — online and at our showroom in Dnipro."),
+    tr("Сертифікат діє на всі товари CORSO — на сайті та в магазині у Дніпрі.", "Valid for all CORSO pieces — online and at our store in Dnipro."),
     tr(`Номінал — від ${min}, сума обирається при покупці.`, `Amount — from ${min}, chosen at purchase.`),
     tr("Сертифікат надсилається отримувачу на e-mail лише після повної оплати.", "The certificate is e-mailed to the recipient only after full payment."),
     tr(`Термін дії — ${GIFT_VALID_UK} з дня оплати.`, `Valid for ${GIFT_VALID_MONTHS} months from the date of payment.`),
     tr("Якщо покупка дорожча за номінал — різницю можна доплатити.", "If the purchase costs more than the certificate, you can pay the difference."),
     tr("Сертифікат не обмінюється на гроші та не підлягає поверненню.", "The certificate cannot be exchanged for cash or refunded."),
     tr(
-      "Щоб скористатися, вкажіть номер сертифіката в коментарі до замовлення або покажіть його в шоурумі.",
-      "To use it, add the certificate number to your order notes or show it at the showroom.",
+      "Щоб скористатися, вкажіть номер сертифіката в коментарі до замовлення або покажіть його в магазині.",
+      "To use it, add the certificate number to your order notes or show it at the store.",
     ),
   ];
 

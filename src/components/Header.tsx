@@ -6,7 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "@/lib/store";
 import { site } from "@/lib/site";
-import { Monogram } from "./Monogram";
 import { LangSwitch } from "./LangSwitch";
 import { useLang } from "@/i18n/client";
 import { IconBag, IconClose, IconHeart, IconInstagram, IconMenu, IconSearch, IconTelegram, IconUser } from "./Icons";
@@ -35,15 +34,15 @@ const MENU = [
 const SECONDARY = [
   { href: "/lookbook", uk: "Лукбук", en: "Lookbook" },
   { href: "/about", uk: "Про бренд", en: "About" },
-  { href: "/showroom", uk: "Шоурум у Дніпрі", en: "Showroom in Dnipro" },
   { href: "/gift-certificate", uk: "Подарунковий сертифікат", en: "Gift certificate" },
   { href: "/info/oplata-i-dostavka", uk: "Оплата і доставка", en: "Payment & delivery" },
   { href: "/info/rozmirna-sitka", uk: "Розмірна сітка", en: "Size guide" },
   { href: "/account", uk: "Особистий кабінет", en: "My account" },
+  { href: "/contacts", uk: "Контакти", en: "Contacts" },
 ];
 
 const NOTES = [
-  { uk: "Офлайн-примірка · Дніпро, Вернадського 16", en: "Fitting in our showroom · Dnipro, Vernadskoho 16" },
+  { uk: "Офлайн-примірка · Дніпро, Вернадського 16", en: "Fitting in our store · Dnipro, Vernadskoho 16" },
   { uk: "Відправка по Україні 1–2 дні", en: "Shipping across Ukraine in 1–2 days" },
   { uk: "Італійські тканини · Made in Ukraine", en: "Italian fabrics · Made in Ukraine" },
 ];
@@ -117,7 +116,6 @@ export function Header({ items }: { items: SearchItem[] }) {
             </nav>
           </div>
           <Link href="/" className="hdr__logo" aria-label={tr("CORSO — на головну", "CORSO — home")}>
-            <Monogram className="hdr__mono" />
             <span className="hdr__word">CORSO</span>
           </Link>
           <div className="hdr__right">
@@ -143,7 +141,7 @@ export function Header({ items }: { items: SearchItem[] }) {
             <IconClose />
           </button>
           <Link href="/" className="menu__logo" aria-label={tr("CORSO — на головну", "CORSO — home")} onClick={() => setMenu(false)}>
-            <Monogram />
+            <span className="hdr__word">CORSO</span>
           </Link>
           <span className="icon-btn" />
         </div>

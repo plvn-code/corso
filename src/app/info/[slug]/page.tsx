@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { SizeTable } from "@/components/ProductView";
 import { site } from "@/lib/site";
 import { getTr } from "@/i18n/server";
-import { PREPAY_MIN } from "@/lib/prepay";
+import { OfferEn, OfferUk, PaymentDeliveryEn, PaymentDeliveryUk, PrivacyEn, PrivacyUk, ReturnsEn, ReturnsUk } from "@/content/legal";
 
 type Page = { title: string; en: string; body: React.ReactNode; bodyEn: React.ReactNode };
 
@@ -18,76 +18,14 @@ const PAGES: Record<string, Page> = {
   "oplata-i-dostavka": {
     title: "Оплата і доставка",
     en: "Payment & Delivery",
-    body: (
-      <>
-        <h2>Доставка</h2>
-        <ul className="dash">
-          <li>Нова пошта по всій Україні: відділення, поштомат або кур&apos;єр. Відправка протягом 1–2 днів.</li>
-          <li>Самовивіз — шоурум у Дніпрі, {site.address}.</li>
-          <li>Вартість доставки — за тарифами перевізника.</li>
-        </ul>
-        <h2>Оплата</h2>
-        <ul className="dash">
-          <li>Карткою онлайн на сайті — Visa, Mastercard, Apple Pay, Google Pay (підключається).</li>
-          <li>Офіційна оплата на рахунок ФОП за реквізитами IBAN або на картку ПриватБанку.</li>
-          <li>
-            Накладений платіж з передоплатою — стартова передоплата від {PREPAY_MIN} грн онлайн. Можна внести більше: сума передоплати на ваш
-            вибір, але не менше {PREPAY_MIN} грн. Решту сплачуєте при отриманні на пошті.
-          </li>
-        </ul>
-        <h2>Опт</h2>
-        <p>Опт — від 6 одиниць однієї моделі. Накладеного платежу на опт немає.</p>
-      </>
-    ),
-    bodyEn: (
-      <>
-        <h2>Delivery</h2>
-        <ul className="dash">
-          <li>Nova Poshta across Ukraine: branch, parcel locker or courier. Dispatched within 1–2 days.</li>
-          <li>Pickup — our showroom in Dnipro, {site.addressEn}.</li>
-          <li>Delivery cost — at the carrier&apos;s rates.</li>
-        </ul>
-        <h2>Payment</h2>
-        <ul className="dash">
-          <li>By card online — Visa, Mastercard, Apple Pay, Google Pay (being connected).</li>
-          <li>Official bank transfer to our business account (IBAN) or to a PrivatBank card.</li>
-          <li>
-            Cash on delivery with prepayment — a starting prepayment from {PREPAY_MIN} UAH online. You can pay more: the amount is up to you,
-            but not less than {PREPAY_MIN} UAH. The rest is paid on delivery at the post office.
-          </li>
-        </ul>
-        <h2>Wholesale</h2>
-        <p>Wholesale — from 6 pieces of one style. No cash on delivery for wholesale orders.</p>
-      </>
-    ),
+    body: PaymentDeliveryUk,
+    bodyEn: PaymentDeliveryEn,
   },
   "obmin-i-povernennia": {
     title: "Обмін і повернення",
     en: "Exchange & Return",
-    body: (
-      <>
-        <ul className="dash">
-          <li>Обмін на інший розмір — за рахунок покупця.</li>
-          <li>Повернення — у разі виявлення браку під час огляду у відділенні пошти.</li>
-          <li>Перед відправкою менеджер допоможе підібрати розмір за вашими параметрами, щоб обмін не знадобився.</li>
-        </ul>
-        <p>
-          З питань обміну пишіть менеджеру: <Manager />.
-        </p>
-      </>
-    ),
-    bodyEn: (
-      <>
-        <ul className="dash">
-          <li>Size exchanges are at the buyer&apos;s expense.</li>
-          <li>Returns — if a defect is found when inspecting the parcel at the post office.</li>
-          <li>Before dispatch our manager will help you choose the size for your measurements, so an exchange isn&apos;t needed.</li>
-        </ul>
-        <p>
-          For exchanges, message our manager: <Manager />.
-        </p>
-      </>
-    ),
+    body: ReturnsUk,
+    bodyEn: ReturnsEn,
   },
   "rozmirna-sitka": {
     title: "Розмірна сітка",
@@ -159,25 +97,15 @@ const PAGES: Record<string, Page> = {
   },
   oferta: {
     title: "Публічна оферта",
-    en: "Terms of Sale",
-    body: <p>Текст публічної оферти буде додано після погодження з юристом бренду. Чернетка.</p>,
-    bodyEn: <p>The terms of sale will be added once approved by the brand&apos;s lawyer. Draft.</p>,
+    en: "Public Offer",
+    body: OfferUk,
+    bodyEn: OfferEn,
   },
   konfidentsiinist: {
     title: "Політика конфіденційності",
     en: "Privacy Policy",
-    body: (
-      <p>
-        Ми використовуємо ваші контактні дані лише для обробки замовлення та зв&apos;язку з вами. Дані не передаються третім особам, окрім служби
-        доставки. Повний текст політики буде додано перед запуском.
-      </p>
-    ),
-    bodyEn: (
-      <p>
-        We use your contact details only to process your order and to get in touch with you. Data is not shared with third parties other than
-        the delivery service. The full policy will be added before launch.
-      </p>
-    ),
+    body: PrivacyUk,
+    bodyEn: PrivacyEn,
   },
 };
 
