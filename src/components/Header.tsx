@@ -20,7 +20,6 @@ export interface SearchItem {
 
 const MENU = [
   { href: "/catalog?c=new", uk: "Новинки", en: "New in" },
-  { href: "/catalog?col=fw26", uk: "Осінь — зима", en: "Fall — Winter" },
   { href: "/catalog?c=puhovyky", uk: "Пуховики", en: "Puffers" },
   { href: "/catalog?c=palta", uk: "Пальта і тренчі", en: "Coats & trenches" },
   { href: "/catalog?c=kurtky", uk: "Бомбери і парки", en: "Bombers & parkas" },
@@ -28,7 +27,7 @@ const MENU = [
   { href: "/catalog?c=sety", uk: "Сети і костюми", en: "Sets" },
   { href: "/catalog?c=sorochky", uk: "Сорочки", en: "Shirts" },
   { href: "/catalog?c=basic", uk: "База", en: "Basics" },
-  { href: "/catalog?col=ss26", uk: "Літо 26", en: "Summer 26" },
+  { href: "/catalog?col=ss26", uk: "Літня колекція", en: "Summer collection" },
 ];
 
 const SECONDARY = [

@@ -31,14 +31,12 @@ const COLS = [
       { href: "/account", uk: "Особистий кабінет", en: "My account" },
     ],
   },
-  {
-    uk: "Політики",
-    en: "Policies",
-    links: [
-      { href: "/info/oferta", uk: "Публічна оферта", en: "Terms of sale" },
-      { href: "/info/konfidentsiinist", uk: "Політика конфіденційності", en: "Privacy policy" },
-    ],
-  },
+];
+
+/** Policies sit in the bottom bar, not as an accordion (client, 2026-11-27). */
+const LEGAL = [
+  { href: "/info/oferta", uk: "Публічна оферта", en: "Terms of sale" },
+  { href: "/info/konfidentsiinist", uk: "Політика конфіденційності", en: "Privacy policy" },
 ];
 
 export function Footer() {
@@ -114,6 +112,13 @@ export function Footer() {
       </div>
       <div className="ftr__base">
         <span>© {new Date().getFullYear()} CORSO · Ukrainian clothing brand</span>
+        <nav className="ftr__legal" aria-label={tr("Політики", "Policies")}>
+          {LEGAL.map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l[lang]}
+            </Link>
+          ))}
+        </nav>
         <div className="ftr__base-r">
           <Link href="/gift-certificate" className="ftr__gift">
             {tr("Сертифікат", "Gift card")}

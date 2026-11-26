@@ -90,6 +90,25 @@ function write(key: string, value: unknown) {
   }
 }
 
+/** Burgundy set → separate bomber + skirt (2026-11-27): carry saved bag lines / wishes over to the bomber. */
+const OLD_SET = "leather-bomber-set";
+const NEW_BOMBER = "leather-bomber";
+function migrateBag(lines: BagLine[]): BagLine[] {
+  return lines.map((l) =>
+    l.slug !== OLD_SET
+      ? l
+      : {
+          ...l,
+          slug: NEW_BOMBER,
+          key: `${NEW_BOMBER}|${l.color}|One size`,
+          size: "One size",
+          name: "Шкіряний бомбер",
+          names: { uk: "Шкіряний бомбер", en: "Leather Bomber" },
+          image: l.image.replace(`/${OLD_SET}/`, `/${NEW_BOMBER}/`).replace("/1096_4.jpg", "/1096_2.jpg"),
+        },
+  );
+}
+
 const Ctx = createContext<StoreValue | null>(null);
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
@@ -102,8 +121,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [bagOpen, setBagOpen] = useState(false);
 
   useEffect(() => {
-    setBag(read(K.bag, []));
-    setWishlist(read(K.wish, []));
+    setBag(migrateBag(read(K.bag, [])));
+    setWishlist(read<string[]>(K.wish, []).map((w) => (w === OLD_SET ? NEW_BOMBER : w)));
     setUser(read(K.user, null));
     setOrders(read(K.orders, []));
     setMeasurements(read(K.measure, null));

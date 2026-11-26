@@ -63,9 +63,6 @@ export default async function Contacts() {
             <a href={site.maps} target="_blank" rel="noopener noreferrer" className="btn btn--dark">
               {tr("Прокласти маршрут", "Get directions")}
             </a>
-            <a href={site.manager} target="_blank" rel="noopener noreferrer" className="btn btn--line">
-              {tr("Записатися на примірку", "Book a fitting")}
-            </a>
           </div>
         </div>
       </section>

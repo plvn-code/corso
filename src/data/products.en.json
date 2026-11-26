@@ -176,20 +176,20 @@
   "leather-skirt": {
     "name": "Leather Skirt",
     "description": [
-      "A skirt from the CORSO leather line — mini or midi, depending on your mood. Build a full leather set or choose each piece separately."
+      "A skirt from the CORSO leather line — mini or midi, depending on your mood. Build a full leather set or choose each piece separately.",
+      "A refined midi skirt that softly follows the lines — paired with the voluminous leather bomber it makes the Burgundy Set."
     ],
     "details": ["Length: mini or midi", "Pairs with the jacket and bomber of the line"],
     "composition": ["Soft matte eco-leather"]
   },
-  "leather-bomber-set": {
-    "name": "Leather Bomber + Skirt Set",
+  "leather-bomber": {
+    "name": "Leather Bomber",
     "description": [
-      "A play on contrast, delicacy and volume. A refined midi skirt that softly follows the lines, and an oversized bomber in soft premium eco-leather.",
-      "A set that highlights a flawless silhouette and carries an aristocratic vibe."
+      "A voluminous oversized bomber in soft premium eco-leather, lined with 100% viscose. A play on contrast, delicacy and volume.",
+      "Paired with the midi skirt it makes the Burgundy Set — a set that highlights a flawless silhouette and carries an aristocratic vibe."
     ],
-    "details": ["Bomber with voluminous sleeves", "Midi skirt"],
-    "composition": ["Premium eco-leather", "Lining: 100% viscose"],
-    "sizeNote": "Bomber — one size, skirt — XS–L"
+    "details": ["Oversized cut", "Voluminous sleeves", "One size"],
+    "composition": ["Premium eco-leather", "Lining: 100% viscose"]
   },
   "sorochka-vuzol": {
     "name": "Knot Shirt",

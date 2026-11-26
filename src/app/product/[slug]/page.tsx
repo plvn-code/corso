@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductView } from "@/components/ProductView";
 import { ProductCard } from "@/components/ProductCard";
-import { TAG_LABEL, categoryName, getProduct, photo, products, related, toCard } from "@/lib/catalog";
+import { TAG_LABEL, categoryName, getProduct, photo, products, related, toCard, together } from "@/lib/catalog";
 import { site } from "@/lib/site";
 import { getTr } from "@/i18n/server";
 
@@ -33,6 +33,7 @@ export default async function ProductPage({ params, searchParams }: { params: Pa
   const color = Number(Array.isArray(sp.color) ? sp.color[0] : sp.color) || 0;
   const card = toCard(p);
   const more = related(p, 4, lang).map(toCard);
+  const pairs = together(p, lang).map((t) => ({ card: toCard(t.product), color: t.color }));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -65,6 +66,19 @@ export default async function ProductPage({ params, searchParams }: { params: Pa
           names,
         }}
       />
+      {pairs.length > 0 && (
+        <section className="sec related together">
+          <header className="sec__head">
+            <p className="eyebrow">Complete the set</p>
+            <h2 className="h-title">{tr("Купують разом", "Bought together")}</h2>
+          </header>
+          <div className="grid grid--home">
+            {pairs.map((x) => (
+              <ProductCard key={x.card.slug} p={x.card} initialColor={x.color} />
+            ))}
+          </div>
+        </section>
+      )}
       <section className="sec related">
         <header className="sec__head">
           <p className="eyebrow">You may also like</p>

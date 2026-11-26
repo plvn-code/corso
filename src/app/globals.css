@@ -563,6 +563,20 @@ ol {
   align-items: center;
   gap: 18px;
 }
+.ftr__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 22px;
+}
+.ftr__legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  color: var(--ink-2);
+}
+.ftr__legal a:hover {
+  color: var(--ink);
+}
 .ftr__gift {
   display: inline-flex;
   align-items: center;
@@ -1602,7 +1616,7 @@ ol {
   }
   .ftr__cols {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     border-top: 0;
   }
@@ -2216,6 +2230,25 @@ ol {
 }
 .related {
   border-top: 1px solid var(--line);
+}
+/* «Купують разом»: usually 1–2 pieces — centred at normal card width */
+.together .grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.together .grid > * {
+  width: calc((100% - 6px) / 2);
+}
+@media (min-width: 760px) {
+  .together .grid > * {
+    width: calc((100% - 24px) / 3);
+  }
+}
+@media (min-width: 1200px) {
+  .together .grid > * {
+    width: calc((100% - 48px) / 4);
+  }
 }
 @media (min-width: 960px) {
   .pdp {

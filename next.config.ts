@@ -43,7 +43,11 @@ const nextConfig: NextConfig = {
   },
   // The «Шоурум» page was replaced by «Контакти» (client, 2026-11-25)
   async redirects() {
-    return [{ source: "/showroom", destination: "/contacts", permanent: true }];
+    return [
+      { source: "/showroom", destination: "/contacts", permanent: true },
+      // the Burgundy set was split into a bomber + skirt (client, 2026-11-27)
+      { source: "/product/leather-bomber-set", destination: "/product/leather-bomber", permanent: true },
+    ];
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

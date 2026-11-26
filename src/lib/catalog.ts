@@ -27,6 +27,8 @@ export interface Product {
   colors: Color[];
   /** price in UAH; null until the client confirms the price list */
   price: number | null;
+  /** «Купують разом» — pieces worn with this one; `color` preselects that colour on the card (client, 2026-11-27) */
+  together?: { slug: string; color?: string }[];
 }
 
 export const CATEGORIES: { slug: CategorySlug; name: string; en: string }[] = [
@@ -42,7 +44,7 @@ export const CATEGORIES: { slug: CategorySlug; name: string; en: string }[] = [
 
 export const COLLECTIONS: { slug: CollectionSlug; name: string; en: string }[] = [
   { slug: "fw26", name: "Осінь — зима 26/27", en: "Fall Winter 26/27" },
-  { slug: "ss26", name: "Літо 26", en: "Summer 26" },
+  { slug: "ss26", name: "Літня колекція", en: "Summer collection" },
 ];
 
 export const TAG_LABEL: Record<Tag, string> = { new: "New", bestseller: "Bestseller", limited: "Limited" };
@@ -134,9 +136,20 @@ export function query(opts: { c?: string; col?: string; color?: string; size?: s
 }
 
 export function related(p: Product, n = 4, lang: Lang = "uk") {
-  const same = products.filter((x) => x.slug !== p.slug && x.category === p.category);
-  const rest = products.filter((x) => x.slug !== p.slug && x.category !== p.category && x.collection === p.collection);
+  const skip = new Set([p.slug, ...(p.together ?? []).map((t) => t.slug)]);
+  const same = products.filter((x) => !skip.has(x.slug) && x.category === p.category);
+  const rest = products.filter((x) => !skip.has(x.slug) && x.category !== p.category && x.collection === p.collection);
   return [...same, ...rest].slice(0, n).map((x) => localize(x, lang));
+}
+
+/** «Купують разом»: paired products with the card index of the colour to show first. */
+export function together(p: Product, lang: Lang = "uk") {
+  return (p.together ?? []).flatMap(({ slug, color }) => {
+    const x = products.find((q) => q.slug === slug);
+    if (!x) return [];
+    const ci = Math.max(0, x.colors.findIndex((c) => c.name === color));
+    return [{ product: localize(x, lang), color: ci }];
+  });
 }
 
 /** Serializable card payload for client components. */

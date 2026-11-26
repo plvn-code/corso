@@ -17,10 +17,21 @@ export interface CardData {
   colors: { name: string; hex: string; images: string[] }[];
 }
 
-export function ProductCard({ p, priority = false, sizes }: { p: CardData; priority?: boolean; sizes?: string }) {
+export function ProductCard({
+  p,
+  priority = false,
+  sizes,
+  initialColor = 0,
+}: {
+  p: CardData;
+  priority?: boolean;
+  sizes?: string;
+  /** colour shown first (index into p.colors) */
+  initialColor?: number;
+}) {
   const { wishlist, toggleWish, ready } = useStore();
   const { tr } = useLang();
-  const [ci, setCi] = useState(0);
+  const [ci, setCi] = useState(initialColor);
   const [slide, setSlide] = useState(0);
   const track = useRef<HTMLAnchorElement>(null);
   const color = p.colors[ci];
